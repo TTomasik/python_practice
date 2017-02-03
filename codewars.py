@@ -62,20 +62,21 @@
 # string = "sfbjASFASDVNkxncv"
 # print(accum(string))
 
-#---EX6 -> finding how many times number appear in array and check if its %2==0
-def find_it(seq):    
-    for i in seq:
-        if seq.count(i)%2==0:
-            return i
-
-                      
+# #---EX6 -> finding how many times number appear in array and check if number of appears %2!=0
+# def find_it(seq):    
+#     for i in seq:
+#         if seq.count(i)%2!=0:
+#             return i                     
+#                    
+# example = [20, 2, 2, 11, 11, 12, 13, 1, 2, 11, 11]
+# print(find_it(example))
                
-    
-
-
-example = [20, 2, 2, 11, 11, 12, 13, 1, 2, 11, 11]
-print(find_it(example))
-               
+# #---EX7 -> give three dimensions and check if you can build a triangle from them
+# def is_triangle(a, b, c):
+#     if a+b>c and a+c>b and b+c>a:
+#         return True
+#     else:
+#         return False
 
 
 
