@@ -26,23 +26,29 @@
 #         
 # print(haha(num))
 
-#---EX3 -> makes first letter capital    
-quote = "cant wait till summer"
-def capital(quotes):
-    list = quotes.split()    
-    result = []
-    for word in list:               
-        result.append(word[0].upper()+word[1:])        
-    return " ".join(result)
+# #---EX3 -> makes first letter capital    
+# quote = "cant wait till summer"
+# def capital(quotes):
+#     list = quotes.split()    
+#     result = []
+#     for word in list:               
+#         result.append(word[0].upper()+word[1:])        
+#     return " ".join(result)
+# 
+# print(capital(quote))
+# 
+# print(quote.title()) # this one line does the same that the whole function above
+    
+#---EX4 -> makes sum from range    
+def get_sum(a,b):
+    if a < b:
+        return sum(list(range(a,b+1)))
+    elif a > b: 
+        return sum(list(range(b,a+1)))
+    elif a == b:
+        return a  
 
-print(capital(quote))
-
-print(quote.title()) # this one line does the same that the whole function above
-    
-    
-    
-    
-    
+print(get_sum(2,2)) 
     
     
     
