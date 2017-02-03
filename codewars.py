@@ -78,6 +78,21 @@
 #     else:
 #         return False
 
+#---EX8 -> You are given an array strarr of strings and an integer k. 
+#           Your task is to return the first longest string consisting of k consecutive strings
+#           taken in the array.
+def longest_consec(starr, k):
+    result=[]
+    if k <= 0 or k > len(starr) or len(starr) == 0:        
+        return ""
+    else:
+        for i in range(0, len(starr), 1):
+            result.append("".join(starr[i:i+k]))        
+    return max(result, key=len)
+ 
+starr = ["zone", "abigail", "theta", "form", "libe", "zas"]
+k = 2
+print(longest_consec(starr, k))
 
 
 
