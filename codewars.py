@@ -39,17 +39,29 @@
 # 
 # print(quote.title()) # this one line does the same that the whole function above
     
-#---EX4 -> makes sum from range    
-def get_sum(a,b):
-    if a < b:
-        return sum(list(range(a,b+1)))
-    elif a > b: 
-        return sum(list(range(b,a+1)))
-    elif a == b:
-        return a  
+# #---EX4 -> makes sum from range    
+# def get_sum(a,b):
+#     if a < b:
+#         return sum(list(range(a,b+1)))
+#     elif a > b: 
+#         return sum(list(range(b,a+1)))
+#     elif a == b:
+#         return a  
+# 
+# print(get_sum(2,2)) 
 
-print(get_sum(2,2)) 
+def accum(s):
+    result = []
+    for index, x in enumerate(s):
+        x = x.upper() + x.lower()*len(s[:index])
+        result.append(x)
+    return "-".join(result)   
+
     
-    
-    
+string = "sfbjASFASDVNkxncv"
+print(accum(string))    
+
+
+
+
     
