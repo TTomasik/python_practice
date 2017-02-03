@@ -50,16 +50,32 @@
 # 
 # print(get_sum(2,2)) 
 
-def accum(s):
-    result = []
-    for index, x in enumerate(s):
-        x = x.upper() + x.lower()*len(s[:index])
-        result.append(x)
-    return "-".join(result)   
+# #---EX5 -> hard camel case
+# def accum(s):
+#     result = []
+#     for index, x in enumerate(s):
+#         x = x.upper() + x.lower()*len(s[:index])
+#         result.append(x)
+#     return "-".join(result)   
+# 
+#     
+# string = "sfbjASFASDVNkxncv"
+# print(accum(string))
 
+#---EX6 -> finding how many times number appear in array and check if its %2==0
+def find_it(seq):    
+    for i in seq:
+        if seq.count(i)%2==0:
+            return i
+
+                      
+               
     
-string = "sfbjASFASDVNkxncv"
-print(accum(string))    
+
+
+example = [20, 2, 2, 11, 11, 12, 13, 1, 2, 11, 11]
+print(find_it(example))
+               
 
 
 
