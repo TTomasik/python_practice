@@ -139,18 +139,63 @@ import math
 # example = [5, 4, 2, 8, 9, 1, 1, 1]
 # print(remove_smallest(ex)) 
     
-#---EX12 -> return middle string or pair of strings
-def get_middle(s):
-    if len(s)%2 == 0:
-        middle = int(len(s)/2-1)        
-        return s[middle:middle+2]
-    else:
-        middle = int(len(s)/2)
-        return s[middle]
+# #---EX12 -> return middle string or pair of strings
+# def get_middle(s):
+#     if len(s)%2 == 0:
+#         middle = int(len(s)/2-1)        
+#         return s[middle:middle+2]
+#     else:
+#         middle = int(len(s)/2)
+#         return s[middle]
+# 
+# ex1 = "ttEStt"
+# ex2 = "a"
+# print(get_middle(ex2))
 
-ex1 = "ttEStt"
-ex2 = "a"
-print(get_middle(ex2))
+# #---EX13 --> convert sum of two digits into binary - MY SOLUTION - I DIDNT FINISH IT
+# def add_binary(a,b):
+#     binary = [2**0, 2**1, 2**2, 2**3, 2**4, 2**5, 2**6, 2**7, 2**8]
+#     sum_a_b = a + b
+#     result = []
+# #     print(sum_a_b-1)
+#     if sum_a_b % 2 == 0:
+#         for index, x in enumerate(binary):
+#             if x == sum_a_b:
+#                 print(index, x)
+#                 for i in range(0, index):
+#                     result.append(0)
+#                 result.append(1)
+#                 result.reverse()
+#                 return ''.join(str(k) for k in result)
+#             else: 
+#                 sort = sorted(binary)
+#                 binary.append(sum_a_b)
+#                 for i, k in enumerate(sort):
+#                     if k == sum_a_b:
+#                         print(sort[i]-sort[i-1])
+#                         if sort[i]-sort[i-1]
+#                         return(i, k, sort)
+      
+def add_binary(a,b):
+    sum_a_b = a + b
+    return "{0:b}".format(sum_a_b)
+    
+    
+
+a = 2
+b = 32
+print(add_binary(a,b))
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
         
    
 
