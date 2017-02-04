@@ -1,3 +1,5 @@
+import math
+
 # #---EX1 -> finds two smallest integers and show sum of them
 # numbers = [1, 10, 22, 4]
 # def sum_two_smallest_numbers(numbers):
@@ -78,22 +80,40 @@
 #     else:
 #         return False
 
-#---EX8 -> You are given an array strarr of strings and an integer k. 
-#           Your task is to return the first longest string consisting of k consecutive strings
-#           taken in the array.
-def longest_consec(starr, k):
-    result=[]
-    if k <= 0 or k > len(starr) or len(starr) == 0:        
-        return ""
-    else:
-        for i in range(0, len(starr), 1):
-            result.append("".join(starr[i:i+k]))        
-    return max(result, key=len)
- 
-starr = ["zone", "abigail", "theta", "form", "libe", "zas"]
-k = 2
-print(longest_consec(starr, k))
+# #---EX8 -> You are given an array strarr of strings and an integer k. 
+# #           Your task is to return the first longest string consisting of k consecutive strings
+# #           taken in the array.
+# def longest_consec(starr, k):
+#     result=[]
+#     if k <= 0 or k > len(starr) or len(starr) == 0:        
+#         return ""
+#     else:
+#         for i in range(0, len(starr), 1):
+#             result.append("".join(starr[i:i+k]))        
+#     return max(result, key=len)
+#  
+# starr = ["zone", "abigail", "theta", "form", "libe", "zas"]
+# k = 2
+# print(longest_consec(starr, k))
 
+#---EX9 -> delta
+def find_nb(m):
+    delta = 1 + 4*(2*math.sqrt(m))
+    if delta > 0:
+        x_1 = (-1 - math.sqrt(delta))/2
+        x_2 = (-1 + math.sqrt(delta))/2     
+        if x_1 > x_2 and x_1%1 == 0:                        
+            return int(x_1)
+        elif x_1 < x_2 and x_2%1 == 0:
+            return int(x_2)
+        else:
+            return -1     
+    elif delta < 0:
+        return -1       
+
+print(find_nb(450010))
+
+    
 
 
     
