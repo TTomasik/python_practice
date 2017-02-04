@@ -127,17 +127,30 @@ import math
 # example = "WUBTOWUBWUBWUBWUBJAWUBTOMEK"            
 # print(song_decoder(example))
 
-#--EX11 -> remove smallest, only one digit, dont mutate the array
-def remove_smallest(numbers):
-    if len(numbers) == 0:
-        return []
+# #---EX11 -> remove smallest, only one digit, dont mutate the array
+# def remove_smallest(numbers):
+#     if len(numbers) == 0:
+#         return []
+#     else:
+#         numbers.remove(sorted(numbers)[0])
+#         return numbers
+# 
+# ex = [1]
+# example = [5, 4, 2, 8, 9, 1, 1, 1]
+# print(remove_smallest(ex)) 
+    
+#---EX12 -> return middle string or pair of strings
+def get_middle(s):
+    if len(s)%2 == 0:
+        middle = int(len(s)/2-1)        
+        return s[middle:middle+2]
     else:
-        numbers.remove(sorted(numbers)[0])
-        return numbers
+        middle = int(len(s)/2)
+        return s[middle]
 
-ex = [1]
-example = [5, 4, 2, 8, 9, 1, 1, 1]
-print(remove_smallest(ex))     
+ex1 = "ttEStt"
+ex2 = "a"
+print(get_middle(ex2))
         
    
 
