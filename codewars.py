@@ -113,21 +113,31 @@ import math
 # 
 # print(find_nb(450010))
 
-#---EX10 -> decoder, key word = WUB
-def song_decoder(song):
-    splited = song.split("WUB")
-    result = []
-    if splited[0] == "":        
-        splited.remove("")
-    for w in splited:
-        if w != "":
-            result.append(w)
-    return " ".join(result)
- 
-example = "WUBTOWUBWUBWUBWUBJAWUBTOMEK"            
-print(song_decoder(example))
+# #---EX10 -> decoder, key word = WUB
+# def song_decoder(song):
+#     splited = song.split("WUB")
+#     result = []
+#     if splited[0] == "":        
+#         splited.remove("")
+#     for w in splited:
+#         if w != "":
+#             result.append(w)
+#     return " ".join(result)
+#  
+# example = "WUBTOWUBWUBWUBWUBJAWUBTOMEK"            
+# print(song_decoder(example))
 
-        
+#--EX11 -> remove smallest, only one digit, dont mutate the array
+def remove_smallest(numbers):
+    if len(numbers) == 0:
+        return []
+    else:
+        numbers.remove(sorted(numbers)[0])
+        return numbers
+
+ex = [1]
+example = [5, 4, 2, 8, 9, 1, 1, 1]
+print(remove_smallest(ex))     
         
    
 
