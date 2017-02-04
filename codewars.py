@@ -152,12 +152,12 @@ import math
 # ex2 = "a"
 # print(get_middle(ex2))
 
-# #---EX13 --> convert sum of two digits into binary - MY SOLUTION - I DIDNT FINISH IT
+#---EX13 --> convert sum of two digits into binary - MY SOLUTION - I DIDNT FINISH IT
 # def add_binary(a,b):
 #     binary = [2**0, 2**1, 2**2, 2**3, 2**4, 2**5, 2**6, 2**7, 2**8]
 #     sum_a_b = a + b
 #     result = []
-# #     print(sum_a_b-1)
+#     print(sum_a_b-1)
 #     if sum_a_b % 2 == 0:
 #         for index, x in enumerate(binary):
 #             if x == sum_a_b:
@@ -175,16 +175,44 @@ import math
 #                         print(sort[i]-sort[i-1])
 #                         if sort[i]-sort[i-1]
 #                         return(i, k, sort)
-      
-def add_binary(a,b):
-    sum_a_b = a + b
-    return "{0:b}".format(sum_a_b)
-    
-    
 
-a = 2
-b = 32
-print(add_binary(a,b))
+# #---EX13 --> simplest solution      
+# def add_binary(a,b):
+#     sum_a_b = a + b
+#     return "{0:b}".format(sum_a_b)  
+#     
+# 
+# a = 2
+# b = 32
+# print(add_binary(a,b))
+
+#---EX14 - sum of left side of index equal sum of right side of index and return index
+def find_even_index(arr):
+    a = 0
+    b = 0
+    result = []
+    reverse_result = []
+    final = []
+    reversed = arr[::-1]    
+    for x in arr:               
+        a += x
+        result.append(a)      
+    for y in reversed:
+        b += y
+        reverse_result.append(b)
+    for (x1, x2) in zip(result, reverse_result[::-1]):
+        c = x1 - x2
+        final.append(c)  
+    for index, z in enumerate(final):
+        if 0 not in final:
+            return -1
+        else:
+            if z == 0:
+                return index
+
+arr = [100, 1, 1, 9, 20, 20, 50]
+
+print(find_even_index(arr))
     
     
     
