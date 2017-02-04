@@ -96,22 +96,40 @@ import math
 # k = 2
 # print(longest_consec(starr, k))
 
-#---EX9 -> delta
-def find_nb(m):
-    delta = 1 + 4*(2*math.sqrt(m))
-    if delta > 0:
-        x_1 = (-1 - math.sqrt(delta))/2
-        x_2 = (-1 + math.sqrt(delta))/2     
-        if x_1 > x_2 and x_1%1 == 0:                        
-            return int(x_1)
-        elif x_1 < x_2 and x_2%1 == 0:
-            return int(x_2)
-        else:
-            return -1     
-    elif delta < 0:
-        return -1       
+# #---EX9 -> quadratic equation
+# def find_nb(m):
+#     delta = 1 + 4*(2*math.sqrt(m))
+#     if delta > 0:
+#         x_1 = (-1 - math.sqrt(delta))/2
+#         x_2 = (-1 + math.sqrt(delta))/2     
+#         if x_1 > x_2 and x_1%1 == 0:                        
+#             return int(x_1)
+#         elif x_1 < x_2 and x_2%1 == 0:
+#             return int(x_2)
+#         else:
+#             return -1     
+#     elif delta < 0:
+#         return -1       
+# 
+# print(find_nb(450010))
 
-print(find_nb(450010))
+#---EX10 -> decoder, key word = WUB
+def song_decoder(song):
+    splited = song.split("WUB")
+    result = []
+    if splited[0] == "":        
+        splited.remove("")
+    for w in splited:
+        if w != "":
+            result.append(w)
+    return " ".join(result)
+ 
+example = "WUBTOWUBWUBWUBWUBJAWUBTOMEK"            
+print(song_decoder(example))
+
+        
+        
+   
 
     
 
