@@ -186,7 +186,7 @@ import math
 # b = 32
 # print(add_binary(a,b))
 
-# #---EX14 - sum of left side of index equal sum of right side of index and return index
+# #---EX14 -> sum of left side of index equal sum of right side of index and return index
 # def find_even_index(arr):
 #     a = 0
 #     b = 0
@@ -214,7 +214,7 @@ import math
 # 
 # print(find_even_index(arr))
 
-# #---EX14 - BETTER SOLUTION :)
+# #---EX14 -> BETTER SOLUTION :)
 # def find_even_index(lst):
 #     left_sum = 0
 #     right_sum = sum(lst)
@@ -225,12 +225,23 @@ import math
 #         left_sum += a
 #     return -1
 
-#---EX14 - THE BEST SOLUTION!!!
-def find_even_index(arr):
-    for i in range(len(arr)):
-        if sum(arr[:i]) == sum(arr[i+1:]):
-            return i
-    return -1
+# #---EX14 -> THE BEST SOLUTION!!!
+# def find_even_index(arr):
+#     for i in range(len(arr)):
+#         if sum(arr[:i]) == sum(arr[i+1:]):
+#             return i
+#     return -1
+
+# #---EX15 -> find numbers in list that number % 3 or number % 5 == 0, then make sum of them
+def solution(number):
+    result = []
+    for i in range(number):
+        if i % 3 == 0 or i % 5 == 0:
+            result.append(i)
+    return(sum(result))          
+ 
+number = 10
+print(solution(number))
     
     
     
