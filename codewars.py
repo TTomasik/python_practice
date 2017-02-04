@@ -186,33 +186,44 @@ import math
 # b = 32
 # print(add_binary(a,b))
 
-#---EX14 - sum of left side of index equal sum of right side of index and return index
-def find_even_index(arr):
-    a = 0
-    b = 0
-    result = []
-    reverse_result = []
-    final = []
-    reversed = arr[::-1]    
-    for x in arr:               
-        a += x
-        result.append(a)      
-    for y in reversed:
-        b += y
-        reverse_result.append(b)
-    for (x1, x2) in zip(result, reverse_result[::-1]):
-        c = x1 - x2
-        final.append(c)  
-    for index, z in enumerate(final):
-        if 0 not in final:
-            return -1
-        else:
-            if z == 0:
-                return index
+# #---EX14 - sum of left side of index equal sum of right side of index and return index
+# def find_even_index(arr):
+#     a = 0
+#     b = 0
+#     result = []
+#     reverse_result = []
+#     final = []
+#     reversed = arr[::-1]    
+#     for x in arr:               
+#         a += x
+#         result.append(a)      
+#     for y in reversed:
+#         b += y
+#         reverse_result.append(b)
+#     for (x1, x2) in zip(result, reverse_result[::-1]):
+#         c = x1 - x2
+#         final.append(c)  
+#     for index, z in enumerate(final):
+#         if 0 not in final:
+#             return -1
+#         else:
+#             if z == 0:
+#                 return index
+# 
+# arr = [100, 1, 1, 9, 20, 20, 50]
+# 
+# print(find_even_index(arr))
 
-arr = [100, 1, 1, 9, 20, 20, 50]
-
-print(find_even_index(arr))
+#---EX14 - BETTER SOLUTION :)
+def find_even_index(lst):
+    left_sum = 0
+    right_sum = sum(lst)
+    for i, a in enumerate(lst):
+        right_sum -= a
+        if left_sum == right_sum:
+            return i
+        left_sum += a
+    return -1
     
     
     
