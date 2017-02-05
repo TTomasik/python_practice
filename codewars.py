@@ -1,4 +1,5 @@
 import math
+from subprocess import list2cmdline
 
 # #---EX1 -> finds two smallest integers and show sum of them
 # numbers = [1, 10, 22, 4]
@@ -348,15 +349,30 @@ import math
 # 
 # A = [9, 7]
 # print(solution(A))
-#
-def fibonacci(n):
-    numbers = [0, 1]
-    for i in range(2,n):
-        numbers.append(numbers[i-1]+numbers[i-2])
-    return numbers
+# #---FIBONACCI
+# def fibonacci(n):
+#     numbers = [0, 1]
+#     for i in range(2,n):
+#         numbers.append(numbers[i-1]+numbers[i-2])
+#     return numbers, sum(numbers)
+# 
+# n = 10    
+# print(fibonacci(n))
 
-n = 10    
-print(fibonacci(n))
+def cakes(recipe, available):
+    list = []
+    list2 = []
+    list3 = []    
+    for k in a.keys() & r.keys():
+        list.append(k)
+        list2.append(a[k])
+        list3.append(r[k])
+    return list, list2, list3
+    
+
+r = {'flour': 500, 'sugar': 200, 'eggs': 1}
+a = {"flour": 1200, "sugar": 1200, "eggs": 5, "milk": 200}
+print(cakes(r, a))
 
 
 
