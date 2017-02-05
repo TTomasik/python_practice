@@ -333,21 +333,30 @@ import math
 # Y = 85
 # D = 30
 # print(solution(X, Y, D))
+# #---CODILITY5
+# def solution(A): 
+#     if len(A) == 0:
+#         return 1
+#     elif len(A) == 1:
+#         return 1
+#     for index, i in enumerate(sorted(A)):     
+#         if sorted(A)[index] != sorted(A)[index+1]-1:
+#             return(i+1) 
+#             
+#             
+# 
+# 
+# A = [9, 7]
+# print(solution(A))
+#
+def fibonacci(n):
+    numbers = [0, 1]
+    for i in range(2,n):
+        numbers.append(numbers[i-1]+numbers[i-2])
+    return numbers
 
-def solution(A): 
-    if len(A) == 0:
-        return None
-    elif len(A) == 1:
-        return None
-    for index, i in enumerate(sorted(A)):     
-        if sorted(A)[index] != sorted(A)[index+1]-1:
-            return(i+1) 
-            
-            
-
-
-A = [9, 7]
-print(solution(A))
+n = 10    
+print(fibonacci(n))
 
 
 
