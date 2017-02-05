@@ -152,30 +152,30 @@ import math
 # ex2 = "a"
 # print(get_middle(ex2))
 
-#---EX13 --> convert sum of two digits into binary - MY SOLUTION - I DIDNT FINISH IT
-# def add_binary(a,b):
-#     binary = [2**0, 2**1, 2**2, 2**3, 2**4, 2**5, 2**6, 2**7, 2**8]
-#     sum_a_b = a + b
-#     result = []
-#     print(sum_a_b-1)
-#     if sum_a_b % 2 == 0:
-#         for index, x in enumerate(binary):
-#             if x == sum_a_b:
-#                 print(index, x)
-#                 for i in range(0, index):
-#                     result.append(0)
-#                 result.append(1)
-#                 result.reverse()
-#                 return ''.join(str(k) for k in result)
-#             else: 
-#                 sort = sorted(binary)
-#                 binary.append(sum_a_b)
-#                 for i, k in enumerate(sort):
-#                     if k == sum_a_b:
-#                         print(sort[i]-sort[i-1])
-#                         if sort[i]-sort[i-1]
-#                         return(i, k, sort)
-
+# EX13 --> convert sum of two digits into binary - MY SOLUTION - I DIDNT FINISH IT
+#  def add_binary(a,b):
+#      binary = [2**0, 2**1, 2**2, 2**3, 2**4, 2**5, 2**6, 2**7, 2**8]
+#      sum_a_b = a + b
+#      result = []
+#      print(sum_a_b-1)
+#      if sum_a_b % 2 == 0:
+#          for index, x in enumerate(binary):
+#              if x == sum_a_b:
+#                  print(index, x)
+#                  for i in range(0, index):
+#                      result.append(0)
+#                  result.append(1)
+#                  result.reverse()
+#                  return ''.join(str(k) for k in result)
+#              else: 
+#                  sort = sorted(binary)
+#                  binary.append(sum_a_b)
+#                  for i, k in enumerate(sort):
+#                      if k == sum_a_b:
+#                          print(sort[i]-sort[i-1])
+#                          if sort[i]-sort[i-1]
+#                          return(i, k, sort)
+# 
 # #---EX13 --> simplest solution      
 # def add_binary(a,b):
 #     sum_a_b = a + b
@@ -233,15 +233,47 @@ import math
 #     return -1
 
 # #---EX15 -> find numbers in list that number % 3 or number % 5 == 0, then make sum of them
-def solution(number):
-    result = []
-    for i in range(number):
-        if i % 3 == 0 or i % 5 == 0:
-            result.append(i)
-    return(sum(result))          
- 
-number = 10
-print(solution(number))
+# def solution(number):
+#     result = []
+#     for i in range(number):
+#         if i % 3 == 0 or i % 5 == 0:
+#             result.append(i)
+#     return(sum(result))          
+#  
+# number = 10
+# print(solution(number))
+
+# def longest_palindrome(s):    # I HAVENT FINISH IT
+#     for i in list(s):
+#         if i == i+1:
+#              
+#             if i-1 == i+2:
+#                 if i-2 == i+3:
+#                     pass
+#             else:
+#             return(i, i+1)
+#                 return(i-1, i, i+1, i+2)
+#                     return(i-2, i-1, i, i+1, i+2, i+3)
+#      
+#      
+#  
+# s = 'baablkj12345432133d'
+# print(longest_palindrome(s)) 
+
+#---EX16
+def narcissistic(value):    
+    int_list = [int(x) for x in str(value)]
+    result=[]
+    for i in int_list:
+        i**=(len(int_list))
+        result.append(i)
+    if sum(result) == value:
+        return True
+    else:
+        return False      
+
+value = 153
+print(narcissistic(value))
     
     
     
