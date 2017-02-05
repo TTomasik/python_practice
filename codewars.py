@@ -260,24 +260,64 @@ import math
 # s = 'baablkj12345432133d'
 # print(longest_palindrome(s)) 
 
-#---EX16
-def narcissistic(value):    
-    int_list = [int(x) for x in str(value)]
-    result=[]
-    for i in int_list:
-        i**=(len(int_list))
-        result.append(i)
-    if sum(result) == value:
-        return True
-    else:
-        return False      
+# #---EX16
+# def narcissistic(value):    
+#     int_list = [int(x) for x in str(value)]
+#     result=[]
+#     for i in int_list:
+#         i**=(len(int_list))
+#         result.append(i)
+#     if sum(result) == value:
+#         return True
+#     else:
+#         return False      
+# 
+# value = 153
+# print(narcissistic(value))
 
-value = 153
-print(narcissistic(value))
-    
-    
-    
-    
+# #---CODILITY1
+# def solution(N):
+#     N = "{0:b}".format(N)
+#     print(N)
+#     result = []
+#     counter = 0
+#     if "0" in str(N):
+#         for i in str(N):
+#             if i == "1":            
+#                 result.append(counter)
+#                 counter = 0            
+#             if i == "0":
+#                 counter += 1
+#         return max(result)
+#     else:
+#         return 0
+#         
+# 
+# N=256
+# print(solution(N))
+# #---CODILITY2 
+# def solution(A):
+#     result = []
+#     for i in range(1, 1000001, 2):
+#         counter = A.count(i)
+#         if counter % 2 != 0:
+#             return i
+#         
+#     
+#     
+# A=[9, 9, 1, 1, 1, 0, 0]
+# print(solution(A))  
+
+#---CODILITY3
+def solution(A, K):
+    for i in range(K):
+        A.insert(0,A.pop())
+    return A
+
+
+K=2
+A=[1, 2, 3, 4, 5, 6, 7, 8, 9]
+print(solution(A, K))
     
     
     
