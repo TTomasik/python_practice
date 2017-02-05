@@ -319,20 +319,40 @@ import math
 # A=[1, 2, 3, 4, 5, 6, 7, 8, 9]
 # print(solution(A, K))
 
-#---CODILITY4
-import math
-def solution(X, Y, D):
-    if X == Y:
-        return 0
-    else:        
-        range_xy = Y-X        
-        jumps = math.ceil(float(range_xy)/D)    #float - becouse of python 2.7        
-        return int(jumps)                       #int - becouse of python 2.7
+# #---CODILITY4
+# import math
+# def solution(X, Y, D):
+#     if X == Y:
+#         return 0
+#     else:        
+#         range_xy = Y-X        
+#         jumps = math.ceil(float(range_xy)/D)    #float - becouse of python 2.7        
+#         return int(jumps)                       #int - becouse of python 2.7
+# 
+# X = 10
+# Y = 85
+# D = 30
+# print(solution(X, Y, D))
 
-X = 10
-Y = 85
-D = 30
-print(solution(X, Y, D))
+def solution(A): 
+    if len(A) == 0:
+        return None
+    elif len(A) == 1:
+        return None
+    for index, i in enumerate(sorted(A)):     
+        if sorted(A)[index] != sorted(A)[index+1]-1:
+            return(i+1) 
+            
+            
+
+
+A = [9, 7]
+print(solution(A))
+
+
+
+
+
     
     
     
