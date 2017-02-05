@@ -308,16 +308,31 @@ import math
 # A=[9, 9, 1, 1, 1, 0, 0]
 # print(solution(A))  
 
-#---CODILITY3
-def solution(A, K):
-    for i in range(K):
-        A.insert(0,A.pop())
-    return A
+# #---CODILITY3
+# def solution(A, K):
+#     for i in range(K):
+#         A.insert(0,A.pop())
+#     return A
+# 
+# 
+# K=2
+# A=[1, 2, 3, 4, 5, 6, 7, 8, 9]
+# print(solution(A, K))
 
+#---CODILITY4
+import math
+def solution(X, Y, D):
+    if X == Y:
+        return 0
+    else:        
+        range_xy = Y-X        
+        jumps = math.ceil(float(range_xy)/D)    #float - becouse of python 2.7        
+        return int(jumps)                       #int - becouse of python 2.7
 
-K=2
-A=[1, 2, 3, 4, 5, 6, 7, 8, 9]
-print(solution(A, K))
+X = 10
+Y = 85
+D = 30
+print(solution(X, Y, D))
     
     
     
