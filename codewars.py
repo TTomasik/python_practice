@@ -491,27 +491,63 @@ from subprocess import list2cmdline
 # 
 # print(solution(N, A))
 
-#CODILITY11
-def solution(A, B, K):    
-    if A == B:
-        if A%K == 0:
-            return 1
-        else:
-            return 0
-    if K != 0 and A < B and A > 0 and B > 0:
-        result = []
-        for i in range(A, B+1):    #in python 2.7 it should be xrange
-            if i%K == 0:
-                result.append(i)
-        return len(result), result
-    else:
-        return 0
-    
-    
-A = 10
-B = 20
-K = 2  
-print(solution(A, B, K))
+# #CODILITY11
+# def solution(A, B, K):    
+#     if A == B:
+#         if A%K == 0:
+#             return 1
+#         else:
+#             return 0
+#     if K != 0 and A < B and A > 0 and B > 0:
+#         result = []
+#         for i in range(A, B+1):    #in python 2.7 it should be xrange
+#             if i%K == 0:
+#                 result.append(i)
+#         return len(result), result
+#     else:
+#         return 0
+#     
+#     
+# A = 10
+# B = 20
+# K = 2  
+# print(solution(A, B, K))
+
+#CODILITY12
+def solution(S, P, Q):
+    if max(P) > len(S)-1 or max(Q) > len(S)-1:
+        return False
+    A, C, G, T = 1, 2, 3, 4
+    dna = []
+    result = [[] for x in range(len(P))]    
+    for index, i in enumerate(P):
+        for k in Q:
+            a_min = i
+            a_max = Q[index]+1
+            code = S[a_min:a_max]
+            dna.append(code)
+    for index, i in enumerate(dna[::3]):               
+        for x in list(i):            
+            if x == "A":
+                result[index].append(ord(x)-64)
+            if x == "C":
+                result[index].append(ord(x)-65)
+            if x == "G":
+                result[index].append(ord(x)-68)
+            if x == "T":
+                result[index].append(ord(x)-80) 
+    answer = []
+    for y in result:
+        answer.append(min(y))
+    return answer     
+
+S = 'CAGCCTA'
+P = [2, 5, 0]
+Q = [4, 5, 6]
+print(solution(S, P, Q))
+
+
+
     
         
    
