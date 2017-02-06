@@ -378,15 +378,26 @@ from subprocess import list2cmdline
 # a = {"flour": 1200, "sugar": 1200, "eggs": 5, "milk": 200}
 # print(cakes(r, a))
 
-#---EX17 -> better solution
-def cakes(recipe, available):
-    args = []
-    for k in recipe.keys():
-        if k not in available:
-            return 0
-        args.append(available[k] //recipe[k])
-    return min(args)
+# #---EX17 -> better solution
+# def cakes(recipe, available):
+#     args = []
+#     for k in recipe.keys():
+#         if k not in available:
+#             return 0
+#         args.append(available[k] //recipe[k])
+#     return min(args)
 
+#---EX18 -> hard exercise -> problems with False, 0.0 and 0
+def move_zeros(array):
+    counter = array.count(0)    
+    for x in array:
+        if x is False:
+            counter -= 1   
+    return [x for x in array if x is not 0 and not isinstance(x, float)] + [0]*counter
+
+
+array = [None, False, 9, [], 0, 0, 0.0, 1, 2, 0, 5]
+print(move_zeros(array))
 
 
 
