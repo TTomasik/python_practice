@@ -418,23 +418,36 @@ from subprocess import list2cmdline
 # A = [6]
 # print(solution(A))
 
-#---CODILITY7
-def solution(A):       
-    if len(A) <= 1:
-        return 0    
-    sorted_A = sorted(A)
-    print(sorted(A))    
-    for i in range(len(sorted_A)-1):             
-        if sorted_A[i]+1 < sorted_A[i+1]:
-            result = sorted_A[i]+1          
-    return result      
+# #---CODILITY7
+# def solution(A):       
+#     if len(A) == 0:
+#         return 0 
+#     if len(A) == 1:
+#         return A[0]   
+#     sorted_A = sorted(A)
+#     print(sorted(A))    
+#     for i in range(len(sorted_A)-1):             
+#         if sorted_A[i]+1 < sorted_A[i+1]:
+#             result = sorted_A[i]+1          
+#     return result    
+#         
+# 
+# A = [333]
+# print(solution(A))
+    
+#CODILITY-8    
+def solution(X, A):
+    if A.count(X) == 0:
+        return -1
+    else:
+        for index, i in enumerate(A):
+            if i == X:
+                return index
         
 
-A = [-1, 0, 6, -4, 1, 1, 1 , -10]
-print(solution(A))
-    
-    
-    
+X = 11
+A = [1, 3, 1, 4, 2, 3, 5, 4]
+print(solution(X, A))  
     
     
     
