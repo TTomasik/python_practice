@@ -399,25 +399,39 @@ from subprocess import list2cmdline
 # array = [None, False, 9, [], 0, 0, 0.0, 1, 2, 0, 5]
 # print(move_zeros(array))
 
-#---CODILITY6
-def solution(A):
+# #---CODILITY6
+# def solution(A):
+#     if len(A) <= 1:
+#         return 0
+#     else:
+#         sum_left = A[0]
+#         sum_right = sum(A)-A[0]    
+#         list_left = [sum_left]
+#         list_right = [sum_right]    
+#         for i in range(1, len(A)-1):
+#             sum_left += A[i]
+#             sum_right -= A[i]
+#             list_left.append(sum_left)
+#             list_right.append(sum_right)
+#         return min([abs(x1 - x2) for x1, x2 in zip(list_left, list_right)])
+# 
+# A = [6]
+# print(solution(A))
+
+#---CODILITY7
+def solution(A):       
     if len(A) <= 1:
-        return 0
-    else:
-        sum_left = A[0]
-        sum_right = sum(A)-A[0]    
-        list_left = [sum_left]
-        list_right = [sum_right]    
-        for i in range(1, len(A)-1):
-            sum_left += A[i]
-            sum_right -= A[i]
-            list_left.append(sum_left)
-            list_right.append(sum_right)
-        return min([abs(x1 - x2) for x1, x2 in zip(list_left, list_right)])
+        return 0    
+    sorted_A = sorted(A)
+    print(sorted(A))    
+    for i in range(len(sorted_A)-1):             
+        if sorted_A[i]+1 < sorted_A[i+1]:
+            result = sorted_A[i]+1          
+    return result      
+        
 
-A = [6]
+A = [-1, 0, 6, -4, 1, 1, 1 , -10]
 print(solution(A))
-
     
     
     
