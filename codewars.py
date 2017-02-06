@@ -449,29 +449,49 @@ from subprocess import list2cmdline
 # A = [1, 3, 1, 4, 2, 3, 5, 4]
 # print(solution(X, A))  
 
-#CODILITY9
-def solution(A):
+# #CODILITY9
+# def solution(A):
+#     if len(A) <= 1:
+#         return 0
+#     else:         
+#         for i in A:
+#             if A.count(i) > 1:
+#                 return 0                  
+#         sort_A = sorted(A)
+#         comparator = list(range(min(A), max(A)+1))
+#         difference = [x1 - x2 for x1, x2 in zip(comparator, sort_A)]
+#         if all(i == 0 for i in difference):
+#             return 1
+#         else:
+#             return 0  
+# 
+# A = [1, 3]
+# print(solution(A))
+    
+#CODILITY10   
+def solution(N, A):
+    proper = []
+    array = [0]*N
     for i in A:
-        if A.count(i) > 1:
-            return -1            
-    sort_A = sorted(A)
-    comparator = list(range(min(A), max(A)+1))
-    print(sort_A)
-    print(comparator)
-    print(min(sort_A), max(sort_A))
-    difference = [x1 - x2 for x1, x2 in zip(comparator, sort_A)]
-    print(difference)
-    if all(i == 0 for i in difference):
-        return 1
-    else:
-        return 0
-    
-    
-    
+        i -= 1
+        proper.append(i)
+    for i in proper:
+        if i >= 0:            
+            if i <= len(array)-1:
+                array[i] += 1                                                       
+            if i == len(array):
+                b = max(array)            
+                array = [b]*N
+        else:
+            pass
+    return array
+        
 
-A = [4, 1, 1, 2]
-print(solution(A))
-    
+
+N=5
+A=[3, 4, 4, 6, 1, 4, 4]
+
+print(solution(N, A))
     
     
         
