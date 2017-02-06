@@ -468,31 +468,50 @@ from subprocess import list2cmdline
 # A = [1, 3]
 # print(solution(A))
     
-#CODILITY10   
-def solution(N, A):
-    proper = []
-    array = [0]*N
-    for i in A:
-        i -= 1
-        proper.append(i)
-    for i in proper:
-        if i >= 0:            
-            if i <= len(array)-1:
-                array[i] += 1                                                       
-            if i == len(array):
-                b = max(array)            
-                array = [b]*N
+# #CODILITY10   
+# def solution(N, A):
+#     proper = []
+#     array = [0]*N
+#     for i in A:
+#         i -= 1
+#         proper.append(i)
+#     for i in proper:
+#         if i >= 0:            
+#             if i <= len(array)-1:
+#                 array[i] += 1                                                       
+#             if i == len(array):
+#                 b = max(array)            
+#                 array = [b]*N
+#         else:
+#             pass
+#     return array        
+# 
+# N=5
+# A=[3, 4, 4, 6, 1, 4, 4]
+# 
+# print(solution(N, A))
+
+#CODILITY11
+def solution(A, B, K):    
+    if A == B:
+        if A%K == 0:
+            return 1
         else:
-            pass
-    return array
-        
-
-
-N=5
-A=[3, 4, 4, 6, 1, 4, 4]
-
-print(solution(N, A))
+            return 0
+    if K != 0 and A < B and A > 0 and B > 0:
+        result = []
+        for i in range(A, B+1):    #in python 2.7 it should be xrange
+            if i%K == 0:
+                result.append(i)
+        return len(result), result
+    else:
+        return 0
     
+    
+A = 10
+B = 20
+K = 2  
+print(solution(A, B, K))
     
         
    
