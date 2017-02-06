@@ -387,20 +387,36 @@ from subprocess import list2cmdline
 #         args.append(available[k] //recipe[k])
 #     return min(args)
 
-#---EX18 -> hard exercise -> problems with False, 0.0 and 0
-def move_zeros(array):
-    counter = array.count(0)    
-    for x in array:
-        if x is False:
-            counter -= 1   
-    return [x for x in array if x is not 0 and not isinstance(x, float)] + [0]*counter
+# #---EX18 -> hard exercise -> problems with False, 0.0 and 0
+# def move_zeros(array):
+#     counter = array.count(0)    
+#     for x in array:
+#         if x is False:
+#             counter -= 1   
+#     return [x for x in array if x is not 0 and not isinstance(x, float)] + [0]*counter
+# 
+# 
+# array = [None, False, 9, [], 0, 0, 0.0, 1, 2, 0, 5]
+# print(move_zeros(array))
 
+#---CODILITY6
+def solution(A):
+    if len(A) <= 1:
+        return 0
+    else:
+        sum_left = A[0]
+        sum_right = sum(A)-A[0]    
+        list_left = [sum_left]
+        list_right = [sum_right]    
+        for i in range(1, len(A)-1):
+            sum_left += A[i]
+            sum_right -= A[i]
+            list_left.append(sum_left)
+            list_right.append(sum_right)
+        return min([abs(x1 - x2) for x1, x2 in zip(list_left, list_right)])
 
-array = [None, False, 9, [], 0, 0, 0.0, 1, 2, 0, 5]
-print(move_zeros(array))
-
-
-
+A = [6]
+print(solution(A))
 
     
     
