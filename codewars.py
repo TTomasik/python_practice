@@ -359,15 +359,18 @@ from subprocess import list2cmdline
 # n = 10    
 # print(fibonacci(n))
 
-def cakes(recipe, available):
+def cakes(r, a):
     list = []
-    list2 = []
-    list3 = []    
-    for k in a.keys() & r.keys():
-        list.append(k)
-        list2.append(a[k])
-        list3.append(r[k])
-    return list, list2, list3
+    list_available = []
+    list_recipe = []  
+    if len(a) < len(r):
+        return 0
+    else:        
+        for k in a.keys() & r.keys():            
+            list_available.append(a[k])
+            list_recipe.append(r[k])
+        result = [x1 / x2 for (x1, x2) in zip(list_available, list_recipe)]      
+    return int(min(result))
     
 
 r = {'flour': 500, 'sugar': 200, 'eggs': 1}
