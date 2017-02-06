@@ -359,23 +359,33 @@ from subprocess import list2cmdline
 # n = 10    
 # print(fibonacci(n))
 
-def cakes(r, a):
-    list = []
-    list_available = []
-    list_recipe = []  
-    if len(a) < len(r):
-        return 0
-    else:        
-        for k in a.keys() & r.keys():            
-            list_available.append(a[k])
-            list_recipe.append(r[k])
-        result = [x1 / x2 for (x1, x2) in zip(list_available, list_recipe)]      
-    return int(min(result))
-    
+# #---EX17
+# def cakes(r, a):
+#     list = []
+#     list_available = []
+#     list_recipe = []  
+#     if len(a) < len(r):
+#         return 0
+#     else:        
+#         for k in a.keys() & r.keys():            
+#             list_available.append(a[k])
+#             list_recipe.append(r[k])
+#         result = [x1 / x2 for (x1, x2) in zip(list_available, list_recipe)]      
+#     return int(min(result))
+#     
+# 
+# r = {'flour': 500, 'sugar': 200, 'eggs': 1}
+# a = {"flour": 1200, "sugar": 1200, "eggs": 5, "milk": 200}
+# print(cakes(r, a))
 
-r = {'flour': 500, 'sugar': 200, 'eggs': 1}
-a = {"flour": 1200, "sugar": 1200, "eggs": 5, "milk": 200}
-print(cakes(r, a))
+#---EX17 -> better solution
+def cakes(recipe, available):
+    args = []
+    for k in recipe.keys():
+        if k not in available:
+            return 0
+        args.append(available[k] //recipe[k])
+    return min(args)
 
 
 
