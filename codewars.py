@@ -435,19 +435,42 @@ from subprocess import list2cmdline
 # A = [333]
 # print(solution(A))
     
-#CODILITY-8    
-def solution(X, A):
-    if A.count(X) == 0:
-        return -1
-    else:
-        for index, i in enumerate(A):
-            if i == X:
-                return index
-        
+# #CODILITY-8    
+# def solution(X, A):
+#     if A.count(X) == 0:
+#         return -1
+#     else:
+#         for index, i in enumerate(A):
+#             if i == X:
+#                 return index
+#         
+# 
+# X = 11
+# A = [1, 3, 1, 4, 2, 3, 5, 4]
+# print(solution(X, A))  
 
-X = 11
-A = [1, 3, 1, 4, 2, 3, 5, 4]
-print(solution(X, A))  
+#CODILITY9
+def solution(A):
+    for i in A:
+        if A.count(i) > 1:
+            return -1            
+    sort_A = sorted(A)
+    comparator = list(range(min(A), max(A)+1))
+    print(sort_A)
+    print(comparator)
+    print(min(sort_A), max(sort_A))
+    difference = [x1 - x2 for x1, x2 in zip(comparator, sort_A)]
+    print(difference)
+    if all(i == 0 for i in difference):
+        return 1
+    else:
+        return 0
+    
+    
+    
+
+A = [4, 1, 1, 2]
+print(solution(A))
     
     
     
