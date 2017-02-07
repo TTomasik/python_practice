@@ -513,44 +513,132 @@ from subprocess import list2cmdline
 # K = 2  
 # print(solution(A, B, K))
 
-#CODILITY12
-def solution(S, P, Q):
-    if max(P) > len(S)-1 or max(Q) > len(S)-1:
-        return False
-    A, C, G, T = 1, 2, 3, 4
-    dna = []
-    result = [[] for x in range(len(P))]    
-    for index, i in enumerate(P):
-        for k in Q:
-            a_min = i
-            a_max = Q[index]+1
-            code = S[a_min:a_max]
-            dna.append(code)
-    for index, i in enumerate(dna[::3]):               
-        for x in list(i):            
-            if x == "A":
-                result[index].append(ord(x)-64)
-            if x == "C":
-                result[index].append(ord(x)-65)
-            if x == "G":
-                result[index].append(ord(x)-68)
-            if x == "T":
-                result[index].append(ord(x)-80) 
-    answer = []
-    for y in result:
-        answer.append(min(y))
-    return answer     
+# #CODILITY12
+# def solution(S, P, Q):
+#     if max(P) > len(S)-1 or max(Q) > len(S)-1:
+#         return False
+#     A, C, G, T = 1, 2, 3, 4
+#     dna = []
+#     result = [[] for x in range(len(P))]    
+#     for index, i in enumerate(P):
+#         for k in Q:
+#             a_min = i
+#             a_max = Q[index]+1
+#             code = S[a_min:a_max]
+#             dna.append(code)
+#     for index, i in enumerate(dna[::3]):               
+#         for x in list(i):            
+#             if x == "A":
+#                 result[index].append(ord(x)-64)
+#             if x == "C":
+#                 result[index].append(ord(x)-65)
+#             if x == "G":
+#                 result[index].append(ord(x)-68)
+#             if x == "T":
+#                 result[index].append(ord(x)-80) 
+#     answer = []
+#     for y in result:
+#         answer.append(min(y))
+#     return answer     
+# 
+# S = 'CAGCCTA'
+# P = [2, 5, 0]
+# Q = [4, 5, 6]
+# print(solution(S, P, Q))
 
-S = 'CAGCCTA'
-P = [2, 5, 0]
-Q = [4, 5, 6]
-print(solution(S, P, Q))
+##TASK1
+# import itertools
+# def solution(N):
+#     list_N = [int(x) for x in str(N)]
+#     combinations = set(itertools.permutations(list_N))      
+#     list_comb = list(combinations)
+#     print(len(list_comb))
+#     if len(list_comb) >= 100000000:
+#         return -1 
+#     result = []
+#     for i in list_comb:
+#         r = ''.join(map(str, i))
+#         result.append(int(r))
+#     return max(result)   
+# 
+# 
+# N = 123456789123
+# print(solution(N))
 
+##TASK3
+# def solution(N):
+#     numbers = [0, 1]
+#     for i in range(2,N-1):
+#         numbers.append(numbers[i-1]+numbers[i-2])
+#     fibonacci = sum(numbers)+1    
+#     return fibonacci%1000000    
+# 
+# N = 36
+# print(solution(N))
 
+##TASK5
+# def solution(A):
+#     del A[0]
+#     del A[-1]
+#     print(A)
+#     result = []
+#     result.append(A[0]+A[-2])
+#     result.append(A[0]+A[-1])
+#     result.append(A[1]+A[-1]) 
+#     print(result)   
+#     return min(result)     
+# 
+# A = [13, 5, 12, 6, 3, 7, 2, 4, 6, 3, 7, 2, 4, 6, 3, 7, 2, 4, 6, 3, 7, 2, 4, 6, 3, 7, 2, 113, 41, 33, 41]
+# print(solution(A))
+##TASK2
+# import itertools
+# def solution(A): 
+#     combs_list = []    
+#     result = [] 
+#     longest = []
+#     for i in range(1,len(A)+1):
+#         element = [list(x) for x in itertools.combinations(A,i)]
+#         combs_list.append(element)
+#     for i in combs_list:
+#         for j in i:
+#             if len(j) <= 1:
+#                 difference_j = 0
+#                 result.append(j)
+#             else:
+#                 difference_j = max(j)-min(j)
+#                 if difference_j <= 1:
+#                     result.append(j)
+#                 else:
+#                     pass
+#     for i in result:
+#         longest.append(len(i))
+#     return max(longest)
+#     
+# 
+# A = [6, 10, 6, 9, 7, 8]
+# 
+#         
+# print(solution(A))  
 
+#TASK4
+def solution(A, B):
+    result_A = []
+    result_B = []
+    for index, i in enumerate(A):
+        value = i*(-2)**index
+        result_A.append(value)
+    for index, k in enumerate(B):
+        value = k*(-2)**index
+        result_B.append(value)
+    value = sum(result_A) + sum(result_B)   
+    return value # need to return it in this binary version
     
-        
-   
+    
+#     sum_a_b = A+B
+#     return "{0:b}".format(A)
+A = [0, 1, 1, 0, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1]
+B = [0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1]
+print(solution(A, B)) 
 
     
 
