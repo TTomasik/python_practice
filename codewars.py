@@ -546,36 +546,58 @@ from subprocess import list2cmdline
 # Q = [4, 5, 6]
 # print(solution(S, P, Q))
 
-#EX---19
-def longest_slide_down(pyramid):
-    result = [pyramid[0][0]]
-    indexes = [0]
-    for j, i in enumerate(pyramid):                
-        a = max(i[indexes[j]:indexes[j]+2])
-        b = min(i[indexes[j]:indexes[j]+2])
-        result.append(a)
-        for k, l in enumerate(i):            
-            if l == a and len(i[0:k]) >= indexes[j]:                
-                indexes.append(k)
-    return sum(result[1::]), result, indexes
+# #EX---19
+# def longest_slide_down(pyramid):
+#     result = [pyramid[0][0]]
+#     result_alternative = [pyramid[0][0]]
+#     indexes = [0]
+#     for j, i in enumerate(pyramid):                
+#         a = max(i[indexes[j]:indexes[j]+2])
+#         b = min(i[indexes[j]:indexes[j]+2])
+#         result.append(a)
+#         result_alternative.append(b)
+#         if sum(result[-1:-3:-1]) < sum(result_alternative[-1:-3:-1]):
+#             result[-1] = result_alternative[-1]
+#             result[-2] = result_alternative[-2]            
+#         for k, l in enumerate(i):            
+#             if l == a and len(i[0:k]) >= indexes[j]:                
+#                 indexes.append(k)
+#     return sum(result[1::]), result, result_alternative, indexes
+# 
+# 
+# pyramid =   [[75],
+#             [95, 64],
+#             [17, 47, 82],
+#             [18, 35, 87, 10],
+#             [20,  4, 82, 47, 65],
+#             [19,  1, 23, 75,  3, 34],
+#             [88,  2, 77, 73,  7, 63, 67],
+#             [99, 65,  4, 28,  6, 16, 70, 92],
+#             [41, 41, 26, 56, 83, 40, 80, 70, 33],
+#             [41, 48, 72, 33, 47, 32, 37, 16, 94, 29],
+#             [53, 71, 44, 65, 25, 43, 91, 52, 97, 51, 14],
+#             [70, 11, 33, 28, 77, 73, 17, 78, 39, 68, 17, 57],
+#             [91, 71, 52, 38, 17, 14, 91, 43, 58, 50, 27, 29, 48],
+#             [63, 66,  4, 68, 89, 53, 67, 30, 73, 16, 69, 87, 40, 31],
+#             [4, 62, 98, 27, 23,  9, 70, 98, 73, 93, 38, 53, 60, 4, 23]]
+# print(longest_slide_down(pyramid))
 
+def rot13(message):
+    input = []
+    output = []
+    result = []
+    for i in message:
+        input.append(ord(i))
+    for k in input:
+        output.append(k+13)    
+    for j in output:
+        result.append(chr(j))
+    return input, output, result
+    
+        
 
-pyramid =   [[75],
-            [95, 64],
-            [17, 47, 82],
-            [18, 35, 87, 10],
-            [20,  4, 82, 47, 65],
-            [19,  1, 23, 75,  3, 34],
-            [88,  2, 77, 73,  7, 63, 67],
-            [99, 65,  4, 28,  6, 16, 70, 92],
-            [41, 41, 26, 56, 83, 40, 80, 70, 33],
-            [41, 48, 72, 33, 47, 32, 37, 16, 94, 29],
-            [53, 71, 44, 65, 25, 43, 91, 52, 97, 51, 14],
-            [70, 11, 33, 28, 77, 73, 17, 78, 39, 68, 17, 57],
-            [91, 71, 52, 38, 17, 14, 91, 43, 58, 50, 27, 29, 48],
-            [63, 66,  4, 68, 89, 53, 67, 30, 73, 16, 69, 87, 40, 31],
-            [4, 62, 98, 27, 23,  9, 70, 98, 73, 93, 38, 53, 60, 4, 23]]
-print(longest_slide_down(pyramid))
+message = "test"
+print(rot13(message))
     
 
 
