@@ -546,100 +546,36 @@ from subprocess import list2cmdline
 # Q = [4, 5, 6]
 # print(solution(S, P, Q))
 
-##TASK1
-# import itertools
-# def solution(N):
-#     list_N = [int(x) for x in str(N)]
-#     combinations = set(itertools.permutations(list_N))      
-#     list_comb = list(combinations)
-#     print(len(list_comb))
-#     if len(list_comb) >= 100000000:
-#         return -1 
-#     result = []
-#     for i in list_comb:
-#         r = ''.join(map(str, i))
-#         result.append(int(r))
-#     return max(result)   
-# 
-# 
-# N = 123456789123
-# print(solution(N))
+#EX---19
+def longest_slide_down(pyramid):
+    result = [pyramid[0][0]]
+    indexes = [0]
+    for j, i in enumerate(pyramid):                
+        a = max(i[indexes[j]:indexes[j]+2])
+        b = min(i[indexes[j]:indexes[j]+2])
+        result.append(a)
+        for k, l in enumerate(i):            
+            if l == a and len(i[0:k]) >= indexes[j]:                
+                indexes.append(k)
+    return sum(result[1::]), result, indexes
 
-##TASK3
-# def solution(N):
-#     numbers = [0, 1]
-#     for i in range(2,N-1):
-#         numbers.append(numbers[i-1]+numbers[i-2])
-#     fibonacci = sum(numbers)+1    
-#     return fibonacci%1000000    
-# 
-# N = 36
-# print(solution(N))
 
-##TASK5
-# def solution(A):
-#     del A[0]
-#     del A[-1]
-#     print(A)
-#     result = []
-#     result.append(A[0]+A[-2])
-#     result.append(A[0]+A[-1])
-#     result.append(A[1]+A[-1]) 
-#     print(result)   
-#     return min(result)     
-# 
-# A = [13, 5, 12, 6, 3, 7, 2, 4, 6, 3, 7, 2, 4, 6, 3, 7, 2, 4, 6, 3, 7, 2, 4, 6, 3, 7, 2, 113, 41, 33, 41]
-# print(solution(A))
-##TASK2
-# import itertools
-# def solution(A): 
-#     combs_list = []    
-#     result = [] 
-#     longest = []
-#     for i in range(1,len(A)+1):
-#         element = [list(x) for x in itertools.combinations(A,i)]
-#         combs_list.append(element)
-#     for i in combs_list:
-#         for j in i:
-#             if len(j) <= 1:
-#                 difference_j = 0
-#                 result.append(j)
-#             else:
-#                 difference_j = max(j)-min(j)
-#                 if difference_j <= 1:
-#                     result.append(j)
-#                 else:
-#                     pass
-#     for i in result:
-#         longest.append(len(i))
-#     return max(longest)
-#     
-# 
-# A = [6, 10, 6, 9, 7, 8]
-# 
-#         
-# print(solution(A))  
-
-#TASK4
-def solution(A, B):
-    result_A = []
-    result_B = []
-    for index, i in enumerate(A):
-        value = i*(-2)**index
-        result_A.append(value)
-    for index, k in enumerate(B):
-        value = k*(-2)**index
-        result_B.append(value)
-    value = sum(result_A) + sum(result_B)   
-    return value # need to return it in this binary version
-    
-    
-#     sum_a_b = A+B
-#     return "{0:b}".format(A)
-A = [0, 1, 1, 0, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1]
-B = [0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1]
-print(solution(A, B)) 
-
+pyramid =   [[75],
+            [95, 64],
+            [17, 47, 82],
+            [18, 35, 87, 10],
+            [20,  4, 82, 47, 65],
+            [19,  1, 23, 75,  3, 34],
+            [88,  2, 77, 73,  7, 63, 67],
+            [99, 65,  4, 28,  6, 16, 70, 92],
+            [41, 41, 26, 56, 83, 40, 80, 70, 33],
+            [41, 48, 72, 33, 47, 32, 37, 16, 94, 29],
+            [53, 71, 44, 65, 25, 43, 91, 52, 97, 51, 14],
+            [70, 11, 33, 28, 77, 73, 17, 78, 39, 68, 17, 57],
+            [91, 71, 52, 38, 17, 14, 91, 43, 58, 50, 27, 29, 48],
+            [63, 66,  4, 68, 89, 53, 67, 30, 73, 16, 69, 87, 40, 31],
+            [4, 62, 98, 27, 23,  9, 70, 98, 73, 93, 38, 53, 60, 4, 23]]
+print(longest_slide_down(pyramid))
     
 
 
