@@ -589,14 +589,27 @@ def rot13(message):
     for i in message:
         input.append(ord(i))
     for k in input:
-        output.append(k+13)    
+        if k in range(97, 123):
+            a = k+13
+            if a > 122:
+                a_new = 97 + (a - 123)
+                output.append(a_new)
+            else:
+                output.append(a)
+        if k in range(65, 91):
+            a = k+13
+            if a > 90:
+                a_new = 65 + (a - 91)
+                output.append(a_new)
+            else:
+                output.append(a)
+        if k not in range(97, 123) and k not in range(65, 91):
+            output.append(k)
     for j in output:
         result.append(chr(j))
-    return input, output, result
-    
-        
+    return "".join(result)
 
-message = "test"
+message = "12412///1Test"
 print(rot13(message))
     
 
