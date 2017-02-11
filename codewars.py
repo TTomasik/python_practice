@@ -582,36 +582,45 @@ from subprocess import list2cmdline
 #             [4, 62, 98, 27, 23,  9, 70, 98, 73, 93, 38, 53, 60, 4, 23]]
 # print(longest_slide_down(pyramid))
 
-def rot13(message):
-    input = []
-    output = []
-    result = []
-    for i in message:
-        input.append(ord(i))
-    for k in input:
-        if k in range(97, 123):
-            a = k+13
-            if a > 122:
-                a_new = 97 + (a - 123)
-                output.append(a_new)
-            else:
-                output.append(a)
-        if k in range(65, 91):
-            a = k+13
-            if a > 90:
-                a_new = 65 + (a - 91)
-                output.append(a_new)
-            else:
-                output.append(a)
-        if k not in range(97, 123) and k not in range(65, 91):
-            output.append(k)
-    for j in output:
-        result.append(chr(j))
-    return "".join(result)
+# #EX---20
+# def rot13(message):
+#     input = []
+#     output = []
+#     result = []
+#     for i in message:
+#         input.append(ord(i))
+#     for k in input:
+#         if k in range(97, 123):
+#             a = k+13
+#             if a > 122:
+#                 a_new = 97 + (a - 123)
+#                 output.append(a_new)
+#             else:
+#                 output.append(a)
+#         if k in range(65, 91):
+#             a = k+13
+#             if a > 90:
+#                 a_new = 65 + (a - 91)
+#                 output.append(a_new)
+#             else:
+#                 output.append(a)
+#         if k not in range(97, 123) and k not in range(65, 91):
+#             output.append(k)
+#     for j in output:
+#         result.append(chr(j))
+#     return "".join(result)
+#
+# message = "12412///1Test"
+# print(rot13(message))
 
-message = "12412///1Test"
-print(rot13(message))
-    
+#EX---21
+import re
+def domain_name(url):
+    if "www" in url:
+        result = re.search(r'(?<=www.)\w+(\-\w+)?', url)
+    if "www" not in url:
+        result = re.search(r'(?<=//)\w+(\-\w+)?', url)
+    return result.group(0)
 
-
-    
+url = "www.bites.com"
+print(domain_name(url))
