@@ -613,14 +613,41 @@ from subprocess import list2cmdline
 # message = "12412///1Test"
 # print(rot13(message))
 
-#EX---21
-import re
-def domain_name(url):
-    if "www" in url:
-        result = re.search(r'(?<=www.)\w+(\-\w+)?', url)
-    if "www" not in url:
-        result = re.search(r'(?<=//)\w+(\-\w+)?', url)
-    return result.group(0)
+# #EX---21
+# import re
+# def domain_name(url):
+#     if "www" in url:
+#         result = re.search(r'(?<=www.)\w+(\-\w+)?', url)
+#     if "www" not in url:
+#         result = re.search(r'(?<=//)\w+(\-\w+)?', url)
+#     return result.group(0)
+#
+# url = "www.bites.com"
+# print(domain_name(url))
 
-url = "www.bites.com"
-print(domain_name(url))
+#EX---22
+def simplify(poly):
+    result = []
+    str_int = []
+    test = []
+
+    for i in poly:
+        result.append(i)
+    for index, k in enumerate(result):
+        if ord(k) in range(97, 123) or ord(k) in range(49, 58):
+            str_int.append(k)
+            if index == len(result) - 1:
+                joined = "".join(str_int)
+                test.append(joined)
+        else:
+            joined = "".join(str_int)
+            test.append(joined)
+            test.append(k)
+            str_int = []
+
+
+
+    return result, test
+
+poly="3ab+ba-4ac+12ca"
+print(simplify(poly))
