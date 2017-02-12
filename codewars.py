@@ -625,29 +625,70 @@ from subprocess import list2cmdline
 # url = "www.bites.com"
 # print(domain_name(url))
 
-#EX---22
-def simplify(poly):
-    result = []
-    str_int = []
-    test = []
+# #EX---22
+# def simplify(poly):
+#     result = []
+#     str_int = []
+#     result_joined = []
+#     result_joined_sorted = []
+#     for i in poly:
+#         result.append(i)
+#     for index, k in enumerate(result):
+#         if ord(k) in range(97, 123) or ord(k) in range(49, 58):
+#             str_int.append(k)
+#             if index == len(result) - 1:
+#                 joined = "".join(str_int)
+#                 result_joined.append(joined)
+#         else:
+#             joined = "".join(str_int)
+#             result_joined.append(joined)
+#             result_joined.append(k)
+#             str_int = []
+#     for i in result_joined:
+#         result_joined_sorted.append("".join(sorted(i)))
+#
+#
+#
+#     return result, result_joined_sorted
+#
+# poly="3ab+ba-4ac+12ca"
+# print(simplify(poly))
 
-    for i in poly:
-        result.append(i)
-    for index, k in enumerate(result):
-        if ord(k) in range(97, 123) or ord(k) in range(49, 58):
-            str_int.append(k)
-            if index == len(result) - 1:
-                joined = "".join(str_int)
-                test.append(joined)
-        else:
-            joined = "".join(str_int)
-            test.append(joined)
-            test.append(k)
-            str_int = []
+# def tester(poly):
+#     for i in poly:
+#         if int(i):
+#
+#
+# poly = "3ab+ba-4ac+12ca"
+# print(tester(poly))
+
+#EX---23
+def whoIsNext(names, r):
+    if r < len(names):
+        names.append(names[r-1])
+    if r > len(names):
+        new_r = r%len(names)
+        names.append(names[new_r])
+    return names[-1]
+
+names = ["Sheldon", "Leonard", "Penny", "Rajesh", "Howard"]
+r = 101
+print(whoIsNext(names, r))
 
 
 
-    return result, test
 
-poly="3ab+ba-4ac+12ca"
-print(simplify(poly))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
