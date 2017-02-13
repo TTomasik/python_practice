@@ -661,19 +661,48 @@ from subprocess import list2cmdline
 #
 # poly = "3ab+ba-4ac+12ca"
 # print(tester(poly))
+import math
+# #EX---23
+# def whoIsNext(names, r):
+#     counter=2
+#     if r <= 1000000000:
+#         for i in range(0, r):
+#             if i % 5 == 0 and i is not 0:
+#                 counter*=2
+#                 del names[0:i]
+#             names.extend([names[i]]*counter)
+#         return names[-1], names
+#     pass
+#
+#
+# names = ["Sheldon", "Leonard", "Penny", "Rajesh", "Howard"]
+# r = 7
+# print(whoIsNext(names, r))
 
-#EX---23
-def whoIsNext(names, r):
-    if r < len(names):
-        names.append(names[r-1])
-    if r > len(names):
-        new_r = r%len(names)
-        names.append(names[new_r])
-    return names[-1]
+#EX---24
+def josephus(items, k):
+    k -= 1  # pop automatically skips the dead guy
+    idx = k
+    result = []
+    if k > len(items):
+        k2 = k%len(items)
+        idx = k2
+    if len(items) == 0:
+        return []
+    while len(items) > 1:
+        if k2:
+            result.append(items.pop(idx))
+            k2 = k % len(items)
+            idx = (idx + k2) % len(items)
+        result.append(items.pop(idx))  # kill prisoner at idx
+        idx = (idx + k) % len(items)
+    result.append(items[0])
+    return result
 
-names = ["Sheldon", "Leonard", "Penny", "Rajesh", "Howard"]
-r = 101
-print(whoIsNext(names, r))
+items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+k = 40
+print(josephus(items, k))
+
 
 
 
