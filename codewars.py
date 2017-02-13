@@ -679,28 +679,38 @@ import math
 # r = 7
 # print(whoIsNext(names, r))
 
-#EX---24
-def josephus(items, k):
-    k -= 1  # pop automatically skips the dead guy
-    idx = k
-    result = []
-    if k > len(items):
-        k2 = k%len(items)
-        idx = k2
-    if len(items) == 0:
-        return []
-    while len(items) > 1:
-        if k2:
-            result.append(items.pop(idx))
-            k2 = k % len(items)
-            idx = (idx + k2) % len(items)
-        result.append(items.pop(idx))  # kill prisoner at idx
-        idx = (idx + k) % len(items)
-    result.append(items[0])
-    return result
+# #EX---24
+# def josephus(items, k):
+#     k -= 1  # pop automatically skips the dead guy
+#     idx = k
+#     result = []
+#     if k > len(items):
+#         k2 = k%len(items)
+#         idx = k2
+#     if len(items) == 0:
+#         return []
+#     while len(items) > 1:
+#         if k2:
+#             result.append(items.pop(idx))
+#             k2 = k % len(items)
+#             idx = (idx + k2) % len(items)
+#         else:
+#             result.append(items.pop(idx))  # kill prisoner at idx
+#             idx = (idx + k) % len(items)
+#
+#     result.append(items[0])
+#     return result
 
-items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
-k = 40
+#EX---24
+def josephus(xs, k):
+    i, ys = 0, []
+    while len(xs) > 0:
+        i = (i + k - 1) % len(xs)
+        ys.append(xs.pop(i))
+    return ys
+
+items = [1, 2]
+k = 16
 print(josephus(items, k))
 
 
