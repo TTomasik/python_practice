@@ -701,17 +701,42 @@ import math
 #     result.append(items[0])
 #     return result
 
-#EX---24
-def josephus(xs, k):
-    i, ys = 0, []
-    while len(xs) > 0:
-        i = (i + k - 1) % len(xs)
-        ys.append(xs.pop(i))
-    return ys
+# #EX---24
+# def josephus(xs, k):
+#     i, ys = 0, []
+#     while len(xs) > 0:
+#         i = (i + k - 1) % len(xs)
+#         ys.append(xs.pop(i))
+#     return ys
+#
+# items = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+# k = 16
+# print(josephus(items, k))
 
-items = [1, 2]
-k = 16
-print(josephus(items, k))
+#---EX25
+def order_weight(strng):
+    array = strng.split(" ")
+    print(array)
+    array_sum = []
+    for i in array:
+        b = list(i)
+        c = [int(x) for x in b]
+        d = sum(c)
+        array_sum.append(d)
+    print(array_sum)
+    array_sum, array = zip(*sorted(zip(array_sum, array)))
+    print(array)
+    print(array_sum)
+    return " ".join(array)
+
+
+
+
+
+
+
+strng = "103 123 4444 99 2000 11"
+print(order_weight(strng))
 
 
 
