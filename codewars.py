@@ -778,15 +778,147 @@ import math
 #     result.append(i)
 # print(int("".join([str(x) for x in result])))
 
+# #---------------------------zadania na rozgrzewke
+# number = int(input())
+# dict = set()
+# for i in range(0, number):
+#     country = str(input())
+#     dict.add(country)
+# print(len(dict))
 
 
 
+# import pprint
+# w, h = 10, 10;
+# matrix = [[0 for x in range(w)] for y in range(h)]
+# matrix[0][0] = 1
+# matrix[0][1] = 1
+# matrix[0][2] = 1
+# matrix[0][3] = 1
+# matrix[0][4] = 1
+# matrix[0][5] = 1
+# matrix[1][5] = 1
+# matrix[2][5] = 1
+# matrix[9][1] = 1
+# matrix[9][4] = 1
+# matrix[4][0] = 1
+# matrix[4][9] = 1
+# matrix[9][7] = 1
+# matrix[9][8] = 1
+# matrix[9][9] = 0
+#
+#
+# def ship_validator(matrix):
+#     ship = []
+#     values = []
+#     kinds = []
+#     for i in range(0, 10):
+#         for index, k in enumerate(matrix[i]):
+#             if i == 0:
+#                 if k == 1 and matrix[i+1][index] == 0 and len(ship) < 5:
+#                     ship.append(k)
+#                     if matrix[i][index+1] == 0 :
+#                         values.append(True)
+#                         kinds.append(len(ship))
+#                         ship = []
+#                 if k == 1 and len(ship) > 4:
+#                     values.append(False)
+#                     ship = []
+#             if i != 0 and i != 9:
+#                 if k == 1 and matrix[i+1][index] == 0 and matrix[i-1][index] == 0 and len(ship) < 5:
+#                     ship.append(k)
+#                     if matrix[i][index+1] == 0:
+#                         values.append(True)
+#                         kinds.append(len(ship))
+#                         ship = []
+#                 if k == 1 and len(ship) > 4:
+#                     values.append(False)
+#                     ship = []
+#             if i == 9:
+#                 if k == 1 and index != 9:
+#                     if len(ship) < 4:
+#                         ship.append(k)
+#                         if matrix[i][index+1] == 0:
+#                             values.append(True)
+#                             kinds.append(len(ship))
+#                             ship = []
+#                     if len(ship) >= 4 and matrix[i][index+1] == 0:
+#                         values.append(False)
+#                         ship = []
+#                 if k == 1 and index == 9:
+#                     print(len(ship))
+#                     if len(ship) <= 3:
+#                         ship.append(k)
+#                         values.append(True)
+#                         kinds.append(len(ship))
+#                         ship = []
+#                     if len(ship) > 3:
+#                         values.append(False)
+#                         ship = []
+#
+#
+#     return kinds, ship, matrix, values
+#
+#     return matrix
+#
+# pprint.pprint(ship_validator(matrix))
 
 
+# def  StairCase(n):
+#     for i in range(1, n+1):
+#         print(" "*(n-i)+"#"*i)
+# n = int(input())
+# print(StairCase(n))
+
+# def  summation(numbers):
+#     return sum(numbers)
+#
+# numbers = [1,2,3,4,5]
+# print(summation(numbers))
 
 
+# def  mergeStrings(a, b):
+#     list_a = list(a)
+#     list_b = list(b)
+#     result = []
+#     if len(a) < len(b):
+#         for index, i in enumerate(range(0, len(b))):
+#             if index <= len(a)-1:
+#                 result.append(list_a[i])
+#                 result.append(list_b[i])
+#             else:
+#                 result.append(list_b[i])
+#     if len(a) > len(b):
+#         for index, i in enumerate(range(0, len(a))):
+#             if index <= len(b)-1:
+#                 result.append(list_a[i])
+#                 result.append(list_b[i])
+#             else:
+#                 result.append(list_a[i])
+#     if len(a) == len(b):
+#         for i in range(len(a)):
+#             result.append(list_a[i])
+#             result.append(list_b[i])
+#     return "".join(result)
+#
+#
+# a = "abc"
+# b = "zsd"
+# print(mergeStrings(a, b))
 
-
+# def  countDuplicates(numbers):
+#     result = []
+#     counter = []
+#     for i in range(1, 1001):
+#         result.append(numbers.count(i))
+#     for k in result:
+#         if k > 1:
+#             counter.append(k)
+#     return len(counter)
+#
+#
+# numbers = [1,1,2,2,2,3]
+# print(countDuplicates(numbers))
 
 
 
