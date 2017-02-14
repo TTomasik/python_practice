@@ -713,21 +713,70 @@ import math
 # k = 16
 # print(josephus(items, k))
 
-#---EX25
-def order_weight(strng):
-    array = strng.split(" ")
-    print(array)
-    array_sum = []
-    for i in array:
-        b = list(i)
-        c = [int(x) for x in b]
-        d = sum(c)
-        array_sum.append(d)
-    print(array_sum)
-    array_sum, array = zip(*sorted(zip(array_sum, array)))
-    print(array)
-    print(array_sum)
-    return " ".join(array)
+# #---EX25
+# def order_weight(strng):
+#     array = strng.split(" ")
+#     print(array)
+#     array_sum = []
+#     for i in array:
+#         b = list(i)
+#         c = [int(x) for x in b]
+#         d = sum(c)
+#         array_sum.append(d)
+#     print(array_sum)
+#     array_sum, array = zip(*sorted(zip(array_sum, array)))
+#     print(array)
+#     print(array_sum)
+#     return " ".join(array)
+#
+#
+# strng = "103 123 4444 99 2000 11"
+# print(order_weight(strng))
+
+
+
+# #---EX26
+# def exp_sum(n):
+#     return e_sum(n, 0, 1)
+#
+#
+# def e_sum(n, current, index):
+#     print("POOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOCZATEK")
+#     print("current:",current)
+#     print("index:",index)
+#     if current == n:
+#         return 1
+#     if current > n:
+#         return 0
+#
+#     count = 0
+#     for i in range(index, n + 1):
+#         print("to jest i:", i)
+#         count += e_sum(n, current + i, i)
+#         print("TEEEEEEEEEERAZ COUNT:")
+#         print("TO JEST COUNT: ", count)
+#         print("KOOOOOOOOOOONIEC COUNT")
+#     print("WYNIK:")
+#     return count
+#
+# n = 2
+# print(exp_sum(n))
+
+# #---------------------------zadania na rozgrzewke
+# def is_leap(year):
+#     if year % 4 == 0 and year % 100 != 0 or year % 400 == 0:
+#         return True
+#     return False
+# year = int(input())
+# print(is_leap(year))
+
+# #---------------------------zadania na rozgrzewke
+# if __name__ == '__main__':
+#     n = int(input())
+# result = []
+# for i in range (1, n+1):
+#     result.append(i)
+# print(int("".join([str(x) for x in result])))
 
 
 
@@ -735,8 +784,6 @@ def order_weight(strng):
 
 
 
-strng = "103 123 4444 99 2000 11"
-print(order_weight(strng))
 
 
 
