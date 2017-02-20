@@ -314,8 +314,8 @@ from subprocess import list2cmdline
 #     for i in range(K):
 #         A.insert(0,A.pop())
 #     return A
-# 
-# 
+#
+#
 # K=2
 # A=[1, 2, 3, 4, 5, 6, 7, 8, 9]
 # print(solution(A, K))
@@ -335,14 +335,14 @@ from subprocess import list2cmdline
 # D = 30
 # print(solution(X, Y, D))
 # #---CODILITY5
-# def solution(A): 
+# def solution(A):
 #     if len(A) == 0:
 #         return 1
 #     elif len(A) == 1:
 #         return 1
-#     for index, i in enumerate(sorted(A)):     
+#     for index, i in enumerate(sorted(A)):
 #         if sorted(A)[index] != sorted(A)[index+1]-1:
-#             return(i+1) 
+#             return(i+1)
 #             
 #             
 # 
@@ -355,8 +355,8 @@ from subprocess import list2cmdline
 #     for i in range(2,n):
 #         numbers.append(numbers[i-1]+numbers[i-2])
 #     return numbers, sum(numbers)
-# 
-# n = 10    
+#
+# n = 10
 # print(fibonacci(n))
 
 # #---EX17
@@ -876,7 +876,7 @@ import math
 # numbers = [1,2,3,4,5]
 # print(summation(numbers))
 
-
+##ZADANIA DO HALODOKTORZE--------------------------------------------
 # def  mergeStrings(a, b):
 #     list_a = list(a)
 #     list_b = list(b)
@@ -919,7 +919,42 @@ import math
 #
 # numbers = [1,1,2,2,2,3]
 # print(countDuplicates(numbers))
+##---------------------------------------------------------------------
 
+##CODILITY-Lesson3-PermMissingElem
+def solution(A):
+    for i in sorted(A):
+        if i < 1:
+            A.remove(i)
+    A_sum = 0
+    if len(A) == 0:
+        return 1
+    if len(A) == 1:
+        if A[0] == 1:
+            return 2
+        if A[0] == 100001:
+            return 100000
+        else:
+            return 1
+    print(sorted(A))
+    for i in sorted(A):
+        A_sum += i
+    A_sum_total = sum(list(range(sorted(A)[0], sorted(A)[-1]+1)))
+    missing_element = A_sum_total - A_sum
+    print(A_sum_total, A_sum)
+    if A_sum_total == A_sum:
+        if sorted(A)[0] == 1:
+            missing_element = sorted(A)[-1]+1
+        if sorted(A)[-1] == 100001:
+            missing_element = sorted(A)[0]-1
+        if A[0] != 1 and A[-1] != 100001:
+            return 1
+    return missing_element
+
+
+
+A = [-1,0,1,2,3,4,5]
+print(solution(A))
 
 
 
