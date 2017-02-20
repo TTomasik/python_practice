@@ -356,7 +356,7 @@ from subprocess import list2cmdline
 #         numbers.append(numbers[i-1]+numbers[i-2])
 #     return numbers, sum(numbers)
 #
-# n = 10
+# n = 50
 # print(fibonacci(n))
 
 # #---EX17
@@ -921,42 +921,81 @@ import math
 # print(countDuplicates(numbers))
 ##---------------------------------------------------------------------
 
-##CODILITY-Lesson3-PermMissingElem
+# ##CODILITY-Lesson3-PermMissingElem
+# def solution(A):
+#     for i in sorted(A):
+#         if i < 1:
+#             A.remove(i)
+#     A_sum = 0
+#     if len(A) == 0:
+#         return 1
+#     if len(A) == 1:
+#         if A[0] == 1:
+#             return 2
+#         if A[0] == 100001:
+#             return 100000
+#         else:
+#             return 1
+#     print(sorted(A))
+#     for i in sorted(A):
+#         A_sum += i
+#     A_sum_total = sum(list(range(sorted(A)[0], sorted(A)[-1]+1)))
+#     missing_element = A_sum_total - A_sum
+#     print(A_sum_total, A_sum)
+#     if A_sum_total == A_sum:
+#         if sorted(A)[0] == 1:
+#             missing_element = sorted(A)[-1]+1
+#         if sorted(A)[-1] == 100001:
+#             missing_element = sorted(A)[0]-1
+#         if A[0] != 1 and A[-1] != 100001:
+#             return 1
+#     return missing_element
+#
+# A = [-1,0,1,2,3,4,5]
+# print(solution(A))
+
+
+# def my_fibo(n):
+#     if n == 0:
+#         return 0
+#     if n == 1:
+#         return 1
+#     first_two = [0, 1]
+#     for i in range(2, n+1):
+#         first_two.append(first_two[i-1]+first_two[i-2])
+#     return first_two[-1], first_two
+#
+# n = 50
+# print(my_fibo(n))
+
+
+# CODILITY-Lesson2- OddOccurrencesInArray->O(N)
 def solution(A):
-    for i in sorted(A):
-        if i < 1:
-            A.remove(i)
-    A_sum = 0
-    if len(A) == 0:
-        return 1
-    if len(A) == 1:
-        if A[0] == 1:
-            return 2
-        if A[0] == 100001:
-            return 100000
+    counter = 0
+    B = sorted(A)
+    for index, i in enumerate(B):
+        if B[index] != B[-1]:
+            if B[index] == B[index+1]:
+                counter += 1
+            if B[index] != B[index+1]:
+                counter +=1
+                if counter % 2 != 0:
+                    return i
+                if counter % 2 == 0:
+                    counter = 0
         else:
-            return 1
-    print(sorted(A))
-    for i in sorted(A):
-        A_sum += i
-    A_sum_total = sum(list(range(sorted(A)[0], sorted(A)[-1]+1)))
-    missing_element = A_sum_total - A_sum
-    print(A_sum_total, A_sum)
-    if A_sum_total == A_sum:
-        if sorted(A)[0] == 1:
-            missing_element = sorted(A)[-1]+1
-        if sorted(A)[-1] == 100001:
-            missing_element = sorted(A)[0]-1
-        if A[0] != 1 and A[-1] != 100001:
-            return 1
-    return missing_element
+            return i
 
-
-
-A = [-1,0,1,2,3,4,5]
+A = [3,9,3,9,1,1,5]
 print(solution(A))
 
 
+##-Lesson2- OddOccurrencesInArray->A.count(i) powodowalo worst-case time complexity = O(N**2)
+# def solution(A):
+#     for i in range(sorted(A)[0], sorted(A)[-1]+1):
+#         number = A.count(i)
+#         if number % 2 != 0:
+#             return i
 
 
 
