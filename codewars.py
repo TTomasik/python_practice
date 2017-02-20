@@ -969,35 +969,45 @@ import math
 # print(my_fibo(n))
 
 
-# CODILITY-Lesson2- OddOccurrencesInArray->O(N)
-def solution(A):
-    counter = 0
-    B = sorted(A)
-    for index, i in enumerate(B):
-        if B[index] != B[-1]:
-            if B[index] == B[index+1]:
-                counter += 1
-            if B[index] != B[index+1]:
-                counter +=1
-                if counter % 2 != 0:
-                    return i
-                if counter % 2 == 0:
-                    counter = 0
-        else:
-            return i
-
-A = [3,9,3,9,1,1,5]
-print(solution(A))
-
-
-##-Lesson2- OddOccurrencesInArray->A.count(i) powodowalo worst-case time complexity = O(N**2)
+# # CODILITY-Lesson2- OddOccurrencesInArray->O(N)
 # def solution(A):
-#     for i in range(sorted(A)[0], sorted(A)[-1]+1):
-#         number = A.count(i)
-#         if number % 2 != 0:
+#     counter = 0
+#     B = sorted(A)
+#     for index, i in enumerate(B):
+#         if B[index] != B[-1]:
+#             if B[index] == B[index+1]:
+#                 counter += 1
+#             if B[index] != B[index+1]:
+#                 counter +=1
+#                 if counter % 2 != 0:
+#                     return i
+#                 if counter % 2 == 0:
+#                     counter = 0
+#         else:
 #             return i
+#
+# A = [3,9,3,9,1,1,5]
+# print(solution(A))
+#
+#
+# ##-Lesson2- OddOccurrencesInArray->A.count(i) powodowalo worst-case time complexity = O(N**2)
+# # def solution(A):
+# #     for i in range(sorted(A)[0], sorted(A)[-1]+1):
+# #         number = A.count(i)
+# #         if number % 2 != 0:
+# #             return i
 
+#CODILITY-Lesson2- CyclicRotation
+def solution(A, K):
+    if len(A) == 0:
+        return []
+    for i in range(K):
+        A.insert(0, A.pop(-1))
+    return A
 
+A = []
+K = 3
+print(solution(A,K))
 
 
 
