@@ -997,25 +997,160 @@ import math
 # #         if number % 2 != 0:
 # #             return i
 
-#CODILITY-Lesson2- CyclicRotation
-def solution(A, K):
-    if len(A) == 0:
-        return []
-    for i in range(K):
-        A.insert(0, A.pop(-1))
-    return A
+# #CODILITY-Lesson2- CyclicRotation
+# def solution(A, K):
+#     if len(A) == 0:
+#         return []
+#     for i in range(K):
+#         A.insert(0, A.pop(-1))
+#     return A
+#
+# A = []
+# K = 3
+# print(solution(A,K))
 
-A = []
-K = 3
-print(solution(A,K))
+# #CODILITY-Lesson4
+# def solution(A):
+#     A = [item for item in A if item >= 0]
+#     if len(A) == 0:
+#         return []
+#     if len(A) == 1:
+#         if A[0] < 0 or A[0] == 0 or A[0] == 2:
+#             return 1
+#         return A[0]+1
+#     B = sorted(A)
+#     result = []
+#     for index, i in enumerate(B):
+#         if index == len(B)-2 and B[index] == B[index+1]:
+#             break
+#         if index == len(B)-2 and B[index] != B[index+1]:
+#             result.append(i)
+#             result.append(B[index+1])
+#             break
+#         else:
+#             if B[index] == B[index+1]:
+#                 pass
+#             if B[index] != B[index+1] and B[index] != B[index-1]:
+#                 result.append(i)
+#     print(result)
+#     for i in range(0, len(result)-1):
+#         print(result[i], i)
+#         if result[i]+1 != result[i+1]:
+#
+#             return result[i]+1
+#         if result[i]+1 == result[i+1]:
+#             pass
+#
+#
+#
+# A =  [0, 1, 2, 3,4,6]
+# print(solution(A))
 
 
 
+# a = [1,2,3,4,5]
+# for i in range(0,10):
+#     try:
+#         print(a[i], "index: ", i)
+#     except IndexError:
+#         print("nie ma tekigo indeksu w tej liście", i)
+#
+# d = {}
+# for index, i in enumerate(range(10,21)):
+#     d["index nr: {}".format(index)] = i
+#
+# print(d)
 
 
-
-
-
-
-
+# class Book(object):
+#     name = None
+#     price = None
+#     author = None
+#
+#     def __init__(self, n, p, a):
+#         print("Tworzę nową książkę")
+#         self.name = n
+#         self.price = p
+#         self.author = a
+#     def __repr__(self):
+#         return "%s by %s for %s" % (self.name, self.author, self.price)
+#
+#     def info(self):
+#         print("%s by %s for %s" % (self.name, self.author, self.price))
+#
+#     def question(self, quantity):
+#         if self.price * quantity< 100:
+#             print("Stać mnie na {}".format(self.name))
+#         else:
+#             print("Niestety nie stać mnie na {}".format(self.name))
+#
+#
+# book1 = Book(n="Pani Jeziora", p=30, a="Andrzej Sapkowski")
+# book2 = Book(n="Pani Jeziora II", p=60, a="Andrzej Sapkowski")
+# print(book1)
+# book1.question(4)
+# book2.question(1)
+# import base64
+# import random
+# import array
+# import struct, binascii
+#
+# with open("/home/tt/workspace/batman.jpeg", "rb") as imageFile:
+#
+#     f = imageFile.read()
+#     print(f)
+#     result=[]
+#     print(bytearray(f))
+#     encoded_string = base64.b64encode(f)
+#     print(encoded_string)
+#     for i in encoded_string:
+#         result.append(i)
+#     print(len(result))
+#     result2 = []
+#     result3 = []
+#     i = 0
+#     new_list = []
+#     while i < len(result):
+#         new_list.append(result[i:i + 3])
+#         i += 3
+#     print(result)
+#     print(new_list)
+#     random.shuffle(new_list)
+#     print(new_list)
+#     for i in new_list:
+#         for k in i:
+#             result2.append(k)
+#     print(result2)
+#     t = bytes(result2)
+#     print(t)
+#
+#
+#     # counter = 0
+#     # for i in result:
+#     #     counter += 1
+#     # print(counter)
+#     #
+#     #
+#     # random.shuffle(result)
+#     # g = bytes(bytearray(result))
+#     # print(f)
+#     # print(g)
+#     # print("-------------")
+#     # result = base64.b64encode()
+#     # result = base64.b64decode(f)
+#     #
+#     # print(result)
+#     g = base64.b64decode(t)
+#     print(g)
+#
+#     # test = bytearray(random.getrandbits(256) for i in result)
+#     # print(test)
+#
+# # print(result)
+# # random.shuffle(result)
+# # print(result)
+# # g = bytearray(result)
+# # print(str(g))
+# fh = open("/home/tt/workspace/imageToSave.jpg", "wb")
+# fh.write(g)
 
