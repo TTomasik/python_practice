@@ -1154,3 +1154,17 @@ import math
 # fh = open("/home/tt/workspace/imageToSave.jpg", "wb")
 # fh.write(g)
 
+
+import numpy, cv2
+from random import randint
+def pixel_messer(upload, save):
+    img = cv2.imread(upload)
+    for i in range(0, img.shape[1] - 1):
+        for k in range(0, img.shape[0] - 1):
+            img[k, i] = img[randint(0, img.shape[0] - 1), randint(0, img.shape[1] - 1)]
+    return cv2.imwrite(save, img)
+
+upload = '/home/tt/workspace/wallpaper.jpg'
+save = '/home/tt/workspace/messed_wallpaper.jpg'
+
+print(pixel_messer(upload, save))
