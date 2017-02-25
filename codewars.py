@@ -1090,81 +1090,26 @@ import math
 # print(book1)
 # book1.question(4)
 # book2.question(1)
-# import base64
-# import random
-# import array
-# import struct, binascii
-#
-# with open("/home/tt/workspace/batman.jpeg", "rb") as imageFile:
-#
-#     f = imageFile.read()
-#     print(f)
-#     result=[]
-#     print(bytearray(f))
-#     encoded_string = base64.b64encode(f)
-#     print(encoded_string)
-#     for i in encoded_string:
-#         result.append(i)
-#     print(len(result))
-#     result2 = []
-#     result3 = []
-#     i = 0
-#     new_list = []
-#     while i < len(result):
-#         new_list.append(result[i:i + 3])
-#         i += 3
-#     print(result)
-#     print(new_list)
-#     random.shuffle(new_list)
-#     print(new_list)
-#     for i in new_list:
-#         for k in i:
-#             result2.append(k)
-#     print(result2)
-#     t = bytes(result2)
-#     print(t)
-#
-#
-#     # counter = 0
-#     # for i in result:
-#     #     counter += 1
-#     # print(counter)
-#     #
-#     #
-#     # random.shuffle(result)
-#     # g = bytes(bytearray(result))
-#     # print(f)
-#     # print(g)
-#     # print("-------------")
-#     # result = base64.b64encode()
-#     # result = base64.b64decode(f)
-#     #
-#     # print(result)
-#     g = base64.b64decode(t)
-#     print(g)
-#
-#     # test = bytearray(random.getrandbits(256) for i in result)
-#     # print(test)
-#
-# # print(result)
-# # random.shuffle(result)
-# # print(result)
-# # g = bytearray(result)
-# # print(str(g))
-# fh = open("/home/tt/workspace/imageToSave.jpg", "wb")
-# fh.write(g)
 
 
-import numpy, cv2
-from random import randint
-def pixel_messer(upload, save):
-    img = cv2.imread(upload)
-    for i in range(0, img.shape[1] - 1):
-        for k in range(0, img.shape[0] - 1):
-            img[k, i] = img[randint(0, img.shape[0] - 1), randint(0, img.shape[1] - 1)]
-    return cv2.imwrite(save, img)
+# #LaboratoriumEE
+# import numpy, cv2
+# from random import randint
+# def pixel_messer(upload, save):
+#     img = cv2.imread(upload)
+#     for i in range(0, img.shape[1] - 1):
+#         for k in range(0, img.shape[0] - 1):
+#             img[k, i] = img[randint(0, img.shape[0] - 1), randint(0, img.shape[1] - 1)]
+#     return cv2.imwrite(save, img)
+#
+# upload = '/home/tt/workspace/wallpaper.jpg'
+# save = '/home/tt/workspace/messed_wallpaper.jpg'
+#
+# print(pixel_messer(upload, save))
 
-upload = '/home/tt/workspace/wallpaper.jpg'
-save = '/home/tt/workspace/messed_wallpaper.jpg'
 
-print(pixel_messer(upload, save))
+
+
+
+
+
