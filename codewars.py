@@ -1061,37 +1061,6 @@ import math
 #
 # print(d)
 
-
-# class Book(object):
-#     name = None
-#     price = None
-#     author = None
-#
-#     def __init__(self, n, p, a):
-#         print("Tworzę nową książkę")
-#         self.name = n
-#         self.price = p
-#         self.author = a
-#     def __repr__(self):
-#         return "%s by %s for %s" % (self.name, self.author, self.price)
-#
-#     def info(self):
-#         print("%s by %s for %s" % (self.name, self.author, self.price))
-#
-#     def question(self, quantity):
-#         if self.price * quantity< 100:
-#             print("Stać mnie na {}".format(self.name))
-#         else:
-#             print("Niestety nie stać mnie na {}".format(self.name))
-#
-#
-# book1 = Book(n="Pani Jeziora", p=30, a="Andrzej Sapkowski")
-# book2 = Book(n="Pani Jeziora II", p=60, a="Andrzej Sapkowski")
-# print(book1)
-# book1.question(4)
-# book2.question(1)
-
-
 # #LaboratoriumEE
 # import numpy, cv2
 # from random import randint
@@ -1106,6 +1075,190 @@ import math
 # save = '/home/tt/workspace/messed_wallpaper.jpg'
 #
 # print(pixel_messer(upload, save))
+
+#EX---27
+from math import sqrt
+class Vector(object):
+
+    def __init__(self, array):
+        self.array = array
+
+    def __str__(self):
+        if isinstance(self.array, str):
+            result = []
+            second_vector = []
+            for i in str(self.array):
+                try:
+                    if i == "," or i == "]":
+                        second_vector.append(",")
+                    second_vector.append(int(i))
+                except:
+                    ValueError
+            c = [str(i) for i in second_vector]
+            d = ''.join(c)
+            e = d.split(',')
+            for i in e:
+                try:
+                    result.append(int(i))
+                except:
+                    ValueError
+            return str(tuple(result))
+        return str(self.array)
+
+    def equals(self, object):
+        result = []
+        second_vector = []
+        for i in str(object):
+            try:
+                if i == "," or i == "]":
+                    second_vector.append(",")
+                second_vector.append(int(i))
+            except:
+                ValueError
+        c = [str(i) for i in second_vector]
+        d = ''.join(c)
+        e = d.split(',')
+        for i in e:
+            try:
+                result.append(int(i))
+            except:
+                ValueError
+        return str(self), str(result)
+
+    def converter(self, new_array):
+        result = []
+        second_vector = []
+        for i in str(new_array):
+            try:
+                if i == "," or i == "]":
+                    second_vector.append(",")
+                second_vector.append(int(i))
+            except:
+                ValueError
+        c = [str(i) for i in second_vector]
+        d = ''.join(c)
+        e = d.split(',')
+        for i in e:
+            try:
+                result.append(int(i))
+            except:
+                ValueError
+        return result
+
+    def add(self, new_array):
+        if isinstance(self.array, str) or isinstance(new_array, str):
+            result = []
+            second_vector = []
+            for i in str(new_array):
+                try:
+                    if i == "," or i == "]":
+                        second_vector.append(",")
+                    second_vector.append(int(i))
+                except:
+                    ValueError
+            c = [str(i) for i in second_vector]
+            d = ''.join(c)
+            e = d.split(',')
+            for i in e:
+                try:
+                    result.append(int(i))
+                except:
+                    ValueError
+            return str(tuple(result))
+        if len(self.array) == len(self.converter(new_array)):
+            add_result = [x+y for x, y in zip(self.array, self.converter(new_array))]
+            return Vector(add_result)
+        else:
+            raise TypeError("Different vectors lengths")
+
+    def subtract(self, new_array):
+        if isinstance(self.array, str) or isinstance(new_array, str):
+            result = []
+            second_vector = []
+            for i in str(new_array):
+                try:
+                    if i == "," or i == "]":
+                        second_vector.append(",")
+                    second_vector.append(int(i))
+                except:
+                    ValueError
+            c = [str(i) for i in second_vector]
+            d = ''.join(c)
+            e = d.split(',')
+            for i in e:
+                try:
+                    result.append(int(i))
+                except:
+                    ValueError
+            return str(tuple(result))
+        if len(self.array) == len(self.converter(new_array)):
+            add_result = [x-y for x, y in zip(self.array, self.converter(new_array))]
+            return Vector(add_result)
+        else:
+            raise TypeError("Different vectors lengths")
+
+    def dot(self, new_array):
+        if isinstance(self.array, str) or isinstance(new_array, str):
+            result = []
+            second_vector = []
+            for i in str(new_array):
+                try:
+                    if i == "," or i == "]":
+                        second_vector.append(",")
+                    second_vector.append(int(i))
+                except:
+                    ValueError
+            c = [str(i) for i in second_vector]
+            d = ''.join(c)
+            e = d.split(',')
+            for i in e:
+                try:
+                    result.append(int(i))
+                except:
+                    ValueError
+            return str(tuple(result))
+        if len(self.array) == len(self.converter(new_array)):
+            add_result = [x*y for x, y in zip(self.array, self.converter(new_array))]
+            return sum(add_result)
+        else:
+            raise TypeError("Different vectors lengths")
+
+    def norm(self):
+        if isinstance(self.array, str):
+            result = []
+            second_vector = []
+            for i in str(self.array):
+                try:
+                    if i == "," or i == "]":
+                        second_vector.append(",")
+                    second_vector.append(int(i))
+                except:
+                    ValueError
+            c = [str(i) for i in second_vector]
+            d = ''.join(c)
+            e = d.split(',')
+            for i in e:
+                try:
+                    result.append(int(i))
+                except:
+                    ValueError
+            return str(tuple(result))
+        for index, i in enumerate(self.array):
+            self.array[index] = i**2
+        return sqrt(sum(self.array))
+
+
+a = Vector('[1,2,2]')
+b = Vector([4,50,900])
+
+print(str(Vector([5, 52, 902])))
+print(a)
+
+
+
+
+
+
 
 
 

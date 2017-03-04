@@ -175,13 +175,194 @@ c = C()
 d = D()
 e = E()
 
+e.stop()
 
-def print_directory_contents(sPath):
-    import os
-    for sChild in os.listdir(sPath):
-        sChildPath = os.path.join(sPath,sChild)
-        if os.path.isdir(sChildPath):
-            print_directory_contents(sChildPath)
+
+# import os
+# def print_directory_contents(sPath):
+#     for sChild in os.listdir(sPath):
+#         sChildPath = os.path.join(sPath,sChild)
+#         if os.path.isdir(sChildPath):
+#             print_directory_contents(sChildPath)
+#         else:
+#             print(sChildPath)
+#
+# print_directory_contents('/home/tt/workspace/tester')
+#
+# print(os.listdir('/home/tt/workspace/tester')[0])
+# print(os.path.join('/home/tt/workspace/tester', os.listdir('/home/tt/workspace/tester')[0]))
+
+class Book(object):
+    name = "Przykład"
+    price = "10zł"
+    author = "Tomasik"
+
+    def __init__(self, n, p, a):
+        print("Tworzę nową książkę")
+        self.name = n
+        self.price = p
+        self.author = a
+
+
+
+    def __repr__(self):
+        return "%s by %s for %s" % (self.name, self.author, self.price)
+
+    def info(self):
+        print("%s by %s for %s" % (self.name, self.author, self.price))
+
+    def question(self, quantity):
+        if self.price * quantity< 100:
+            print("Stać mnie na {}".format(self.name))
         else:
-            print(sChildPath)
+            print("Niestety nie stać mnie na {}".format(self.name))
 
+    @staticmethod
+    def class_shouter():
+        print("Wywolales metode na klasie cwianiaczku...")
+
+    @classmethod
+    def class_method(cls):
+        print("Wywolales metode na klasie z jej atrybutami... {}".format(cls.author))
+
+print(Book("tomek", "tomasik", "tom"))
+# book1 = Book("Pani Jeziora", 30, "Andrzej Sapkowski")
+# book2 = Book(n="Pani Jeziora II", p=60, a="Andrzej Sapkowski")
+# book1.info()
+# book1.question(1)
+#
+# Book.class_shouter()
+# Book.class_method()
+
+
+def extendList(val, list=[]):
+    list.append(val)
+    return list
+
+list1 = extendList(10)
+print("list1 = %s" % list1)
+list2 = extendList(123,[])
+print("list1 = %s" % list1)
+list3 = extendList('a')
+print("list1 = %s" % list1)
+
+class m(dict):
+    def __missing__(self, key):
+        return "kupa"
+
+ex = m()
+
+print(ex["test"])
+
+
+def multipliers():
+    return [lambda x: i * x for i in range(4)]
+
+
+print([m(2) for m in multipliers()])
+
+a = [1, "t", "2", True]
+for i in a:
+    if isinstance(i, str):
+        if i.isdecimal():
+            print(i)
+
+def multipliers():
+    for i in range(4):
+        yield lambda x: i*x
+
+for k in multipliers():
+    print(k(2))
+
+
+
+
+#generatory:
+# generator = (i**2 for i in range(4))
+#
+# def generator2():
+#     for i in range(4):
+#         yield i**2
+#
+# for i in generator:
+#     print(i)
+#
+# for i in generator2():
+#     print(i)
+
+#lambdy
+multi_func = lambda x: x*10
+print(multi_func(10))
+
+generator2 = (lambda x: i*x for i in range(4))
+
+for i in generator2:
+    print(i(2))
+
+class DefaultDict(dict):
+    def __missing__(self, key):
+        return []
+
+d = DefaultDict()
+
+d['florp']
+print(d['florp'])
+
+def decorator(func):
+    def wrapper(something):
+        print("printed: '{}' by decorator".format(something))
+    return wrapper
+
+@decorator
+def printer(something):
+    print("printed: '{}' by printer".format(something))
+
+printer("bedzie praca w SAMSUNGU")
+
+# import random
+# def f1(lIn):
+#     l1 = sorted(lIn)
+#     l2 = [i for i in l1 if i<0.5]
+#     return [i*i for i in l2]
+#
+# def f2(lIn):
+#     l1 = [i for i in lIn if i<0.5]
+#     l2 = sorted(l1)
+#     return [i*i for i in l2]
+#
+# def f3(lIn):
+#     l1 = [i*i for i in lIn]
+#     l2 = sorted(l1)
+#     return [i for i in l1 if i<(0.5*0.5)]
+#
+# import cProfile
+# lIn = [random.random() for i in range(100000)]
+# cProfile.run('f1(lIn)')
+# cProfile.run('f2(lIn)')
+# cProfile.run('f3(lIn)')
+
+class Test(object):
+    name = "Jan"
+    surname = "Kowalski"
+
+    def __init__(self, name, surname):
+        self.name = name
+        self.surname = surname
+
+    @classmethod
+    def info(cls):
+        print("imie tej klasy to {}".format(cls.name))
+
+
+
+
+t = Test("Tomek", "Tomasik")
+print(t.surname)
+Test.info()
+
+class Test2(Test):
+    pass
+
+
+t2 = Test2("Mietek", "Szczesniak")
+print(t2.name)
