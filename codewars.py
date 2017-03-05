@@ -1254,21 +1254,72 @@ import math
 # print(str(Vector([5, 52, 902])))
 # print(a)
 
-##SOME----RECURSION
-def factorial(n):
-    if n == 0 or n == 1:
-        return 1
-    else:
-        return n * factorial(n-1)
+# ##SOME----RECURSION
+# def factorial(n):
+#     if n == 0 or n == 1:
+#         return 1
+#     else:
+#         return n * factorial(n-1)
+#
+# print(factorial(4))
+#
+# def fibo(n):
+#     if n == 0:
+#         return 0
+#     if n == 1:
+#         return 1
+#     if n > 1:
+#         return fibo(n-1)+fibo(n-2)
+#
+# print(fibo(3))
 
-print(factorial(4))
+#EX---28
+# from random import shuffle
+# def permutations(string, step = 0):
+#
+#     # if we've gotten to the end, print the permutation
+#     if step == len(string):
+#         # print("".join(string))
+#         pass
+#     # everything to the right of step has not been swapped yet
+#     for i in range(step, len(string)):
+#
+#         # copy the string (store as array)
+#         string_copy = [character for character in string]
+#         print(string_copy, i)
+#
+#         # swap the current index with the step
+#         string_copy[step], string_copy[i] = string_copy[i], string_copy[step]
+#
+#         # recurse on the portion of the string that has not been swapped yet (now it's index will begin with step + 1)
+#         permutations(string_copy, step + 1)
+#
+#
+# string = 'aabb'
+# print(permutations(string))
 
-def fibo(n):
-    if n == 0:
-        return 0
-    if n == 1:
-        return 1
-    if n > 1:
-        return fibo(n-1)+fibo(n-2)
+# def string_permutations(string, n=0, result=set()):
+#     if n == len(string):
+#         return
+#
+#     for i in range(n, len(string)):
+#         string_twin = [i for i in string]
+#         string_twin[n], string_twin[i] = string_twin[i], string_twin[n]
+#         result.add(tuple(string_twin))
+#         string_permutations(string_twin, n+1)
+#
+#     return ["".join(x) for x in result]
+#
+# print(string_permutations("abcdef"))
 
-print(fibo(3))
+def permutations(ex, n=0):
+    if n == len(ex):
+        print(ex)
+
+    for i in range(n,len(ex)):
+        ex2 = [i for i in ex]
+        ex2[n], ex2[i] = ex2[i], ex2[n]
+        permutations(ex2, n+1)
+
+ex = '123'
+print(permutations(ex))
