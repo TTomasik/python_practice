@@ -1274,30 +1274,6 @@ import math
 # print(fibo(3))
 
 #EX---28
-# from random import shuffle
-# def permutations(string, step = 0):
-#
-#     # if we've gotten to the end, print the permutation
-#     if step == len(string):
-#         # print("".join(string))
-#         pass
-#     # everything to the right of step has not been swapped yet
-#     for i in range(step, len(string)):
-#
-#         # copy the string (store as array)
-#         string_copy = [character for character in string]
-#         print(string_copy, i)
-#
-#         # swap the current index with the step
-#         string_copy[step], string_copy[i] = string_copy[i], string_copy[step]
-#
-#         # recurse on the portion of the string that has not been swapped yet (now it's index will begin with step + 1)
-#         permutations(string_copy, step + 1)
-#
-#
-# string = 'aabb'
-# print(permutations(string))
-
 # def string_permutations(string, n=0, result=set()):
 #     if n == len(string):
 #         return
@@ -1312,14 +1288,19 @@ import math
 #
 # print(string_permutations("abcdef"))
 
-def permutations(ex, n=0):
-    if n == len(ex):
-        print(ex)
+#EX--28 better solution
+def permutations(string):
+    result = set([string])
+    if len(string) == 2:
+        result.add(string[1] + string[0])
 
-    for i in range(n,len(ex)):
-        ex2 = [i for i in ex]
-        ex2[n], ex2[i] = ex2[i], ex2[n]
-        permutations(ex2, n+1)
+    elif len(string) > 2:
+        for i, c in enumerate(string):
+            for s in permutations(string[:i] + string[i + 1:]):
+                result.add(c + s)
 
-ex = '123'
-print(permutations(ex))
+    return list(result)
+
+string = 'abc'
+print(permutations(string))
+
