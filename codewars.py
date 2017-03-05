@@ -1288,28 +1288,53 @@ import math
 #
 # print(string_permutations("abcdef"))
 
-#EX--28 better solution
-def permutations(string):
-    result = set([string])
-    if len(string) == 2:
-        result.add(string[1] + string[0])
+# #EX--28 better solution
+# def permutations(string):
+#     result = set([string])
+#     if len(string) == 2:
+#         result.add(string[1] + string[0])
+#
+#     elif len(string) > 2:
+#         for i, c in enumerate(string):
+#             for s in permutations(string[:i] + string[i + 1:]):
+#                 result.add(c + s)
+#
+#     return list(result)
+#
+# string = 'abc'
+# print(permutations(string))
+#
+# #EX28---THE SHORTEST SOLUTION USING ITERTOOLS
+# from itertools import permutations
+# def permutations_with_itertools(string):
+#     return [''.join(p) for p in permutations(string)]
+#
+# string = 'abc'
+# print(permutations_with_itertools(string))
 
-    elif len(string) > 2:
-        for i, c in enumerate(string):
-            for s in permutations(string[:i] + string[i + 1:]):
-                result.add(c + s)
 
-    return list(result)
+#CHECKING TIME DIFFERENCES FOR LIST METHOD AND RECURSION METHOD IN FIBONACCI
+import time
+start_time = time.time()
+def fibo_list(n):
+    if n == 0 or n == 1:
+        return n
+    first_two = [0,1]
+    for i in range(2, n):
+        first_two.append(first_two[i-1]+first_two[i-2])
 
-string = 'abc'
-print(permutations(string))
+    return first_two[-1]+first_two[-2]
 
-#EX28---THE SHORTEST SOLUTION USING ITERTOOLS
-from itertools import permutations
-def permutations_with_itertools(string):
-    return [''.join(p) for p in permutations(string)]
+n = 35
+print(fibo_list(n), "list method, time: {}s".format(time.time()-start_time))
 
-string = 'abc'
-print(permutations_with_itertools(string))
+def fibo_recursion(n):
+    if n == 0:
+        return 0
+    if n == 1:
+        return 1
+    if n > 1:
+        return fibo_recursion(n-1)+fibo_recursion(n-2)
 
-
+n = 35
+print(fibo_recursion(n), "recursion method, time: {}s".format(time.time()-start_time))
