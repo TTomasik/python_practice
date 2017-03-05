@@ -1304,3 +1304,12 @@ def permutations(string):
 string = 'abc'
 print(permutations(string))
 
+#EX28---THE SHORTEST SOLUTION USING ITERTOOLS
+from itertools import permutations
+def permutations_with_itertools(string):
+    return [''.join(p) for p in permutations(string)]
+
+string = 'abc'
+print(permutations_with_itertools(string))
+
+
