@@ -1313,28 +1313,124 @@ import math
 # print(permutations_with_itertools(string))
 
 
-#CHECKING TIME DIFFERENCES FOR LIST METHOD AND RECURSION METHOD IN FIBONACCI
-import time
-start_time = time.time()
-def fibo_list(n):
-    if n == 0 or n == 1:
-        return n
-    first_two = [0,1]
-    for i in range(2, n):
-        first_two.append(first_two[i-1]+first_two[i-2])
+# #CHECKING TIME DIFFERENCES FOR LIST METHOD AND RECURSION METHOD IN FIBONACCI
+# import time
+#
+# start_time = time.time()
+#
+# def fibo_list(n):
+#     if n == 0 or n == 1:
+#         return n
+#     first_two = [0,1]
+#     for i in range(2, n):
+#         first_two.append(first_two[i-1]+first_two[i-2])
+#
+#     return first_two[-1]+first_two[-2]
+#
+# n = 35
+# print(fibo_list(n), "list method, time: {} sek".format(time.time()-start_time))
+#
+# start_time2 = time.time()
+#
+# def fibo_recursion(n):
+#     if n == 0:
+#         return 0
+#     if n == 1:
+#         return 1
+#     if n > 1:
+#         return fibo_recursion(n-1)+fibo_recursion(n-2)
+#
+# n = 35
+# print(fibo_recursion(n), "recursion method, time: {} sek".format(time.time()-start_time2))
 
-    return first_two[-1]+first_two[-2]
+import datetime
+def get_start_time(schedules, duration):
+    hours = duration // 60
+    minutes = duration % 60
+    print("{}min = {}h:{}min".format(duration, hours, minutes))
+    result = []
 
-n = 35
-print(fibo_list(n), "list method, time: {}s".format(time.time()-start_time))
+    result2 = []
+    i_id = 0
+    for i in schedules:
+        i_id += 1
+        for j in range(0, len(i)):
+            try:
+                hours_after_check = datetime.datetime.strptime("{}".format(i[j][1]), "%H:%M").hour + hours
+                minutes_before_check = datetime.datetime.strptime("{}".format(i[j][1]), "%H:%M").minute + minutes
+                upper_hours = datetime.datetime.strptime("{}".format(i[j + 1][0]), "%H:%M").hour
+                upper_minutes = datetime.datetime.strptime("{}".format(i[j + 1][0]), "%H:%M").minute
+            except:
+                IndexError
 
-def fibo_recursion(n):
-    if n == 0:
-        return 0
-    if n == 1:
-        return 1
-    if n > 1:
-        return fibo_recursion(n-1)+fibo_recursion(n-2)
+            if j == range(0, len(i))[-1]:
+                hours_after_check = datetime.datetime.strptime("{}".format(i[-1][1]), "%H:%M").hour + hours
+                minutes_before_check = datetime.datetime.strptime("{}".format(i[-1][1]), "%H:%M").minute + minutes
+                upper_hours = 19
+                upper_minutes = 0
 
-n = 35
-print(fibo_recursion(n), "recursion method, time: {}s".format(time.time()-start_time))
+            if minutes_before_check == 60:
+                minutes_after_check = 0
+                hours_after_check += 1
+            if minutes_before_check > 60:
+                hours_after_check += minutes_before_check // 60
+                minutes_after_check = minutes_before_check % 60
+                minutes_before_check = 0
+            if minutes_before_check < 60:
+                minutes_after_check = minutes_before_check
+            if hours_after_check < upper_hours:
+                predykat = True
+            if hours_after_check == upper_hours and minutes_after_check <= upper_minutes:
+                predykat = True
+            if hours_after_check > upper_hours:
+                predykat = False
+
+            if predykat == True:
+                try:
+                    finally_hours = i[j][1]
+                    finally_hours_2 = i[j+1][0]
+                    result2.append(i_id)
+                    result2.append(finally_hours)
+                    result2.append(finally_hours_2)
+                    result.append(result2)
+                    result2 = []
+                except:
+                    IndexError
+                if j == range(0, len(i))[-1]:
+                    finally_hours = i[-1][1]
+                    finally_hours_2 = '19:00'
+                    result2.append(i_id)
+                    result2.append(finally_hours)
+                    result2.append(finally_hours_2)
+                    result.append(result2)
+                    result2 = []
+
+            # print(hours_after_check, minutes_after_check, upper_hours, upper_minutes, predykat)
+    result3 = []
+    print(result)
+    range_list = []
+    for x in range(0, len(result)-1):
+        print(range_list)
+        if result[x][0] != result[x+1][0] and result[x][0] not in range_list:
+            result3.append(result.pop(x))
+            range_list.append(result[x][0])
+        if result[x][0] == result[x+1][0] and result[x][0] not in range_list:
+            result3.append(result.pop(x))
+            range_list.append(result[x][0])
+
+
+    print(result)
+    print(result3)
+
+
+
+
+schedules = [
+  [['09:00', '11:30'], ['13:30', '16:00'], ['16:00', '17:30'], ['17:45', '19:00']],
+  [['09:15', '12:00'], ['14:00', '16:30'], ['17:00', '17:30']],
+  [['11:30', '12:15'], ['15:00', '16:30'], ['17:45', '19:00']]
+]
+duration = 60
+print(get_start_time(schedules, duration))
+
+

@@ -366,33 +366,48 @@
 #
 # t2 = Test2("Mietek", "Szczesniak")
 # print(t2.name)
-import time
-start_time = time.time()
-def fibo_list(n):
-    if n == 0 or n == 1:
-        return n
-    first_two = [0,1]
-    for i in range(2, n):
-        first_two.append(first_two[i-1]+first_two[i-2])
+# import time
+# start_time = time.time()
+# def fibo_list(n):
+#     if n == 0 or n == 1:
+#         return n
+#     first_two = [0,1]
+#     for i in range(2, n):
+#         first_two.append(first_two[i-1]+first_two[i-2])
+#
+#     return first_two[-1]+first_two[-2]
+#
+# n = 35
+# print(fibo_list(n), "list method, time: {}s".format(time.time()-start_time))
+#
+# def fibo(n):
+#     if n == 0:
+#         return 0
+#     if n == 1:
+#         return 1
+#     if n > 1:
+#         return fibo(n-1)+fibo(n-2)
+#
+# n = 35
+# print(fibo(n), "recursion method, time: {}s".format(time.time()-start_time))
 
-    return first_two[-1]+first_two[-2]
-
-n = 35
-print(fibo_list(n), "list method, time: {}s".format(time.time()-start_time))
-
-def fibo(n):
-    if n == 0:
-        return 0
-    if n == 1:
-        return 1
-    if n > 1:
-        return fibo(n-1)+fibo(n-2)
-
-n = 35
-print(fibo(n), "recursion method, time: {}s".format(time.time()-start_time))
 
 
 
+class Counter(object):
+
+    def __init__(self, age, weight):
+        self.age = age
+        self.weight = weight
+
+    @property
+    def dynamic_value(self):
+        value = self.age*self.weight
+        return value
+
+
+tomek = Counter(30, 90)
+print(tomek)
 
 
 
