@@ -1071,8 +1071,8 @@ import math
 #             img[k, i] = img[randint(0, img.shape[0] - 1), randint(0, img.shape[1] - 1)]
 #     return cv2.imwrite(save, img)
 #
-# upload = '/home/tt/workspace/wallpaper.jpg'
-# save = '/home/tt/workspace/messed_wallpaper.jpg'
+# upload = '/home/tt/workspace/batman.jpg'
+# save = '/home/tt/workspace/batman_messed.jpg'
 #
 # print(pixel_messer(upload, save))
 
@@ -1343,94 +1343,114 @@ import math
 # n = 35
 # print(fibo_recursion(n), "recursion method, time: {} sek".format(time.time()-start_time2))
 
-import datetime
-def get_start_time(schedules, duration):
-    hours = duration // 60
-    minutes = duration % 60
-    print("{}min = {}h:{}min".format(duration, hours, minutes))
+# import datetime
+# def get_start_time(schedules, duration):
+#     hours = duration // 60
+#     minutes = duration % 60
+#     print("{}min = {}h:{}min".format(duration, hours, minutes))
+#     result = []
+#
+#     result2 = []
+#     i_id = 0
+#     for i in schedules:
+#         i_id += 1
+#         for j in range(0, len(i)):
+#             try:
+#                 hours_after_check = datetime.datetime.strptime("{}".format(i[j][1]), "%H:%M").hour + hours
+#                 minutes_before_check = datetime.datetime.strptime("{}".format(i[j][1]), "%H:%M").minute + minutes
+#                 upper_hours = datetime.datetime.strptime("{}".format(i[j + 1][0]), "%H:%M").hour
+#                 upper_minutes = datetime.datetime.strptime("{}".format(i[j + 1][0]), "%H:%M").minute
+#             except:
+#                 IndexError
+#
+#             if j == range(0, len(i))[-1]:
+#                 hours_after_check = datetime.datetime.strptime("{}".format(i[-1][1]), "%H:%M").hour + hours
+#                 minutes_before_check = datetime.datetime.strptime("{}".format(i[-1][1]), "%H:%M").minute + minutes
+#                 upper_hours = 19
+#                 upper_minutes = 0
+#
+#             if minutes_before_check == 60:
+#                 minutes_after_check = 0
+#                 hours_after_check += 1
+#             if minutes_before_check > 60:
+#                 hours_after_check += minutes_before_check // 60
+#                 minutes_after_check = minutes_before_check % 60
+#                 minutes_before_check = 0
+#             if minutes_before_check < 60:
+#                 minutes_after_check = minutes_before_check
+#             if hours_after_check < upper_hours:
+#                 predykat = True
+#             if hours_after_check == upper_hours and minutes_after_check <= upper_minutes:
+#                 predykat = True
+#             if hours_after_check > upper_hours:
+#                 predykat = False
+#
+#             if predykat == True:
+#                 try:
+#                     finally_hours = i[j][1]
+#                     finally_hours_2 = i[j+1][0]
+#                     result2.append(i_id)
+#                     result2.append(finally_hours)
+#                     result2.append(finally_hours_2)
+#                     result.append(result2)
+#                     result2 = []
+#                 except:
+#                     IndexError
+#                 if j == range(0, len(i))[-1]:
+#                     finally_hours = i[-1][1]
+#                     finally_hours_2 = '19:00'
+#                     result2.append(i_id)
+#                     result2.append(finally_hours)
+#                     result2.append(finally_hours_2)
+#                     result.append(result2)
+#                     result2 = []
+#
+#             # print(hours_after_check, minutes_after_check, upper_hours, upper_minutes, predykat)
+#     result3 = []
+#     print(result)
+#     range_list = []
+#     for x in range(0, len(result)-1):
+#         print(range_list)
+#         if result[x][0] != result[x+1][0] and result[x][0] not in range_list:
+#             result3.append(result.pop(x))
+#             range_list.append(result[x][0])
+#         if result[x][0] == result[x+1][0] and result[x][0] not in range_list:
+#             result3.append(result.pop(x))
+#             range_list.append(result[x][0])
+#
+#
+#     print(result)
+#     print(result3)
+#
+#
+#
+#
+# schedules = [
+#   [['09:00', '11:30'], ['13:30', '16:00'], ['16:00', '17:30'], ['17:45', '19:00']],
+#   [['09:15', '12:00'], ['14:00', '16:30'], ['17:00', '17:30']],
+#   [['11:30', '12:15'], ['15:00', '16:30'], ['17:45', '19:00']]
+# ]
+# duration = 60
+# print(get_start_time(schedules, duration))
+
+
+#MY IMPLEMENTATION OF MERGE SORT ALGORITHM
+def my_merge_sort(example):
+    if len(example) < 2:
+        return example
+
     result = []
+    mid = int(len(example)/2)
+    y = my_merge_sort(example[:mid])
+    z = my_merge_sort(example[mid:])
 
-    result2 = []
-    i_id = 0
-    for i in schedules:
-        i_id += 1
-        for j in range(0, len(i)):
-            try:
-                hours_after_check = datetime.datetime.strptime("{}".format(i[j][1]), "%H:%M").hour + hours
-                minutes_before_check = datetime.datetime.strptime("{}".format(i[j][1]), "%H:%M").minute + minutes
-                upper_hours = datetime.datetime.strptime("{}".format(i[j + 1][0]), "%H:%M").hour
-                upper_minutes = datetime.datetime.strptime("{}".format(i[j + 1][0]), "%H:%M").minute
-            except:
-                IndexError
+    while len(y) > 0 and len(z) > 0:
+        if y[0] > z[0]:
+            result.append(z.pop(0))
+        else:
+            result.append(y.pop(0))
+    result.extend(y+z)
+    return result
 
-            if j == range(0, len(i))[-1]:
-                hours_after_check = datetime.datetime.strptime("{}".format(i[-1][1]), "%H:%M").hour + hours
-                minutes_before_check = datetime.datetime.strptime("{}".format(i[-1][1]), "%H:%M").minute + minutes
-                upper_hours = 19
-                upper_minutes = 0
-
-            if minutes_before_check == 60:
-                minutes_after_check = 0
-                hours_after_check += 1
-            if minutes_before_check > 60:
-                hours_after_check += minutes_before_check // 60
-                minutes_after_check = minutes_before_check % 60
-                minutes_before_check = 0
-            if minutes_before_check < 60:
-                minutes_after_check = minutes_before_check
-            if hours_after_check < upper_hours:
-                predykat = True
-            if hours_after_check == upper_hours and minutes_after_check <= upper_minutes:
-                predykat = True
-            if hours_after_check > upper_hours:
-                predykat = False
-
-            if predykat == True:
-                try:
-                    finally_hours = i[j][1]
-                    finally_hours_2 = i[j+1][0]
-                    result2.append(i_id)
-                    result2.append(finally_hours)
-                    result2.append(finally_hours_2)
-                    result.append(result2)
-                    result2 = []
-                except:
-                    IndexError
-                if j == range(0, len(i))[-1]:
-                    finally_hours = i[-1][1]
-                    finally_hours_2 = '19:00'
-                    result2.append(i_id)
-                    result2.append(finally_hours)
-                    result2.append(finally_hours_2)
-                    result.append(result2)
-                    result2 = []
-
-            # print(hours_after_check, minutes_after_check, upper_hours, upper_minutes, predykat)
-    result3 = []
-    print(result)
-    range_list = []
-    for x in range(0, len(result)-1):
-        print(range_list)
-        if result[x][0] != result[x+1][0] and result[x][0] not in range_list:
-            result3.append(result.pop(x))
-            range_list.append(result[x][0])
-        if result[x][0] == result[x+1][0] and result[x][0] not in range_list:
-            result3.append(result.pop(x))
-            range_list.append(result[x][0])
-
-
-    print(result)
-    print(result3)
-
-
-
-
-schedules = [
-  [['09:00', '11:30'], ['13:30', '16:00'], ['16:00', '17:30'], ['17:45', '19:00']],
-  [['09:15', '12:00'], ['14:00', '16:30'], ['17:00', '17:30']],
-  [['11:30', '12:15'], ['15:00', '16:30'], ['17:45', '19:00']]
-]
-duration = 60
-print(get_start_time(schedules, duration))
-
-
+example = [4,1,3,2]
+print(my_merge_sort(example))
