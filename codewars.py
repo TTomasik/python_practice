@@ -1434,23 +1434,98 @@ import math
 # print(get_start_time(schedules, duration))
 
 
-#MY IMPLEMENTATION OF MERGE SORT ALGORITHM
-def my_merge_sort(example):
-    if len(example) < 2:
-        return example
+# #MY IMPLEMENTATION OF MERGE SORT ALGORITHM
+# def my_merge_sort(example):
+#     if len(example) < 2:
+#         return example
+#
+#     result = []
+#     mid = int(len(example)/2)
+#     y = my_merge_sort(example[:mid])
+#     z = my_merge_sort(example[mid:])
+#
+#     while len(y) > 0 and len(z) > 0:
+#         if y[0] > z[0]:
+#             result.append(z.pop(0))
+#         else:
+#             result.append(y.pop(0))
+#     result.extend(y+z)
+#     return result
+#
+# example = [4,1,3,2]
+# print(my_merge_sort(example))
 
-    result = []
-    mid = int(len(example)/2)
-    y = my_merge_sort(example[:mid])
-    z = my_merge_sort(example[mid:])
+#ACTUAL TEMPERATURE IN WARSAW
+import requests, json
+# weather = requests.get('http://api.openweathermap.org/data/2.5/forecast/city?id=756135&APPID=3bdffabc19b9f555ff88207831614ae1')
+# data = weather.json()
+# warsaw_temperature = data['list'][-1]['main']['temp']-273
+# print(warsaw_temperature)
 
-    while len(y) > 0 and len(z) > 0:
-        if y[0] > z[0]:
-            result.append(z.pop(0))
+# #29 Reverse Polish Notation - CODEWARS
+# def parse_molecule (formula):
+#     result = {}
+#     helper = []
+#     for index, i in enumerate(formula):
+#         try:
+#             if i.istitle():
+#                 a = i
+#                 if formula[index+1].istitle():
+#                     helper.append(a)
+#             if not i.istitle() and ord(i) not in (40, 41):
+#                 a += i
+#                 if formula[index+1].istitle() or ord(formula[index+1]) in (40, ):
+#                     helper.append(a)
+#             if formula[index+1].isdigit():
+#                 for i in range(int(formula[index+1])):
+#                     helper.append(a)
+#         except IndexError:
+#             pass
+#     for i in helper:
+#
+#     return helper
+#
+# water = 'Mg(OH2)'
+# print(parse_molecule(water))
+
+#Codility: Lesson1 Task4
+def solution(A):
+    unique = set()
+    input = sorted(A)
+    all_elements = ((input[0]+input[-1])/2.0)*(len(input))
+    missing_element = all_elements - sum(A)
+    if len(input) == 2:
+        if input[0] == 1 and input[1] == 2:
+            return 1
         else:
-            result.append(y.pop(0))
-    result.extend(y+z)
-    return result
+            return 0
+    for i in input:
+        unique.add(i)
+    if input[-1] - input[0] == len(input)-1 and len(list(unique)) == len(input):
+        if input[0] != 1:
+            return 0
+        if input[0] == 1 and missing_element == 0:
+            return 1
+        else:
+            return 0
+    if missing_element == 0:
+        if len(input) == len(list(unique)):
+            return 1
+        else:
+            return 0
+    else:
+        return 0
 
-example = [4,1,3,2]
-print(my_merge_sort(example))
+
+
+
+A =  [9, 5, 7, 3, 2, 7, 3, 1, 10, 8]
+print(solution(A))
+
+
+
+
+
+
+
+
