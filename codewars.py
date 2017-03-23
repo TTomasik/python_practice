@@ -1488,44 +1488,87 @@ import requests, json
 # water = 'Mg(OH2)'
 # print(parse_molecule(water))
 
-#Codility: Lesson1 Task4
-def solution(A):
-    unique = set()
-    input = sorted(A)
-    all_elements = ((input[0]+input[-1])/2.0)*(len(input))
-    missing_element = all_elements - sum(A)
-    if len(input) == 2:
-        if input[0] == 1 and input[1] == 2:
-            return 1
+# #Codility: Lesson1 Task4
+# def solution(A):
+#     unique = set()
+#     input = sorted(A)
+#     all_elements = ((input[0]+input[-1])/2.0)*(len(input))
+#     missing_element = all_elements - sum(A)
+#     if len(input) == 2:
+#         if input[0] == 1 and input[1] == 2:
+#             return 1
+#         else:
+#             return 0
+#     for i in input:
+#         unique.add(i)
+#     if input[-1] - input[0] == len(input)-1 and len(list(unique)) == len(input):
+#         if input[0] != 1:
+#             return 0
+#         if input[0] == 1 and missing_element == 0:
+#             return 1
+#         else:
+#             return 0
+#     if missing_element == 0:
+#         if len(input) == len(list(unique)):
+#             return 1
+#         else:
+#             return 0
+#     else:
+#         return 0
+#
+# A =  [9, 5, 7, 3, 2, 7, 3, 1, 10, 8]
+# print(solution(A))
+
+#Codility: Lesson2 Task4
+def solution(X, A):
+    my_range = []
+    assistant = list(range(1,X+1))
+    helper = []
+    if X not in A:
+        return -1
+    if A.count(A[0]) == len(A):
+        if A[0] == 1:
+            return 0
+        return -1
+    for y in assistant:
+        if y in A:
+            helper.append(0)
         else:
-            return 0
-    for i in input:
-        unique.add(i)
-    if input[-1] - input[0] == len(input)-1 and len(list(unique)) == len(input):
-        if input[0] != 1:
-            return 0
-        if input[0] == 1 and missing_element == 0:
-            return 1
-        else:
-            return 0
-    if missing_element == 0:
-        if len(input) == len(list(unique)):
-            return 1
-        else:
-            return 0
+            helper.append(1)
+    if sum(helper) == 0:
+        helper = set()
+        for index, i in enumerate(A):
+            if i in assistant:
+                helper.add(i)
+            if len(helper) == len(range(1, X+1)) and sum(helper) == sum(assistant):
+                return index
     else:
-        return 0
-
-
-
-
-A =  [9, 5, 7, 3, 2, 7, 3, 1, 10, 8]
-print(solution(A))
+        return -1
 
 
 
 
 
+A = [1, 3, 1, 3, 3, 1, 3]
+X = 3
+print(solution(X, A))
+
+# if i == X:
+#     for x in A[0:index + 1]:
+#         my_range.append(x)
+#     helper = [y for y in range(my_range[0], my_range[-1] + 1)]
+#     for z in helper:
+#         if z in my_range:
+#             assistant.append(0)
+#         else:
+#             assistant.append(1)
+#     if sum(assistant) == 0:
+#         return index
+#     else:
+#         assistant = []
+#         my_range = []
+#         if A.count(i) == 1:
+#             return -1
 
 
 
