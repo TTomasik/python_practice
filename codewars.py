@@ -1521,27 +1521,26 @@ import requests, json
 
 #Codility: Lesson2 Task4
 def solution(X, A):
-    my_range = []
     assistant = list(range(1,X+1))
-    helper = []
+    assistant_sum = sum(assistant)
+    helper = set()
     if X not in A:
         return -1
     if A.count(A[0]) == len(A):
         if A[0] == 1:
             return 0
         return -1
-    for y in assistant:
-        if y in A:
-            helper.append(0)
-        else:
-            helper.append(1)
-    if sum(helper) == 0:
+    for y in A:
+        helper.add(y)
+    if sum(sorted(list(helper))[0:X]) == sum(assistant):
         helper = set()
-        for index, i in enumerate(A):
-            if i in assistant:
-                helper.add(i)
-            if len(helper) == len(range(1, X+1)) and sum(helper) == sum(assistant):
+    for index, i in enumerate(A):
+        try:
+            helper.add(i)
+            if len(list(helper)[0:X]) == len(assistant) and int((list(helper)[0]+list(helper)[X-1])/2.0*len(helper)) == assistant_sum:
                 return index
+        except IndexError:
+            pass
     else:
         return -1
 
@@ -1549,26 +1548,10 @@ def solution(X, A):
 
 
 
-A = [1, 3, 1, 3, 3, 1, 3]
-X = 3
+A = [4,3,2,1]
+X = 4
 print(solution(X, A))
 
-# if i == X:
-#     for x in A[0:index + 1]:
-#         my_range.append(x)
-#     helper = [y for y in range(my_range[0], my_range[-1] + 1)]
-#     for z in helper:
-#         if z in my_range:
-#             assistant.append(0)
-#         else:
-#             assistant.append(1)
-#     if sum(assistant) == 0:
-#         return index
-#     else:
-#         assistant = []
-#         my_range = []
-#         if A.count(i) == 1:
-#             return -1
 
 
 
