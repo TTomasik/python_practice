@@ -1563,7 +1563,7 @@ import requests, json
 # print(*apple[0][0])
 
 pattern = {"M": 1000, "D": 500, "C": 100, "L": 50, "X": 10, "V": 5, "I": 1}
-
+pattern_arabic = {1000: "M", 900: "CM", 500: "D", 400: "CD", 100: "C", 90: "XC", 50: "L", 40: "XL", 10: "X", 9: "IX", 5: "V", 4: "IV", 1: "I"}
 def RomanNumerals(value):
     if isinstance(value, str):
         splitted = [i for i in value]
@@ -1586,7 +1586,30 @@ def RomanNumerals(value):
             except IndexError:
                 pass
         return result
+    if isinstance(value, int):
+        recursion = []
+        def converter(value):
+            helper = []
+            helper2 = []
+            try:
+                for i in pattern_arabic:
+                    if value - i >= 0:
+                        helper.append(i)
+                        helper2.append(value - i)
+                substracted = helper[helper2.index(min(helper2))]
+                recursion.append(substracted)
+                converter(value-substracted)
+            except ValueError:
+                pass
+        converter(value)
+        result = ""
+        for i in recursion:
+            if i in pattern_arabic:
+                result += pattern_arabic[i]
+        return result
 
 
-romanian = "MXMIIIV"
+romanian = "MCMXCVI"
 print(RomanNumerals(romanian))
+arabic = 1996
+print(RomanNumerals(arabic))
