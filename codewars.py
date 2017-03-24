@@ -1519,39 +1519,74 @@ import requests, json
 # A =  [9, 5, 7, 3, 2, 7, 3, 1, 10, 8]
 # print(solution(A))
 
-#Codility: Lesson2 Task4
-def solution(X, A):
-    assistant = list(range(1,X+1))
-    assistant_sum = sum(assistant)
-    helper = set()
-    if X not in A:
-        return -1
-    if A.count(A[0]) == len(A):
-        if A[0] == 1:
-            return 0
-        return -1
-    for y in A:
-        helper.add(y)
-    if sum(sorted(list(helper))[0:X]) == sum(assistant):
-        helper = set()
-    for index, i in enumerate(A):
-        try:
-            helper.add(i)
-            if len(list(helper)[0:X]) == len(assistant) and int((list(helper)[0]+list(helper)[X-1])/2.0*len(helper)) == assistant_sum:
-                return index
-        except IndexError:
-            pass
-    else:
-        return -1
+# #Codility: Lesson2 Task4
+# def solution(X, A):
+#     assistant = list(range(1, X+1))
+#     assistant_sum = sum(assistant)
+#     helper = set()
+#     if X not in A:
+#         return -1
+#     if A.count(A[0]) == len(A):
+#         if A[0] == 1:
+#             return 0
+#         return -1
+#     for y in A:
+#         helper.add(y)
+#     sorted_helper = sorted(list(helper))
+#     if sum(sorted_helper[0:X]) == assistant_sum:
+#         helper = set()
+#     for index, i in enumerate(A):
+#         try:
+#             helper.add(i)
+#             if len(list(helper)[0:X]) == len(assistant) and int((list(helper)[0]+list(helper)[X-1])/2.0*len(helper)) == assistant_sum:
+#                 return index
+#         except IndexError:
+#             pass
+#     else:
+#         return -1
+#
+#
+# A = [4,3,2,1]
+# X = 4
+# print(solution(X, A))
+
+# helper = []
+# apple=[[["SNo."],["Computers"],["Mobile"]],
+#        [["1"],["iMac"],["iPhone"]],
+#         [["2"],["Macbook"],["iPod"]]]
+#
+#
+#
+# for l in apple:
+#     print(*[e[0] for e in l])
+#
+# print(*apple[0][0])
+
+pattern = {"M": 1000, "D": 500, "C": 100, "L": 50, "X": 10, "V": 5, "I": 1}
+
+def RomanNumerals(value):
+    if isinstance(value, str):
+        splitted = [i for i in value]
+        numbers = [pattern[i] for i in splitted]
+        result = 0
+        reversed_numbers = numbers[::-1]
+        for index, i in enumerate(reversed_numbers):
+            try:
+                if index == 0:
+                    result += i
+                elif index == len(numbers)-1:
+                    if reversed_numbers[index] >= reversed_numbers[index-1]:
+                        result += i
+                    else:
+                        result -= i
+                elif reversed_numbers[index] >= reversed_numbers[index-1]:
+                    result += i
+                elif reversed_numbers[index] < reversed_numbers[index-1]:
+                    result -= i
+            except IndexError:
+                pass
+        return result
 
 
-
-
-
-A = [4,3,2,1]
-X = 4
-print(solution(X, A))
-
-
-
-
+romanian = "MXMIIIV"
+print(RomanNumerals(romanian))
