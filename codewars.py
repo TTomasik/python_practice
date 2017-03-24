@@ -1562,11 +1562,68 @@ import requests, json
 #
 # print(*apple[0][0])
 
-pattern = {"M": 1000, "D": 500, "C": 100, "L": 50, "X": 10, "V": 5, "I": 1}
-pattern_arabic = {1000: "M", 900: "CM", 500: "D", 400: "CD", 100: "C", 90: "XC", 50: "L", 40: "XL", 10: "X", 9: "IX", 5: "V", 4: "IV", 1: "I"}
-def RomanNumerals(value):
-    if isinstance(value, str):
-        splitted = [i for i in value]
+# pattern = {"M": 1000, "D": 500, "C": 100, "L": 50, "X": 10, "V": 5, "I": 1}
+# pattern_arabic = {1000: "M", 900: "CM", 500: "D", 400: "CD", 100: "C", 90: "XC", 50: "L", 40: "XL", 10: "X", 9: "IX", 5: "V", 4: "IV", 1: "I"}
+# def RomanNumerals(value):
+#     if isinstance(value, str):
+#         splitted = [i for i in value]
+#         numbers = [pattern[i] for i in splitted]
+#         result = 0
+#         reversed_numbers = numbers[::-1]
+#         for index, i in enumerate(reversed_numbers):
+#             try:
+#                 if index == 0:
+#                     result += i
+#                 elif index == len(numbers)-1:
+#                     if reversed_numbers[index] >= reversed_numbers[index-1]:
+#                         result += i
+#                     else:
+#                         result -= i
+#                 elif reversed_numbers[index] >= reversed_numbers[index-1]:
+#                     result += i
+#                 elif reversed_numbers[index] < reversed_numbers[index-1]:
+#                     result -= i
+#             except IndexError:
+#                 pass
+#         return result
+#     if isinstance(value, int):
+#         recursion = []
+#         def converter(value):
+#             helper = []
+#             helper2 = []
+#             try:
+#                 for i in pattern_arabic:
+#                     if value - i >= 0:
+#                         helper.append(i)
+#                         helper2.append(value - i)
+#                 substracted = helper[helper2.index(min(helper2))]
+#                 recursion.append(substracted)
+#                 converter(value-substracted)
+#             except ValueError:
+#                 pass
+#         converter(value)
+#         result = ""
+#         for i in recursion:
+#             if i in pattern_arabic:
+#                 result += pattern_arabic[i]
+#         return result
+#
+
+# romanian = "MMXVII"
+# print(RomanNumerals(romanian))
+# arabic = 2017
+# print(RomanNumerals(arabic))
+
+#Codewars Roman Numerals Helper
+class RomanNumerals():
+
+    def __init__(self, value):
+        self.value = value
+
+    @classmethod
+    def from_roman(self, test):
+        pattern = {"M": 1000, "D": 500, "C": 100, "L": 50, "X": 10, "V": 5, "I": 1}
+        splitted = [i for i in test]
         numbers = [pattern[i] for i in splitted]
         result = 0
         reversed_numbers = numbers[::-1]
@@ -1574,42 +1631,43 @@ def RomanNumerals(value):
             try:
                 if index == 0:
                     result += i
-                elif index == len(numbers)-1:
-                    if reversed_numbers[index] >= reversed_numbers[index-1]:
+                elif index == len(numbers) - 1:
+                    if reversed_numbers[index] >= reversed_numbers[index - 1]:
                         result += i
                     else:
                         result -= i
-                elif reversed_numbers[index] >= reversed_numbers[index-1]:
+                elif reversed_numbers[index] >= reversed_numbers[index - 1]:
                     result += i
-                elif reversed_numbers[index] < reversed_numbers[index-1]:
+                elif reversed_numbers[index] < reversed_numbers[index - 1]:
                     result -= i
             except IndexError:
                 pass
         return result
-    if isinstance(value, int):
+
+    @classmethod
+    def to_roman(self, test):
+        pattern_arabic = {1000: "M", 900: "CM", 500: "D", 400: "CD", 100: "C", 90: "XC", 50: "L", 40: "XL", 10: "X",
+                          9: "IX", 5: "V", 4: "IV", 1: "I"}
         recursion = []
-        def converter(value):
+        def converter(test):
             helper = []
             helper2 = []
             try:
                 for i in pattern_arabic:
-                    if value - i >= 0:
+                    if test - i >= 0:
                         helper.append(i)
-                        helper2.append(value - i)
+                        helper2.append(test - i)
                 substracted = helper[helper2.index(min(helper2))]
                 recursion.append(substracted)
-                converter(value-substracted)
+                converter(test - substracted)
             except ValueError:
                 pass
-        converter(value)
+        converter(test)
         result = ""
         for i in recursion:
             if i in pattern_arabic:
                 result += pattern_arabic[i]
         return result
 
-
-romanian = "MCMXCVI"
-print(RomanNumerals(romanian))
-arabic = 1996
-print(RomanNumerals(arabic))
+print(RomanNumerals.from_roman("MMM"))
+print(RomanNumerals.to_roman(1000))
