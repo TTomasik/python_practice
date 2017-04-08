@@ -1672,48 +1672,59 @@ import requests, json
 # print(RomanNumerals.from_roman("MMM"))
 # print(RomanNumerals.to_roman(1000))
 
-#Codewars Longest Common Subsequence
-
+# #Codewars Longest Common Subsequence
+# def lcs(x, y):
+#     if len(y) > len(x):
+#         result = []
+#         base = [l for l in x]
+#         indexes = []
+#         counter = 0
+#         for index, i in enumerate(x):
+#             counter += 1
+#             if i in y:
+#                 indexes.append(index)
+#                 try:
+#                     if counter <= 1:
+#                         if y.index(i) >= indexes[0]:
+#                             result.append(base[index])
+#                     if counter > 1:
+#                         if y.index(i) > indexes[0]:
+#                             result.append(base[index])
+#                 except IndexError:
+#                     pass
+#         return "".join(result)
+#     else:
+#         result = []
+#         base = [l for l in y]
+#         indexes = []
+#         counter = 0
+#         for index, i in enumerate(y):
+#             counter += 1
+#             if i in x:
+#                 indexes.append(index)
+#                 try:
+#                     if counter == 1:
+#                         if x.index(i) >= indexes[0]:
+#                             result.append(base[index])
+#                     if counter > 1:
+#                         if x.index(i) > indexes[0]:
+#                             result.append(base[index])
+#                 except IndexError:
+#                     pass
+#         return "".join(result)
+#Codewars Longest Common Subsequence - RECURSION!!!
 def lcs(x, y):
-    if len(y) > len(x):
-        result = []
-        base = [l for l in x]
-        indexes = []
-        counter = 0
-        for index, i in enumerate(x):
-            counter += 1
-            if i in y:
-                indexes.append(index)
-                try:
-                    if counter <= 1:
-                        if y.index(i) >= indexes[0]:
-                            result.append(base[index])
-                    if counter > 1:
-                        if y.index(i) > indexes[0]:
-                            result.append(base[index])
-                except IndexError:
-                    pass
-        return "".join(result)
+    if len(x) == 0 or len(y) == 0:
+        return ''
+    if x[-1] == y[-1]:
+        return lcs(x[:-1], y[:-1]) + x[-1]
     else:
-        result = []
-        base = [l for l in y]
-        indexes = []
-        counter = 0
-        for index, i in enumerate(y):
-            counter += 1
-            if i in x:
-                indexes.append(index)
-                try:
-                    if counter == 1:
-                        if x.index(i) >= indexes[0]:
-                            result.append(base[index])
-                    if counter > 1:
-                        if x.index(i) > indexes[0]:
-                            result.append(base[index])
-                except IndexError:
-                    pass
-        return "".join(result)
-
+        lcs1 = lcs(x,y[:-1])
+        lcs2 = lcs(x[:-1],y)
+        if len(lcs1) > len(lcs2):
+            return lcs1
+        else:
+            return lcs2
 
 x = "abcdef"
 y = "abc"
