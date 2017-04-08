@@ -1675,22 +1675,46 @@ import requests, json
 #Codewars Longest Common Subsequence
 
 def lcs(x, y):
-    if x >= y:
+    if len(y) > len(x):
         result = []
-        checker = [j for j in y]
+        base = [l for l in x]
+        indexes = []
+        counter = 0
         for index, i in enumerate(x):
-            if i in checker:
-                result.append(checker.pop(checker.index(i)))
+            counter += 1
+            if i in y:
+                indexes.append(index)
+                try:
+                    if counter <= 1:
+                        if y.index(i) >= indexes[0]:
+                            result.append(base[index])
+                    if counter > 1:
+                        if y.index(i) > indexes[0]:
+                            result.append(base[index])
+                except IndexError:
+                    pass
         return "".join(result)
     else:
         result = []
-        checker = [j for j in x]
+        base = [l for l in y]
+        indexes = []
+        counter = 0
         for index, i in enumerate(y):
-            if i in checker:
-                result.append(checker.pop(checker.index(i)))
+            counter += 1
+            if i in x:
+                indexes.append(index)
+                try:
+                    if counter == 1:
+                        if x.index(i) >= indexes[0]:
+                            result.append(base[index])
+                    if counter > 1:
+                        if x.index(i) > indexes[0]:
+                            result.append(base[index])
+                except IndexError:
+                    pass
         return "".join(result)
 
 
-x = "notatest"
-y = "nottest"
+x = "abcdef"
+y = "abc"
 print(lcs(x, y))
