@@ -1614,60 +1614,83 @@ import requests, json
 # arabic = 2017
 # print(RomanNumerals(arabic))
 
-#Codewars Roman Numerals Helper
-class RomanNumerals():
+# #Codewars Roman Numerals Helper
+# class RomanNumerals():
+#
+#     def __init__(self, value):
+#         self.value = value
+#
+#     @classmethod
+#     def from_roman(self, test):
+#         pattern = {"M": 1000, "D": 500, "C": 100, "L": 50, "X": 10, "V": 5, "I": 1}
+#         splitted = [i for i in test]
+#         numbers = [pattern[i] for i in splitted]
+#         result = 0
+#         reversed_numbers = numbers[::-1]
+#         for index, i in enumerate(reversed_numbers):
+#             try:
+#                 if index == 0:
+#                     result += i
+#                 elif index == len(numbers) - 1:
+#                     if reversed_numbers[index] >= reversed_numbers[index - 1]:
+#                         result += i
+#                     else:
+#                         result -= i
+#                 elif reversed_numbers[index] >= reversed_numbers[index - 1]:
+#                     result += i
+#                 elif reversed_numbers[index] < reversed_numbers[index - 1]:
+#                     result -= i
+#             except IndexError:
+#                 pass
+#         return result
+#
+#     @classmethod
+#     def to_roman(self, test):
+#         pattern_arabic = {1000: "M", 900: "CM", 500: "D", 400: "CD", 100: "C", 90: "XC", 50: "L", 40: "XL", 10: "X",
+#                           9: "IX", 5: "V", 4: "IV", 1: "I"}
+#         recursion = []
+#         def converter(test):
+#             helper = []
+#             helper2 = []
+#             try:
+#                 for i in pattern_arabic:
+#                     if test - i >= 0:
+#                         helper.append(i)
+#                         helper2.append(test - i)
+#                 substracted = helper[helper2.index(min(helper2))]
+#                 recursion.append(substracted)
+#                 converter(test - substracted)
+#             except ValueError:
+#                 pass
+#         converter(test)
+#         result = ""
+#         for i in recursion:
+#             if i in pattern_arabic:
+#                 result += pattern_arabic[i]
+#         return result
+#
+# print(RomanNumerals.from_roman("MMM"))
+# print(RomanNumerals.to_roman(1000))
 
-    def __init__(self, value):
-        self.value = value
+#Codewars Longest Common Subsequence
 
-    @classmethod
-    def from_roman(self, test):
-        pattern = {"M": 1000, "D": 500, "C": 100, "L": 50, "X": 10, "V": 5, "I": 1}
-        splitted = [i for i in test]
-        numbers = [pattern[i] for i in splitted]
-        result = 0
-        reversed_numbers = numbers[::-1]
-        for index, i in enumerate(reversed_numbers):
-            try:
-                if index == 0:
-                    result += i
-                elif index == len(numbers) - 1:
-                    if reversed_numbers[index] >= reversed_numbers[index - 1]:
-                        result += i
-                    else:
-                        result -= i
-                elif reversed_numbers[index] >= reversed_numbers[index - 1]:
-                    result += i
-                elif reversed_numbers[index] < reversed_numbers[index - 1]:
-                    result -= i
-            except IndexError:
-                pass
-        return result
+def lcs(x, y):
+    if x >= y:
+        result = []
+        checker = [j for j in y]
+        for index, i in enumerate(x):
+            if i in checker:
+                result.append(checker.pop(checker.index(i)))
+        return "".join(result)
+    else:
+        result = []
+        checker = [j for j in x]
+        for index, i in enumerate(y):
+            if i in checker:
+                result.append(checker.pop(checker.index(i)))
+        return "".join(result)
 
-    @classmethod
-    def to_roman(self, test):
-        pattern_arabic = {1000: "M", 900: "CM", 500: "D", 400: "CD", 100: "C", 90: "XC", 50: "L", 40: "XL", 10: "X",
-                          9: "IX", 5: "V", 4: "IV", 1: "I"}
-        recursion = []
-        def converter(test):
-            helper = []
-            helper2 = []
-            try:
-                for i in pattern_arabic:
-                    if test - i >= 0:
-                        helper.append(i)
-                        helper2.append(test - i)
-                substracted = helper[helper2.index(min(helper2))]
-                recursion.append(substracted)
-                converter(test - substracted)
-            except ValueError:
-                pass
-        converter(test)
-        result = ""
-        for i in recursion:
-            if i in pattern_arabic:
-                result += pattern_arabic[i]
-        return result
 
-print(RomanNumerals.from_roman("MMM"))
-print(RomanNumerals.to_roman(1000))
+x = "notatest"
+y = "nottest"
+print(lcs(x, y))
