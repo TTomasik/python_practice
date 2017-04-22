@@ -1712,20 +1712,51 @@ import requests, json
 #                 except IndexError:
 #                     pass
 #         return "".join(result)
-#Codewars Longest Common Subsequence - RECURSION!!!
-def lcs(x, y):
-    if len(x) == 0 or len(y) == 0:
-        return ''
-    if x[-1] == y[-1]:
-        return lcs(x[:-1], y[:-1]) + x[-1]
-    else:
-        lcs1 = lcs(x,y[:-1])
-        lcs2 = lcs(x[:-1],y)
-        if len(lcs1) > len(lcs2):
-            return lcs1
-        else:
-            return lcs2
+# #Codewars Longest Common Subsequence - RECURSION!!!
+# def lcs(x, y):
+#     if len(x) == 0 or len(y) == 0:
+#         return ''
+#     if x[-1] == y[-1]:
+#         return lcs(x[:-1], y[:-1]) + x[-1]
+#     else:
+#         lcs1 = lcs(x,y[:-1])
+#         lcs2 = lcs(x[:-1],y)
+#         if len(lcs1) > len(lcs2):
+#             return lcs1
+#         else:
+#             return lcs2
+#
+# x = "abcdef"
+# y = "abc"
+# print(lcs(x, y))
 
-x = "abcdef"
-y = "abc"
-print(lcs(x, y))
+#Codewars Instant Runoff Voting
+def runoff(voters):
+    a = len(voters)
+    first_loop = []
+    for i in voters:
+        first_loop.append(i[0])
+    for i in first_loop:
+        if first_loop.count(i) >= math.ceil(a/2):
+            return i
+    return [i for i in voters], a
+
+voters = [["dem", "ind", "rep"],
+          ["rep", "ind", "dem"],
+          ["ind", "dem", "rep"],
+          ["ind", "rep", "dem"]]
+
+print(runoff(voters))
+
+
+
+
+
+
+
+
+
+
+
+
+
