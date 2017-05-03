@@ -1730,23 +1730,64 @@ import requests, json
 # y = "abc"
 # print(lcs(x, y))
 
-#Codewars Instant Runoff Voting
-def runoff(voters):
-    a = len(voters)
-    first_loop = []
-    for i in voters:
-        first_loop.append(i[0])
-    for i in first_loop:
-        if first_loop.count(i) >= math.ceil(a/2):
-            return i
-    return [i for i in voters], a
+# #Codewars Instant Runoff Voting
+# import math
+# def runoff(voters):
+#     total_votes = len(voters)
+#     first_loop = []
+#     pattern = sorted(voters[0])
+#     weights = []
+#     for i in voters:
+#         first_loop.append(i[0])
+#     for i in first_loop:
+#         if pattern == sorted(first_loop):
+#             return None
+#         if first_loop.count(i) >= math.ceil(total_votes/2):
+#             return i
+#     if first_loop:
+#         def checker(first_loop):
+#             print("im in")
+#             pattern = sorted(voters[0])
+#             weights = []
+#             for i in pattern:
+#                 weights.append(first_loop.count(i))
+#             for index, i in enumerate(weights):
+#                 if i == 0:
+#                     weights[index] = 9999
+#             for y, i in enumerate(weights):
+#                 if i == min(weights):
+#                     equalizer = pattern.index(first_loop[y])
+#                     for k in voters:
+#                         if k[0] == pattern[equalizer]:
+#                             l = k[1::]
+#                             first_loop[y] = l.pop(0)
+#                             print(l, "to jest l")
+#                 print(first_loop)
+#         print(first_loop, "test")
+#         return checker(first_loop)
+#
+#         print("end of function")
+#         result = []
+#         result_2 = []
+#         for i in pattern:
+#             result.append(first_loop.count(i))
+#             result_2.append(i)
+#         print(first_loop, "TEST")
+#         return result_2[result.index(max(result))]
 
-voters = [["dem", "ind", "rep"],
-          ["rep", "ind", "dem"],
-          ["ind", "dem", "rep"],
-          ["ind", "rep", "dem"]]
+# Codewars Number of Proper Fractions with Denominator d
+def proper_fractions(n):
+    counter = 0
+    for i in range(1, n):
+        for k in range(2, i+1):
+            if i%k == 0 and n%k == 0:
+                counter += 1
+            else:
+                pass
+    return n - (counter+1)
 
-print(runoff(voters))
+n = 15
+print(proper_fractions(n))
 
 
 
