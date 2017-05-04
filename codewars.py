@@ -1786,11 +1786,29 @@ def proper_fractions(n):
                 pass
     return n - (counter+1)
 
-n = 15
+n = 25
 print(proper_fractions(n))
 
 
 
+n_numbers = []
+def proper_fractions(n):
+    global n_numbers
+    for i in range(2, n):
+        if n%i == 0:
+            n_numbers.append(i)
+    return checker(n, 0)
+
+def checker(n, counter):
+    if n > 0:
+        for i in n_numbers:
+            if n % i == 0:
+                counter += 1
+        return checker(n - 1, counter)
+    return counter
+
+n = 4
+print(proper_fractions(n))
 
 
 
