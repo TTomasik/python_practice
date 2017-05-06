@@ -1776,36 +1776,36 @@ import requests, json
 #         return result_2[result.index(max(result))]
 
 # Codewars Number of Proper Fractions with Denominator d
-def proper_fractions(n):
-    counter = 0
-    for i in range(1, n):
-        for k in range(2, i+1):
-            if i%k == 0 and n%k == 0:
-                counter += 1
-            else:
-                pass
-    return n - (counter+1)
-
-n = 25
-print(proper_fractions(n))
-
-
+# def proper_fractions(n):
+#     counter = 0
+#     for i in range(1, n):
+#         for k in range(2, i+1):
+#             if i%k == 0 and n%k == 0:
+#                 counter += 1
+#             else:
+#                 pass
+#     return n - (counter+1)
+#
+# n = 25
+# print(proper_fractions(n))
 
 n_numbers = []
 def proper_fractions(n):
     global n_numbers
-    for i in range(2, n):
+    k = n
+    for i in range(2, n+1):
         if n%i == 0:
             n_numbers.append(i)
-    return checker(n, 0)
+    return checker(n, 0, k)
 
-def checker(n, counter):
+def checker(n, counter, k):
     if n > 0:
         for i in n_numbers:
             if n % i == 0:
                 counter += 1
-        return checker(n - 1, counter)
-    return counter
+        return checker(n - 1, counter, k)
+    if n == 0:
+        return k - counter
 
 n = 4
 print(proper_fractions(n))
