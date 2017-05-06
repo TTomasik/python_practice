@@ -1789,25 +1789,28 @@ import requests, json
 # n = 25
 # print(proper_fractions(n))
 
-n_numbers = []
+
 def proper_fractions(n):
-    global n_numbers
+    if n == 1:
+        return 0
+    n_numbers = []
     k = n
     for i in range(2, n+1):
         if n%i == 0:
             n_numbers.append(i)
-    return checker(n, 0, k)
+    return checker(n, 0, k, n_numbers)
 
-def checker(n, counter, k):
+def checker(n, counter, k, n_numbers):
     if n > 0:
         for i in n_numbers:
             if n % i == 0:
                 counter += 1
-        return checker(n - 1, counter, k)
+                break
+        return checker(n - 1, counter, k, n_numbers)
     if n == 0:
         return k - counter
 
-n = 4
+n = 1000
 print(proper_fractions(n))
 
 
