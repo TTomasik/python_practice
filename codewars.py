@@ -1,5 +1,6 @@
 import math
 from subprocess import list2cmdline
+import time
 
 # #---EX1 -> finds two smallest integers and show sum of them
 # numbers = [1, 10, 22, 4]
@@ -1775,21 +1776,27 @@ import requests, json
 #         print(first_loop, "TEST")
 #         return result_2[result.index(max(result))]
 
-# Codewars Number of Proper Fractions with Denominator d
-# def proper_fractions(n):
-#     counter = 0
-#     for i in range(1, n):
-#         for k in range(2, i+1):
-#             if i%k == 0 and n%k == 0:
-#                 counter += 1
-#             else:
-#                 pass
-#     return n - (counter+1)
-#
-# n = 25
-# print(proper_fractions(n))
 
+start_time = time.time()
 
+#Codewars Number of Proper Fractions with Denominator d
+def proper_fractions(n):
+    counter = 0
+    for i in range(1, n):
+        for k in range(2, i+1):
+            if i%k == 0 and n%k == 0:
+                counter += 1
+                break
+            else:
+                pass
+    return n - (counter+1)
+
+n = 900
+print(proper_fractions(n))
+print("Classic method, TIME: {}sec".format(time.time() - start_time))
+
+start_time = time.time()
+#recursion method
 def proper_fractions(n):
     if n == 1:
         return 0
@@ -1810,8 +1817,21 @@ def checker(n, counter, k, n_numbers):
     if n == 0:
         return k - counter
 
-n = 1000
+n = 900
 print(proper_fractions(n))
+print("Recursion method, TIME: {}sec".format(time.time() - start_time))
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
