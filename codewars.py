@@ -1779,66 +1779,120 @@ import requests, json
 
 start_time = time.time()
 
-#Codewars Number of Proper Fractions with Denominator d
-def proper_fractions(n):
+# #Codewars Number of Proper Fractions with Denominator d
+# def proper_fractions(n):
+#     counter = 0
+#     for i in range(1, n):
+#         for k in range(2, i+1):
+#             if i%k == 0 and n%k == 0:
+#                 counter += 1
+#                 break
+#             else:
+#                 pass
+#     return n - (counter+1)
+#
+# n = 900
+# print(proper_fractions(n))
+# print("Classic method, TIME: {}sec".format(time.time() - start_time))
+#
+# start_time = time.time()
+# #recursion method
+# def proper_fractions(n):
+#     if n == 1:
+#         return 0
+#     n_numbers = []
+#     k = n
+#     for i in range(2, n+1):
+#         if n%i == 0:
+#             n_numbers.append(i)
+#     return checker(n, 0, k, n_numbers)
+#
+# def checker(n, counter, k, n_numbers):
+#     if n > 0:
+#         for i in n_numbers:
+#             if n % i == 0:
+#                 counter += 1
+#                 break
+#         return checker(n - 1, counter, k, n_numbers)
+#     if n == 0:
+#         return k - counter
+#
+# n = 1000
+# print(proper_fractions(n))
+# print("Recursion method, TIME: {}sec".format(time.time() - start_time))
+
+# #recursion method
+# def proper_fractions(n):
+#     if n == 1:
+#         return 0
+#     n_numbers_ = []
+#     k = n
+#     for i in range(2, n+1):
+#         if n%i == 0:
+#             n_numbers_.append(i)
+#     sieve = [True] * n
+#     for i in range(3, int(n ** 0.5) + 1, 2):
+#         if sieve[i]:
+#             sieve[i * i::2 * i] = [False] * int((n - i * i - 1) / (2 * i) + 1)
+#     primes = [2]
+#     for i in range(3,n,2):
+#         if sieve[i]:
+#             primes.append(i)
+#     n_numbers = []
+#     for i in n_numbers_:
+#         if i in primes:
+#             n_numbers.append(i)
+#     return checker(n, 0, k, n_numbers)
+#
+# def checker(n, counter, k, n_numbers):
+#     if n > 0:
+#         for i in n_numbers:
+#             if n % i == 0:
+#                 counter += 1
+#                 break
+#         return checker(n - 1, counter, k, n_numbers)
+#     if n == 0:
+#         return k - counter
+#
+# n = 900
+# print(proper_fractions(n))
+# print("Recursion method, TIME: {}sec".format(time.time() - start_time))
+#
+#
+# def proper_fractions(n):
+#     counter = 0
+#     for i in range(1, n):
+#         for k in range(2, i+1):
+#             if i%k == 0 and n%k == 0:
+#                 counter += 1
+#                 break
+#             else:
+#                 pass
+#     return n - (counter+1)
+#
+# def proper_fractions_2(n):
+#     helper = []
+#     for i in range(1, n+1):
+#         if n%i == 0:
+#             helper.append(I)
+#
+# print(proper_fractions_2(15))
+
+def palindrome(n, c):
+    if n%2 != 0:
+        result = [c[-1]]
+    else:
+        result = [c[-1], c[-1]]
     counter = 0
-    for i in range(1, n):
-        for k in range(2, i+1):
-            if i%k == 0 and n%k == 0:
-                counter += 1
-                break
-            else:
-                pass
-    return n - (counter+1)
+    while len(result) <= n-1:
+        result.append(c[counter])
+        result.insert(0, c[counter])
+        counter += 1
+    return "".join(result)
 
-n = 900
-print(proper_fractions(n))
-print("Classic method, TIME: {}sec".format(time.time() - start_time))
-
-start_time = time.time()
-#recursion method
-def proper_fractions(n):
-    if n == 1:
-        return 0
-    n_numbers = []
-    k = n
-    for i in range(2, n+1):
-        if n%i == 0:
-            n_numbers.append(i)
-    return checker(n, 0, k, n_numbers)
-
-def checker(n, counter, k, n_numbers):
-    if n > 0:
-        for i in n_numbers:
-            if n % i == 0:
-                counter += 1
-                break
-        return checker(n - 1, counter, k, n_numbers)
-    if n == 0:
-        return k - counter
-
-n = 900
-print(proper_fractions(n))
-print("Recursion method, TIME: {}sec".format(time.time() - start_time))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+n = 3
+c = "ab"
+print(palindrome(n, c))
 
 
 
