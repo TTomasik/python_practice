@@ -1890,9 +1890,13 @@ def palindrome(n, c):
         counter += 1
     return "".join(result)
 
-n = 3
-c = "ab"
-print(palindrome(n, c))
+def p(n, c):
+    return c+c[-1]*(n-2*len(c)+1)+c[-2::-1]
 
 
 
+
+n = 6
+c = "abc"
+
+print(palindrome(n, c), p(n, c))
