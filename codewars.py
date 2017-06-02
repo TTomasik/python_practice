@@ -1878,25 +1878,25 @@ start_time = time.time()
 #
 # print(proper_fractions_2(15))
 
-def palindrome(n, c):
-    if n%2 != 0:
-        result = [c[-1]]
-    else:
-        result = [c[-1], c[-1]]
-    counter = 0
-    while len(result) <= n-1:
-        result.append(c[counter])
-        result.insert(0, c[counter])
-        counter += 1
-    return "".join(result)
-
-def p(n, c):
-    return c+c[-1]*(n-2*len(c)+1)+c[-2::-1]
-
-
+# def palindrome2(n, c):
+#     if n%2 != 0:
+#         result = [c[-1]]
+#     else:
+#         result = [c[-1], c[-1]]
+#     counter = 0
+#     while len(result) <= n-1:
+#         result.append(c[counter])
+#         result.insert(0, c[counter])
+#         counter += 1
+#     return "".join(result)
+#
+# def p(n, c):
+#     return c+c[-1]*(n-2*len(c)+1)+c[-2::-1]
+#CODEWARS: One Line Task: Palindrome String -> best solution!
+palindrome=lambda n,c: c[:0:-1]+c[0]*(n-2*len(c)+1)+c
 
 
 n = 6
 c = "abc"
 
-print(palindrome(n, c), p(n, c))
+print(palindrome(n, c))
