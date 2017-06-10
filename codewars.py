@@ -1932,7 +1932,7 @@ def soundex(name):
             times = 4 - len(i)
             for j in range(times):
                 i.append("0")
-    return result
+    return " ".join(["".join(i) for i in result])
 
 name = 'Sarah Connor'
 print(soundex(name))
