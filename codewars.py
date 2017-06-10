@@ -1923,7 +1923,9 @@ def soundex(name):
                 helper.append("5")
             if j.upper() == "R":
                 helper.append("6")
+        print(helper)
         result.append(helper)
+
     for i in result:
         for j in i:
             if i.count(j) > 1:
@@ -1932,9 +1934,13 @@ def soundex(name):
             times = 4 - len(i)
             for j in range(times):
                 i.append("0")
+    for i in result:
+        if len(i) > 4:
+            result.append(i[0:4])
+            result.remove(i)
     return " ".join(["".join(i) for i in result])
 
-name = 'Sarah Connor'
+name = 'Cccc'
 print(soundex(name))
 
 
