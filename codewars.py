@@ -1903,25 +1903,36 @@ start_time = time.time()
 
 #CODEWARS: Soundex
 def soundex(name):
-    result = [name[0]]
-    n = [i for i in name[1::] if i.upper() != "H" and i.upper() != "W"]
-    for index, i in enumerate(n):
-        if index == 0 and i == result[0]:
-            break
-        if i.upper() in ["B", "F", "P", "V"]:
-            result.append("1")
-        if i.upper() in ["C", "G", "J", "K", "Q", "S", "X", "X"]:
-            result.append("2")
-        if i.upper() in ["D", "T"]:
-            result.append("3")
-        if i.upper() == "L":
-            result.append("4")
-        if i.upper() in ["M", "N"]:
-            result.append("5")
-        if i.upper() == "R":
-            result.append("6")
+    first_split = name.split(" ")
+    result = []
+    for index, i in enumerate(first_split):
+        helper = [first_split[index][0]]
+        n = [i for i in first_split[index][1::] if i.upper() != "H" and i.upper() != "W"]
+        for x, j in enumerate(n):
+            if x == 0 and j == helper[0]:
+                break
+            if j.upper() in ["B", "F", "P", "V"]:
+                helper.append("1")
+            if j.upper() in ["C", "G", "J", "K", "Q", "S", "X", "X"]:
+                helper.append("2")
+            if j.upper() in ["D", "T"]:
+                helper.append("3")
+            if j.upper() == "L":
+                helper.append("4")
+            if j.upper() in ["M", "N"]:
+                helper.append("5")
+            if j.upper() == "R":
+                helper.append("6")
+        result.append(helper)
+    for i in result:
+        for j in i:
+            if i.count(j) > 1:
+                i.remove(j)
+        if len(i) < 4:
+            times = 4 - len(i)
+            for j in range(times):
+                i.append("0")
     return result
-
 
 name = 'Sarah Connor'
 print(soundex(name))
