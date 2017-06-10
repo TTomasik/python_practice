@@ -1892,11 +1892,60 @@ start_time = time.time()
 #
 # def p(n, c):
 #     return c+c[-1]*(n-2*len(c)+1)+c[-2::-1]
-#CODEWARS: One Line Task: Palindrome String -> best solution!
-palindrome=lambda n,c: c[:0:-1]+c[0]*(n-2*len(c)+1)+c
+# #CODEWARS: One Line Task: Palindrome String -> best solution!
+# palindrome=lambda n,c: c[:0:-1]+c[0]*(n-2*len(c)+1)+c
+#
+#
+# n = 6
+# c = "abc"
+#
+# print(palindrome)
+
+#CODEWARS: Soundex
+def soundex(name):
+    result = [name[0]]
+    n = [i for i in name[1::] if i.upper() != "H" and i.upper() != "W"]
+    for index, i in enumerate(n):
+        if index == 0 and i == result[0]:
+            break
+        if i.upper() in ["B", "F", "P", "V"]:
+            result.append("1")
+        if i.upper() in ["C", "G", "J", "K", "Q", "S", "X", "X"]:
+            result.append("2")
+        if i.upper() in ["D", "T"]:
+            result.append("3")
+        if i.upper() == "L":
+            result.append("4")
+        if i.upper() in ["M", "N"]:
+            result.append("5")
+        if i.upper() == "R":
+            result.append("6")
+    return result
 
 
-n = 6
-c = "abc"
+name = 'Sarah Connor'
+print(soundex(name))
 
-print(palindrome(n, c))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
