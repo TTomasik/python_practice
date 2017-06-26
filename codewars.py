@@ -1901,52 +1901,65 @@ start_time = time.time()
 #
 # print(palindrome)
 
-#CODEWARS: Soundex
-def soundex(name):
-    first_split = name.split(" ")
-    result = []
-    for index, i in enumerate(first_split):
-        helper = [first_split[index][0]]
-        n = [i for i in first_split[index][1::] if i.upper() != "H" and i.upper() != "W"]
-        for x, j in enumerate(n):
-            if x == 0 and j == helper[0]:
-                break
-            if j.upper() in ["B", "F", "P", "V"]:
-                helper.append("1")
-            if j.upper() in ["C", "G", "J", "K", "Q", "S", "X", "X"]:
-                helper.append("2")
-            if j.upper() in ["D", "T"]:
-                helper.append("3")
-            if j.upper() == "L":
-                helper.append("4")
-            if j.upper() in ["M", "N"]:
-                helper.append("5")
-            if j.upper() == "R":
-                helper.append("6")
-        print(helper)
-        result.append(helper)
+# #CODEWARS: Soundex
+# def soundex(name):
+#     first_split = name.split(" ")
+#     result = []
+#     for index, i in enumerate(first_split):
+#         helper = [first_split[index][0]]
+#         n = [i for i in first_split[index][1::] if i.upper() != "H" and i.upper() != "W"]
+#         for x, j in enumerate(n):
+#             if x == 0 and j == helper[0]:
+#                 break
+#             if j.upper() in ["B", "F", "P", "V"]:
+#                 helper.append("1")
+#             if j.upper() in ["C", "G", "J", "K", "Q", "S", "X", "X"]:
+#                 helper.append("2")
+#             if j.upper() in ["D", "T"]:
+#                 helper.append("3")
+#             if j.upper() == "L":
+#                 helper.append("4")
+#             if j.upper() in ["M", "N"]:
+#                 helper.append("5")
+#             if j.upper() == "R":
+#                 helper.append("6")
+#         print(helper)
+#         result.append(helper)
+#
+#     for i in result:
+#         for j in i:
+#             if i.count(j) > 1:
+#                 i.remove(j)
+#         if len(i) < 4:
+#             times = 4 - len(i)
+#             for j in range(times):
+#                 i.append("0")
+#     for i in result:
+#         if len(i) > 4:
+#             result.append(i[0:4])
+#             result.remove(i)
+#     return " ".join(["".join(i) for i in result])
+#
+# name = 'Cccc'
+# print(soundex(name))
 
-    for i in result:
-        for j in i:
-            if i.count(j) > 1:
-                i.remove(j)
-        if len(i) < 4:
-            times = 4 - len(i)
-            for j in range(times):
-                i.append("0")
-    for i in result:
-        if len(i) > 4:
-            result.append(i[0:4])
-            result.remove(i)
-    return " ".join(["".join(i) for i in result])
+from random import randint
+def one_two():
+    return randint(1, 2)
 
-name = 'Cccc'
-print(soundex(name))
+#CODEWARS: Return 1, 2, 3 randomly
+def one_two_three():
+    # number = one_two()
+    # if number == 1:
+    #     return randint(number, 3)
+    # else:
+    #     return randint(number-1, 3)
+    int(sum([one_two() for i in range(100)]) / 100)
+    return ""
 
+print(one_two_three())
 
-
-
-
+[round(sum([randint(1,2) for i in range(100)])/137, 2) for i in range(10000)]
 
 
 
