@@ -1947,20 +1947,10 @@ from random import randint
 def one_two():
     return randint(1, 2)
 
-#CODEWARS: Return 1, 2, 3 randomly
 def one_two_three():
-    # number = one_two()
-    # if number == 1:
-    #     return randint(number, 3)
-    # else:
-    #     return randint(number-1, 3)
-    int(sum([one_two() for i in range(100)]) / 100)
-    return ""
+    return one_two() + one_two() - 1
 
 print(one_two_three())
-
-[round(sum([randint(1,2) for i in range(100)])/137, 2) for i in range(10000)]
-
 
 
 
