@@ -1948,9 +1948,26 @@ def one_two():
     return randint(1, 2)
 
 def one_two_three():
-    return one_two() + one_two() - 1
+    a = one_two()
+    b = one_two()
+    if a == 2 and b == 1:
+        a = one_two()
+        b = one_two()
+        if a == 2 and b == 1:
+            a = one_two()
+            b = one_two()
+            if a == 2 and b == 1:
+                a = one_two()
+                b = one_two()
+    result = a + b - 1
+    return result
 
-print(one_two_three())
+def test():
+    result = []
+    for i in range(1000):
+        result.append(one_two_three())
+    return result
+print(test().count(1), test().count(2), test().count(3))
 
 
 
