@@ -1979,7 +1979,8 @@ start_time = time.time()
 # print(combos(7))
 
 #CODEWARS: BaseConversion
-
+dwunastkowy='0123456789ab'
+siodemkowy='0123456'
 bin='01'
 oct='01234567'
 dec='0123456789'
@@ -1989,16 +1990,39 @@ allup='ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 alpha='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 alphanum='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
+def horner(source, elements, sum, counter):
+    if len(elements) == 0:
+        return sum
+    for i in elements:
+        sum += len(source)**counter*i
+        elements.remove(elements[0])
+        counter += 1
+        return horner(source, elements, sum, counter)
+
+def division(number, target, rest, history):
+    if rest == 0:
+        target_ints = [int(i) for i in target if i.isdigit()]
+        for index, i in enumerate(history):
+            if i not in target_ints:
+                history[index] = target[-(len(target) - i)]
+        result = [str(i) for i in history[::-1]]
+        return ''.join(result)
+    else:
+        history.append(rest % len(target))
+        rest = rest // len(target)
+        return division(number, target, rest, history)
+
 def convert(input, source, target):
     for i in input:
         if i in source:
-            print("OK")
+            pass
         else:
             return None
-    len(source)
+    elements = [int(i) for i in input][::-1]
+    to_convert = horner(source, elements, 0, 0)
+    return division(to_convert, target, to_convert, [])
 
-
-test = convert("1010", bin, hex)
+test = convert("1111", dec, bin)
 print(test)
 
 
