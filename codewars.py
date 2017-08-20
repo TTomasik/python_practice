@@ -1943,25 +1943,63 @@ start_time = time.time()
 # name = 'Cccc'
 # print(soundex(name))
 
-from random import randint
-def one_two():
-    return randint(1, 2)
+# #CODEWARS: Return 1, 2, 3 randomly
+# from random import randint
+# def one_two():
+#     return randint(1, 2)
+#
+# def one_two_three():
+#     a, b = one_two(), one_two()
+#     if a == 2 and b == 1:
+#         return one_two_three()
+#     return a + b - 1
+#
+# def test():
+#     result = []
+#     for i in range(1000):
+#         result.append(one_two_three())
+#     return result
+# print(test().count(1), test().count(2), test().count(3))
 
-def one_two_three():
-    a, b = one_two(), one_two()
-    if a == 2 and b == 1:
-        return one_two_three()
-    return a + b - 1
+# #CODEWARS: Find all possible number combos that sum to a number
+# def combos(n):
+#     result = []
+#     for i in range(1, n+1):
+#         if n % i == 0:
+#             result.append([i]*int(n/i))
+#         else:
+#             extra = []
+#             extra.append(n-i*int(n/i))
+#             extra.append(i)
+#             result.append(extra)
+#     return result
+#
+# # sprobowac od tylu isc np 7, 6+1, 5+2 i tozbijam 5+1+!, 4+3 i rozbijam 4+1+2, 4+1+1+1,
+# # sprobowac od tylu isc np 7, 6+1, 5+2 i tozbijam 5+1+!, 4+3 i rozbijam 4+1+2, 4+1+1+1,
+# print(combos(7))
 
-def test():
-    result = []
-    for i in range(1000):
-        result.append(one_two_three())
-    return result
-print(test().count(1), test().count(2), test().count(3))
+#CODEWARS: BaseConversion
+
+bin='01'
+oct='01234567'
+dec='0123456789'
+hex='0123456789abcdef'
+allow='abcdefghijklmnopqrstuvwxyz'
+allup='ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+alpha='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+alphanum='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
+def convert(input, source, target):
+    for i in input:
+        if i in source:
+            print("OK")
+        else:
+            return None
+    len(source)
 
 
-
+test = convert("1010", bin, hex)
+print(test)
 
 
 
