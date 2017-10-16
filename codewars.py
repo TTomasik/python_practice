@@ -2025,23 +2025,6 @@ start_time = time.time()
 #
 # test = convert("1111", bin, dec)
 # print(test)
-#
-#
-# """
-# horner bedzie dziala chyba tak samo tylko trzeba bedzie mu wrzucic do funkcji sprawdzanie
-# czy sa tam literki i wtedy dorobic inna filozofie
-# """
-
-
-# def date_checker(day, month, year):
-#     thirty_one = (1, 3, 5, 7, 8, 10, 12)
-#     thirty = (4, 6, 9, 11)
-#     if month in thirty_one and day <= 31 or month in thirty and day <= 30 or month == 2 and day <= 28:
-#         return '{}-{}-{}'.format(day, month, year)
-#     else:
-#         return None
-#
-# print(date_checker(5, 9, 2017))
 
 ##CODEWARS Maximum subarray sum
 import operator
