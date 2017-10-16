@@ -1978,55 +1978,108 @@ start_time = time.time()
 # # sprobowac od tylu isc np 7, 6+1, 5+2 i tozbijam 5+1+!, 4+3 i rozbijam 4+1+2, 4+1+1+1,
 # print(combos(7))
 
-#CODEWARS: BaseConversion
-dwunastkowy='0123456789ab'
-siodemkowy='0123456'
-bin='01'
-oct='01234567'
-dec='0123456789'
-hex='0123456789abcdef'
-allow='abcdefghijklmnopqrstuvwxyz'
-allup='ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-alpha='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-alphanum='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+# #CODEWARS: BaseConversion
+# dwunastkowy='0123456789ab'
+# siodemkowy='0123456'
+# bin='01'
+# oct='01234567'
+# dec='0123456789'
+# hex='0123456789abcdef'
+# allow='abcdefghijklmnopqrstuvwxyz'
+# allup='ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+# alpha='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+# alphanum='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+#
+# def horner(source, elements, sum, counter):
+#     if len(elements) == 0:
+#         return sum
+#     for i in elements:
+#         sum += len(source)**counter*i
+#         elements.remove(elements[0])
+#         counter += 1
+#         return horner(source, elements, sum, counter)
+#
+# def division(number, target, rest, history):
+#     if rest == 0:
+#         target_ints = [int(i) for i in target if i.isdigit()]
+#         for index, i in enumerate(history):
+#             if i not in target_ints:
+#                 history[index] = target[-(len(target) - i)]
+#         result = [str(i) for i in history[::-1]]
+#         return ''.join(result)
+#     else:
+#         history.append(rest % len(target))
+#         rest = rest // len(target)
+#         return division(number, target, rest, history)
+#
+# def convert(input, source, target):
+#     for i in input:
+#         if i in source:
+#             elements = [int(i) for i in input][::-1]
+#             to_convert = horner(source, elements, 0, 0)
+#             return division(to_convert, target, to_convert, [])
+#         else:
+#             return None
+#
+#
+#
+# test = convert("1111", bin, dec)
+# print(test)
+#
+#
+# """
+# horner bedzie dziala chyba tak samo tylko trzeba bedzie mu wrzucic do funkcji sprawdzanie
+# czy sa tam literki i wtedy dorobic inna filozofie
+# """
 
-def horner(source, elements, sum, counter):
-    if len(elements) == 0:
-        return sum
-    for i in elements:
-        sum += len(source)**counter*i
-        elements.remove(elements[0])
-        counter += 1
-        return horner(source, elements, sum, counter)
 
-def division(number, target, rest, history):
-    if rest == 0:
-        target_ints = [int(i) for i in target if i.isdigit()]
-        for index, i in enumerate(history):
-            if i not in target_ints:
-                history[index] = target[-(len(target) - i)]
-        result = [str(i) for i in history[::-1]]
-        return ''.join(result)
-    else:
-        history.append(rest % len(target))
-        rest = rest // len(target)
-        return division(number, target, rest, history)
+# def date_checker(day, month, year):
+#     thirty_one = (1, 3, 5, 7, 8, 10, 12)
+#     thirty = (4, 6, 9, 11)
+#     if month in thirty_one and day <= 31 or month in thirty and day <= 30 or month == 2 and day <= 28:
+#         return '{}-{}-{}'.format(day, month, year)
+#     else:
+#         return None
+#
+# print(date_checker(5, 9, 2017))
 
-def convert(input, source, target):
-    for i in input:
-        if i in source:
-            pass
+##CODEWARS Maximum subarray sum
+import operator
+
+def maxSequence(arr):
+    all_local_extrs = {}
+    for index, i in enumerate(arr):
+        global_sum_left = 0
+        global_sum_right = 0
+        array_l = []
+        array_r = []
+        left = {}
+        right = {}
+        for index_l, l in enumerate(arr[0:index+1]):
+            local_sum_left = sum(arr[index_l:index+1])
+            if local_sum_left > global_sum_left:
+                global_sum_left = local_sum_left
+                array_l = arr[index_l:index+1]
+            left = {'sum': global_sum_left, 'arr': array_l}
+        for index_r, r in enumerate(arr[index::]):
+            local_sum_right = sum(arr[index:index_r])
+            if local_sum_right > global_sum_right:
+                global_sum_right = local_sum_right
+                array_r = arr[index:index_r]
+            right = {'sum': global_sum_right, 'arr': array_r}
+        if left['arr'] and right['arr']:
+            _locals = {left['sum'] + right['sum'] - i: left['arr'] + right['arr'][1::]}
         else:
-            return None
-    elements = [int(i) for i in input][::-1]
-    to_convert = horner(source, elements, 0, 0)
-    return division(to_convert, target, to_convert, [])
+            _locals = {left['sum'] + right['sum']: left['arr'] + right['arr'][1::]}
+        all_local_extrs.update(_locals)
+    return all_local_extrs
 
-test = convert("1111", dec, bin)
-print(test)
+#this max works only on python 2.7:
+#max(all_local_extrs.iteritems(), key=operator.itemgetter(0))[0]
 
+test = [-2, 1, -3, 4, -1, 2, 1, -5, 4]
 
-
+print(maxSequence(test))
 
 
 
