@@ -2029,48 +2029,63 @@ start_time = time.time()
 ##CODEWARS Maximum subarray sum
 import operator
 
-def maxSequence(arr):
-    all_local_extrs = {}
-    for index, i in enumerate(arr):
-        global_sum_left = 0
-        global_sum_right = 0
-        array_l = []
-        array_r = []
-        left = {}
-        right = {}
-        for index_l, l in enumerate(arr[0:index+1]):
-            local_sum_left = sum(arr[index_l:index+1])
-            if local_sum_left > global_sum_left:
-                global_sum_left = local_sum_left
-                array_l = arr[index_l:index+1]
-            left = {'sum': global_sum_left, 'arr': array_l}
-        for index_r, r in enumerate(arr[index::]):
-            local_sum_right = sum(arr[index:index_r])
-            if local_sum_right > global_sum_right:
-                global_sum_right = local_sum_right
-                array_r = arr[index:index_r]
-            right = {'sum': global_sum_right, 'arr': array_r}
-        if left['arr'] and right['arr']:
-            _locals = {left['sum'] + right['sum'] - i: left['arr'] + right['arr'][1::]}
-        else:
-            _locals = {left['sum'] + right['sum']: left['arr'] + right['arr'][1::]}
-        all_local_extrs.update(_locals)
-    return all_local_extrs
+# def maxSequence(arr):
+#     all_local_extrs = {}
+#     for index, i in enumerate(arr):
+#         global_sum_left = 0
+#         global_sum_right = 0
+#         array_l = []
+#         array_r = []
+#         left = {}
+#         right = {}
+#         for index_l, l in enumerate(arr[0:index+1]):
+#             local_sum_left = sum(arr[index_l:index+1])
+#             if local_sum_left > global_sum_left:
+#                 global_sum_left = local_sum_left
+#                 array_l = arr[index_l:index+1]
+#             left = {'sum': global_sum_left, 'arr': array_l}
+#         for index_r, r in enumerate(arr[index::]):
+#             local_sum_right = sum(arr[index:index_r])
+#             if local_sum_right > global_sum_right:
+#                 global_sum_right = local_sum_right
+#                 array_r = arr[index:index_r]
+#             right = {'sum': global_sum_right, 'arr': array_r}
+#         if left['arr'] and right['arr']:
+#             _locals = {left['sum'] + right['sum'] - i: left['arr'] + right['arr'][1::]}
+#         else:
+#             _locals = {left['sum'] + right['sum']: left['arr'] + right['arr'][1::]}
+#         all_local_extrs.update(_locals)
+#     return all_local_extrs
+#
+# #this max works only on python 2.7:
+# #max(all_local_extrs.iteritems(), key=operator.itemgetter(0))[0]
+#
+# test = [-2, 1, -3, 4, -1, 2, 1, -5, 4]
+#
+# print(maxSequence(test))
+#
+# #best from codewars:
+# def maxSequence(arr):
+#     max,curr=0,0
+#     for x in arr:
+#         curr+=x
+#         if curr<0:curr=0
+#         if curr>max:max=curr
+#     return max
 
-#this max works only on python 2.7:
-#max(all_local_extrs.iteritems(), key=operator.itemgetter(0))[0]
+#CODEWARS Trailing zeros in factorials, in any given integer base
+from math import factorial as fac
 
-test = [-2, 1, -3, 4, -1, 2, 1, -5, 4]
+def base_n(num, b, numerals="0123456789abcdefghijklmnopqrstuvwxyz"):
+    return ((num == 0) and "0") or (base_n(num // b, b).lstrip("0") + numerals[num % b])
 
-print(maxSequence(test))
+def trailing_zeros(num, base):
+    fac_num = base_n(fac(num), base)
+    for index, i in enumerate(str(fac_num)[::-1]):
+        if i != "0":
+            return index
 
-
-
-
-
-
-
-
+print(trailing_zeros(7, 2))
 
 
 
