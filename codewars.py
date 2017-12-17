@@ -2073,20 +2073,53 @@ import operator
 #         if curr>max:max=curr
 #     return max
 
-#CODEWARS Trailing zeros in factorials, in any given integer base
-from math import factorial as fac
+# #CODEWARS Trailing zeros in factorials, in any given integer base
+# from math import factorial as fac
+#
+# def base_n(decimal ,base) :
+#     list = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+#     answer = ""
+#     while decimal != 0:
+#         answer += list[decimal % base]
+#         decimal //= base
+#     return answer[::-1]
+#
+# def trailing_zeros(num, base):
+#     fac_num = base_n(fac(num), base)
+#     for index, i in enumerate(str(fac_num)[::-1]):
+#         if i != "0":
+#             return index
+#
+# print(trailing_zeros(100, ))
+#CODEWARS Strings Mix
+def mix(s1, s2):
+    chars = set()
+    s1_amount = 0
+    s2_amount = 0
+    answer = []
+    for i in s1:
+        if s1.count(i) > 1 and i.isalpha():
+            chars.add(i)
+    for i in s2:
+        if s2.count(i) > 1 and i.isalpha():
+            chars.add(i)
+    chars = list(chars)
+    sorted_chars = sorted(chars)
+    print(list(sorted_chars), "***")
+    for i in sorted_chars:
+        s1_amount = s1.count(i)
+        s2_amount = s2.count(i)
+        if s1_amount == s2_amount:
+            answer.append("=:" + s1_amount * i)
+        if s1_amount > s2_amount:
+            answer.append("1:" + s1_amount * i)
+        if s1_amount < s2_amount:
+            answer.append("2:" + s2_amount * i)
+    answer.sort()
+    answer.sort(key=len, reverse=True)
+    return "/".join(answer)
 
-def base_n(num, b, numerals="0123456789abcdefghijklmnopqrstuvwxyz"):
-    return ((num == 0) and "0") or (base_n(num // b, b).lstrip("0") + numerals[num % b])
+s1 = "my&friend&Paul has heavy hats! &"
+s2 = "my friend John has many many friends &"
 
-def trailing_zeros(num, base):
-    fac_num = base_n(fac(num), base)
-    for index, i in enumerate(str(fac_num)[::-1]):
-        if i != "0":
-            return index
-
-print(trailing_zeros(7, 2))
-
-
-
-
+print(mix("In many languages", "there's a pair of functions"))
