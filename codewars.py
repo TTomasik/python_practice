@@ -2094,27 +2094,15 @@ import operator
 #CODEWARS Strings Mix
 def mix(s1, s2):
     chars = set()
-    s1_amount = 0
-    s2_amount = 0
     answer = []
-    for i in s1:
-        if s1.count(i) > 1 and i.isalpha():
-            chars.add(i)
-    for i in s2:
-        if s2.count(i) > 1 and i.isalpha():
-            chars.add(i)
-    chars = list(chars)
-    sorted_chars = sorted(chars)
-    print(list(sorted_chars), "***")
-    for i in sorted_chars:
-        s1_amount = s1.count(i)
-        s2_amount = s2.count(i)
-        if s1_amount == s2_amount:
-            answer.append("=:" + s1_amount * i)
-        if s1_amount > s2_amount:
-            answer.append("1:" + s1_amount * i)
-        if s1_amount < s2_amount:
-            answer.append("2:" + s2_amount * i)
+    for _string in [s1, s2]:
+        for _char in _string:
+            if _string.count(_char) > 1 and _char.isalpha() and _char.islower():
+                chars.add(_char)
+    for i in list(chars):
+        _s1 = s1.count(i)
+        _s2 = s2.count(i)
+        answer.append("=:" + _s1 * i if _s1 == _s2 else "1:" + _s1 * i if _s1 > _s2 else "2:" + _s2 * i)
     answer.sort()
     answer.sort(key=len, reverse=True)
     return "/".join(answer)
@@ -2122,4 +2110,4 @@ def mix(s1, s2):
 s1 = "my&friend&Paul has heavy hats! &"
 s2 = "my friend John has many many friends &"
 
-print(mix("In many languages", "there's a pair of functions"))
+print(mix(s1, s2))
