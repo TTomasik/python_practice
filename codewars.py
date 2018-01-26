@@ -2091,23 +2091,72 @@ import operator
 #             return index
 #
 # print(trailing_zeros(100, ))
-#CODEWARS Strings Mix
-def mix(s1, s2):
-    chars = set()
-    answer = []
-    for _string in [s1, s2]:
-        for _char in _string:
-            if _string.count(_char) > 1 and _char.isalpha() and _char.islower():
-                chars.add(_char)
-    for i in list(chars):
-        _s1 = s1.count(i)
-        _s2 = s2.count(i)
-        answer.append("=:" + _s1 * i if _s1 == _s2 else "1:" + _s1 * i if _s1 > _s2 else "2:" + _s2 * i)
-    answer.sort()
-    answer.sort(key=len, reverse=True)
-    return "/".join(answer)
+# #CODEWARS Strings Mix
+# def mix(s1, s2):
+#     chars = set()
+#     answer = []
+#     for _string in [s1, s2]:
+#         for _char in _string:
+#             if _string.count(_char) > 1 and _char.isalpha() and _char.islower():
+#                 chars.add(_char)
+#     for i in list(chars):
+#         _s1 = s1.count(i)
+#         _s2 = s2.count(i)
+#         answer.append("=:" + _s1 * i if _s1 == _s2 else "1:" + _s1 * i if _s1 > _s2 else "2:" + _s2 * i)
+#     answer.sort()
+#     answer.sort(key=len, reverse=True)
+#     return "/".join(answer)
+#
+# s1 = "my&friend&Paul has heavy hats! &"
+# s2 = "my friend John has many many friends &"
+#
+# print(mix(s1, s2))
 
-s1 = "my&friend&Paul has heavy hats! &"
-s2 = "my friend John has many many friends &"
+#CODEWARS Permutational PrimesII
+from itertools import permutations
 
-print(mix(s1, s2))
+def is_prime(n):
+    for i in range(2, n):
+        if n % i == 0:
+            break
+    else:
+        return n
+
+def find_permutations(n):
+    return [int(''.join(p)) for p in permutations(str(n))]
+
+def permutations_counter(n, kPerm):
+    all_permutations = []
+    primes = []
+    if is_prime(n):
+        all_permutations = find_permutations(n)
+    if len(all_permutations):
+        for i in all_permutations:
+            if is_prime(i):
+                primes.append(i)
+            else:
+                pass
+    if len(primes) == kPerm + 1:
+        return n
+
+def find_prime_kPerm(n, kPerm):
+    primes = []
+    none = []
+    for i in range(2, n+1):
+        if permutations_counter(i, kPerm):
+            pass
+    return primes
+
+
+n = 149
+kPerm = 3
+print(permutations_counter(n, kPerm))
+
+
+
+
+
+
+
+
+
