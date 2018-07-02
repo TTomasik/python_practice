@@ -2112,47 +2112,41 @@ import operator
 #
 # print(mix(s1, s2))
 
-#CODEWARS Permutational PrimesII
-from itertools import permutations
+#CODEWARS: Simple Maze
+def has_exit(maze):
+    counter = 0
+    cords = []
+    for idx, line in enumerate(maze):
+        for idx_char, char in enumerate(line):
+            if char == 'k':
+                counter += 1
+                cords.append(idx)
+                cords.append(idx_char)
+    if counter == 0 or counter > 1:
+        return False
+    current_line = maze[cords[0]].strip()
+    if current_line[0] == 'k' or current_line[-1] == 'k':
+        return True
+    curr_line = maze[cords[0]]
+    initial_line_idx = cords[0]
+    initial_position = cords[1]
+    return curr_line, initial_line_idx, initial_position
 
-def is_prime(n):
-    for i in range(2, n):
-        if n % i == 0:
-            break
-    else:
-        return n
+def get_way_out(line):
+    print(line)
+    step = 1
+    memory = []
+    split = line.split('k')
+    split_left = split[0]
+    split_right = split[1]
+    if split_left[-step] == ' ':
+        split_left = split_left[:-1] + 'k'
+        split = split_left + split_right
+    return get_way_out(split)
 
-def find_permutations(n):
-    return [int(''.join(p)) for p in permutations(str(n))]
-
-def permutations_counter(n, kPerm):
-    all_permutations = []
-    primes = []
-    if is_prime(n):
-        all_permutations = find_permutations(n)
-    if len(all_permutations):
-        for i in all_permutations:
-            if is_prime(i):
-                primes.append(i)
-            else:
-                pass
-    if len(primes) == kPerm + 1:
-        return n
-
-def find_prime_kPerm(n, kPerm):
-    primes = []
-    none = []
-    for i in range(2, n+1):
-        if permutations_counter(i, kPerm):
-            pass
-    return primes
-
-
-n = 149
-kPerm = 3
-print(permutations_counter(n, kPerm))
-
-
+example = ['# ##', '# k#', '####']
+# print(has_exit(example))
+print(get_way_out('#      k#'))
 
 
 
