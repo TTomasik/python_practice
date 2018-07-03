@@ -2113,42 +2113,40 @@ import operator
 # print(mix(s1, s2))
 
 #CODEWARS: Simple Maze
+def maze_map(maze):
+    height = len(maze)
+    width = len(maze[0]) if height else 0
+    graph = {(i, j): [] for i in range(height) for j in range(width) if maze[i][j] != '#'}
+    for row, col in graph.keys():
+        if row < height-1 and maze[row+1][col] != '#':
+            graph[(row, col)].append(('S', (row+1, col)))
+            graph[(row+1, col)].append(('N', (row, col)))
+        if col < width-1 and maze[row][col+1] != '#':
+            graph[(row, col)].append(('E', (row, col+1)))
+            graph[(row, col+1)].append(('W', (row, col)))
+    return graph
+
 def has_exit(maze):
-    counter = 0
-    cords = []
-    for idx, line in enumerate(maze):
-        for idx_char, char in enumerate(line):
-            if char == 'k':
-                counter += 1
-                cords.append(idx)
-                cords.append(idx_char)
-    if counter == 0 or counter > 1:
-        return False
-    current_line = maze[cords[0]].strip()
-    if current_line[0] == 'k' or current_line[-1] == 'k':
-        return True
-    curr_line = maze[cords[0]]
-    initial_line_idx = cords[0]
-    initial_position = cords[1]
-    return curr_line, initial_line_idx, initial_position
+    start, goal = (0, 1), (5, 3)
+    stack = [("", start)]
+    visited = set()
+    graph = maze_map(maze)
+    while stack:
+        path, current = stack.pop()
+        if current == goal:
+            return path
+        if current in visited:
+            continue
+        visited.add(current)
+        for direction, neighbour in graph[current]:
+            stack.append((path + direction, neighbour))
+    return "There is no way out."
 
-def get_way_out(line):
-    print(line)
-    step = 1
-    memory = []
-    split = line.split('k')
-    split_left = split[0]
-    split_right = split[1]
-    if split_left[-step] == ' ':
-        split_left = split_left[:-1] + 'k'
-        split = split_left + split_right
-    return get_way_out(split)
+example = ['# ###', '#  ##', '## ##', '#  ##', '# ###', '# # #', '#  k#']
+print(has_exit(example))
 
-example = ['# ##', '# k#', '####']
-# print(has_exit(example))
-print(get_way_out('#      k#'))
-
-
+# for i in example:
+#     print(i)
 
 
 
