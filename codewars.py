@@ -2127,28 +2127,46 @@ def maze_map(maze):
     return graph
 
 def has_exit(maze):
-    start, goal = (0, 1), (5, 3)
-    stack = [("", start)]
-    visited = set()
-    graph = maze_map(maze)
-    while stack:
-        path, current = stack.pop()
-        if current == goal:
-            return path
-        if current in visited:
-            continue
-        visited.add(current)
-        for direction, neighbour in graph[current]:
-            stack.append((path + direction, neighbour))
-    return "There is no way out."
+    try:
+        rectangle = [len(maze[i]) for i in range(len(maze))]
+        if len(set(rectangle)) > 1:
+            return True
+        k_cordinates = [(i, j) for i in range(len(maze)) for j in range(len(maze[i])) if maze[i][j] == 'k']
+        if len(k_cordinates) == 1:
+            exits = []
+            for i in range(len(maze)):
+                for j in range(len(maze[i])):
+                    if (i == 0 or i == len(maze)-1 or j == 0 or j == len(maze[i])-1) and maze[i][j] != '#':
+                        exits.append((i, j))
+            start = k_cordinates[0]
+            graph = maze_map(maze)
+            for exit in exits:
+                stack = [("", start)]
+                visited = set()
+                while stack:
+                    path, current = stack.pop()
+                    if current == exit:
+                        return True
+                    if current in visited:
+                        continue
+                    visited.add(current)
+                    for direction, neighbour in graph[current]:
+                        stack.append((path + direction, neighbour))
+            return False
+        else:
+            raise AssertionError
+    except AssertionError:
+        raise
 
-example = ['# ###', '#  ##', '## ##', '#  ##', '# ###', '# # #', '#  k#']
+example = ['# ###', '#  ##', '## ##', '#  ##', '# ###', '# # #', '# kk#']
 print(has_exit(example))
 
 # for i in example:
 #     print(i)
 
-
+def test(maze):
+    return [(i, j) for i in range(len(maze)) for j in range(len(maze[i])) if maze[i][j] == 'k']
+print(test(example))
 
 
 
