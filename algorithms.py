@@ -26,14 +26,16 @@ def maze(graph):
     seen, queue = set([]), collections.deque([root])
     while queue:
         current = queue.popleft()
-        if current[0] in [0, len(graph[0])] or current[1] in [0, len(graph)]:
-            return "The coordinates of nearest exit are: [{}, {}]".format(current[0], current[1])
+        row = current[0]
+        position = current[1]
+        if row in [0, len(graph) - 1] or position in [0, len(graph[0]) - 1]:
+            return "The coordinates of nearest exit are: [{}, {}]".format(row, position)
         if current not in seen:
             seen.add(current)
             for node in paths:
-                if node[0] == current[0] and node[1] in [current[1] + 1, current[1] - 1]:
+                if node[0] == row and node[1] in [position + 1, position - 1]:
                     queue.append(node)
-                if node[1] == current[1] and node[0] in [current[0] + 1, current[0] - 1]:
+                if node[1] == position and node[0] in [row + 1, row - 1]:
                     queue.append(node)
 
 graph = [
@@ -42,6 +44,6 @@ graph = [
     '# # ####',
     '#    x #',
     '### ####',
-    '       #',
-    '########'
+    '#      #',
+    '###### #'
 ]
