@@ -1,17 +1,15 @@
 # BFS
 import collections
 
+
 def bfs(graph, root):
     seen, queue = set([]), collections.deque([root])
     while queue:
         current = queue.popleft()
-        print('shit', current, seen)
         if current not in seen:
-            print(current)
             seen.add(current)
             for node in graph[current]:
                 queue.append(node)
-    return 'the end'
 
 # graph = {1: [2, 3], 2: [4, 5], 3: [6], 4: [], 5: [6], 6: [7], 7: [5]}
 # print(bfs(graph, 1))
