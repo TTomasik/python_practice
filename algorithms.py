@@ -54,7 +54,7 @@ def draw_path_in_maze(graph, root, exit, maze):
         for idx_e, element in enumerate(row):
             if element == ' ':
                 if (idx_r, idx_e) in result:
-                    _row.append('o')
+                    _row.append('.')
                 else:
                     _row.append(element)
             else:
