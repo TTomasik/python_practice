@@ -54,7 +54,7 @@ def draw_path_in_maze(graph, root, exit, maze):
         for idx_e, element in enumerate(row):
             if element == ' ':
                 if (idx_r, idx_e) in result:
-                    _row.append('*')
+                    _row.append('o')
                 else:
                     _row.append(element)
             else:
@@ -69,7 +69,8 @@ def find_nearest_exit(graph, root, paths):
         current = queue.popleft()
         row = current[0]
         position = current[1]
-        if row in [0, len(graph) - 1] or position in [0, len(graph[0]) - 1]:
+        if (row in [0, len(graph) - 1] or position in [0, len(graph[0]) - 1])\
+                and row != root[0] and position != root[1]:
             print("The coordinates of nearest exit are: [{}, {}]".format(row, position))
             return [row, position]
         if current not in seen:
@@ -82,13 +83,28 @@ def find_nearest_exit(graph, root, paths):
 
 
 graph = [
-    '#################',
-    '# #    #   #     ',
+    '#X###############',
+    '# #    #   #    #',
     '# # #### # # ####',
-    '#    X # # #    #',
+    '#      # # #    #',
     '### #### # # ## #',
     '#        #    # #',
-    '#################'
+    '########## ######',
+    '#        # ######',
+    '###### ###      #',
+    '#          ## # #',
+    '### ######### ###',
+    '#   #      ##   #',
+    '### ########### #',
+    '#   #           #',
+    '# ######## ## ###',
+    '#  ###   # ## ###',
+    '####   ##  ##   #',
+    '## # #### ##### #',
+    '#  #      #     #',
+    '# ## # #### ### #',
+    '#    # ######   #',
+    '# #### # #    ###',
+    '#  ###   ########',
+    '## ##############',
 ]
-
-print(maze(graph))
