@@ -2112,61 +2112,22 @@ import operator
 #
 # print(mix(s1, s2))
 
-#CODEWARS: Simple Maze
-def maze_map(maze):
-    height = len(maze)
-    width = len(maze[0]) if height else 0
-    graph = {(i, j): [] for i in range(height) for j in range(width) if maze[i][j] != '#'}
-    for row, col in graph.keys():
-        if row < height-1 and maze[row+1][col] != '#':
-            graph[(row, col)].append(('S', (row+1, col)))
-            graph[(row+1, col)].append(('N', (row, col)))
-        if col < width-1 and maze[row][col+1] != '#':
-            graph[(row, col)].append(('E', (row, col+1)))
-            graph[(row, col+1)].append(('W', (row, col)))
-    return graph
+#CODEWARS: Directions reduction
+opposites = {"NORTH": "SOUTH", "SOUTH": "NORTH", "EAST": "WEST", "WEST": "EAST"}
 
-def has_exit(maze):
-    try:
-        rectangle = [len(maze[i]) for i in range(len(maze))]
-        if len(set(rectangle)) > 1:
-            return True
-        k_cordinates = [(i, j) for i in range(len(maze)) for j in range(len(maze[i])) if maze[i][j] == 'k']
-        if len(k_cordinates) == 1:
-            exits = []
-            for i in range(len(maze)):
-                for j in range(len(maze[i])):
-                    if (i == 0 or i == len(maze)-1 or j == 0 or j == len(maze[i])-1) and maze[i][j] != '#':
-                        exits.append((i, j))
-            start = k_cordinates[0]
-            graph = maze_map(maze)
-            for exit in exits:
-                stack = [("", start)]
-                visited = set()
-                while stack:
-                    path, current = stack.pop()
-                    if current == exit:
-                        return True
-                    if current in visited:
-                        continue
-                    visited.add(current)
-                    for direction, neighbour in graph[current]:
-                        stack.append((path + direction, neighbour))
-            return False
-        else:
-            raise AssertionError
-    except AssertionError:
-        raise
 
-example = ['# ###', '#  ##', '## ##', '#  ##', '# ###', '# # #', '# kk#']
-print(has_exit(example))
+def dirReduc(directions):
+    result = directions[:]
+    for idx, i in enumerate(directions):
+        try:
+            if opposites[i] == directions[idx+1]:
+                directions.pop(idx)
+                directions.pop(idx)
+        except IndexError:
+            break
+    return result if len(result) == len(directions) else dirReduc(directions)
 
-# for i in example:
-#     print(i)
-
-def test(maze):
-    return [(i, j) for i in range(len(maze)) for j in range(len(maze[i])) if maze[i][j] == 'k']
-print(test(example))
+print(dirReduc(["NORTH", "SOUTH", "SOUTH", "EAST", "WEST", "NORTH", "WEST"]))
 
 
 
