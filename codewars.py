@@ -2129,5 +2129,4 @@ def dirReduc(directions):
 
 print(dirReduc(["NORTH", "SOUTH", "SOUTH", "EAST", "WEST", "NORTH", "WEST"]))
 
-
-
+# need to paste here alpinist solution
