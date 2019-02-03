@@ -2112,21 +2112,61 @@ import operator
 #
 # print(mix(s1, s2))
 
-#CODEWARS: Directions reduction
-opposites = {"NORTH": "SOUTH", "SOUTH": "NORTH", "EAST": "WEST", "WEST": "EAST"}
+# #CODEWARS: Directions reduction
+# opposites = {"NORTH": "SOUTH", "SOUTH": "NORTH", "EAST": "WEST", "WEST": "EAST"}
+#
+#
+# def dirReduc(directions):
+#     result = directions[:]
+#     for idx, i in enumerate(directions):
+#         try:
+#             if opposites[i] == directions[idx+1]:
+#                 directions.pop(idx)
+#                 directions.pop(idx)
+#         except IndexError:
+#             break
+#     return result if len(result) == len(directions) else dirReduc(directions)
+#
+# print(dirReduc(["NORTH", "SOUTH", "SOUTH", "EAST", "WEST", "NORTH", "WEST"]))
 
 
-def dirReduc(directions):
-    result = directions[:]
-    for idx, i in enumerate(directions):
-        try:
-            if opposites[i] == directions[idx+1]:
-                directions.pop(idx)
-                directions.pop(idx)
-        except IndexError:
-            break
-    return result if len(result) == len(directions) else dirReduc(directions)
+# CODEWARS: Path Finder #3: the Alpinist
+def path_finder(area):
+    nodes = {}  # all available nodes connections
+    for r_idx, row in enumerate(area):
+        for e_idx, element in enumerate(row):
+            nodes[(r_idx, e_idx)] = set([])
+            if r_idx + 1 < len(area):
+                nodes[(r_idx, e_idx)].add((r_idx + 1, e_idx))
+            if r_idx - 1 >= 0:
+                nodes[(r_idx, e_idx)].add((r_idx - 1, e_idx))
+            if e_idx + 1 < len(area):
+                nodes[(r_idx, e_idx)].add((r_idx, e_idx + 1))
+            if e_idx - 1 >= 0:
+                nodes[(r_idx, e_idx)].add((r_idx, e_idx - 1))
+    queue = [((0, 0), [(0, 0)])]
+    result = []  # all available paths
+    while queue:
+        (current, path) = queue.pop(0)
+        for node in nodes[current] - set(path):
+            if node == (len(area) - 1, len(area) - 1):
+                result.append(path + [node])
+            queue.append((node, path + [node]))
+    all_paths_exceedances = []
+    path_exceedance = 0
+    for path in result:
+        for cords in path:
+            path_exceedance += int(area[cords[0]][cords[1]])
+        all_paths_exceedances.append(path_exceedance)
+        path_exceedance = 0
+    return min(all_paths_exceedances)*2
 
-print(dirReduc(["NORTH", "SOUTH", "SOUTH", "EAST", "WEST", "NORTH", "WEST"]))
+area = [
+    "70000",
+    "77777",
+    "00000",
+    "07777",
+    "07777"
+]
 
-# need to paste here alpinist solution
+print(path_finder(area))
