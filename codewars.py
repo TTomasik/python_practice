@@ -2129,7 +2129,6 @@ import operator
 #
 # print(dirReduc(["NORTH", "SOUTH", "SOUTH", "EAST", "WEST", "NORTH", "WEST"]))
 
-
 # CODEWARS: Path Finder #3: the Alpinist
 def path_finder(area):
     nodes = {}  # all available nodes connections
@@ -2161,12 +2160,56 @@ def path_finder(area):
         path_exceedance = 0
     return min(all_paths_exceedances)*2
 
-area = [
-    "70000",
-    "77777",
-    "00000",
-    "07777",
-    "07777"
-]
+# CODEWARS: Path Finder #3: the Alpinist - better solution
+import sys
 
+def path_finder(area, m=None, n=None, factor=1):
+    if m == None:
+        area = area.split('\n')
+        dimension = len(area) - 1
+        m = n = dimension
+        if area[0][0] == area[m][n]:
+            if check_if_hogback(area):
+                return 0
+    if n < 0 or m < 0:
+        return sys.maxsize
+    if m == 0 and n == 0:
+        return int(area[m][n])
+    else:
+        return int(area[m][n]) * factor + min(path_finder(area, m - 1, n, 2), path_finder(area, m, n - 1, 2))
+
+
+def check_if_hogback(area):
+    root = area[0][0]
+    graph = {}
+    for idx_r, row in enumerate(area):
+        for idx_e, element in enumerate(row):
+            if element not in graph and element == root:
+                graph[(idx_r, idx_e)] = set([])
+    for node in graph:
+        for _node in graph:
+            if (node[0] == _node[0] and _node[1] in (node[1] - 1, node[1] + 1)) or \
+                    (node[1] == _node[1] and _node[0] in (node[0] - 1, node[0] + 1)):
+                graph[node].add(_node)
+    seen, queue = set([]), [(0, 0)]
+    while queue:
+        current = queue.pop(0)
+        if current not in seen:
+            seen.add(current)
+            for node in graph[current]:
+                queue.append(node)
+    return (len(area) - 1, len(area) - 1) in seen
+
+
+
+area = '\n'.join([
+    '70000077',
+    '77777777',
+    '00000077',
+    '07707077',
+    '07777077',
+    '07777077',
+    '07777077',
+    '07777077'
+])
 print(path_finder(area))
