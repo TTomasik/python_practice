@@ -2129,87 +2129,125 @@ import operator
 #
 # print(dirReduc(["NORTH", "SOUTH", "SOUTH", "EAST", "WEST", "NORTH", "WEST"]))
 
-# CODEWARS: Path Finder #3: the Alpinist
-def path_finder(area):
-    nodes = {}  # all available nodes connections
-    for r_idx, row in enumerate(area):
-        for e_idx, element in enumerate(row):
-            nodes[(r_idx, e_idx)] = set([])
-            if r_idx + 1 < len(area):
-                nodes[(r_idx, e_idx)].add((r_idx + 1, e_idx))
-            if r_idx - 1 >= 0:
-                nodes[(r_idx, e_idx)].add((r_idx - 1, e_idx))
-            if e_idx + 1 < len(area):
-                nodes[(r_idx, e_idx)].add((r_idx, e_idx + 1))
-            if e_idx - 1 >= 0:
-                nodes[(r_idx, e_idx)].add((r_idx, e_idx - 1))
-    queue = [((0, 0), [(0, 0)])]
-    result = []  # all available paths
-    while queue:
-        (current, path) = queue.pop(0)
-        for node in nodes[current] - set(path):
-            if node == (len(area) - 1, len(area) - 1):
-                result.append(path + [node])
-            queue.append((node, path + [node]))
-    all_paths_exceedances = []
-    path_exceedance = 0
-    for path in result:
-        for cords in path:
-            path_exceedance += int(area[cords[0]][cords[1]])
-        all_paths_exceedances.append(path_exceedance)
-        path_exceedance = 0
-    return min(all_paths_exceedances)*2
+# # CODEWARS: Path Finder #3: the Alpinist
+# def path_finder(area):
+#     nodes = {}  # all available nodes connections
+#     for r_idx, row in enumerate(area):
+#         for e_idx, element in enumerate(row):
+#             nodes[(r_idx, e_idx)] = set([])
+#             if r_idx + 1 < len(area):
+#                 nodes[(r_idx, e_idx)].add((r_idx + 1, e_idx))
+#             if r_idx - 1 >= 0:
+#                 nodes[(r_idx, e_idx)].add((r_idx - 1, e_idx))
+#             if e_idx + 1 < len(area):
+#                 nodes[(r_idx, e_idx)].add((r_idx, e_idx + 1))
+#             if e_idx - 1 >= 0:
+#                 nodes[(r_idx, e_idx)].add((r_idx, e_idx - 1))
+#     queue = [((0, 0), [(0, 0)])]
+#     result = []  # all available paths
+#     while queue:
+#         (current, path) = queue.pop(0)
+#         for node in nodes[current] - set(path):
+#             if node == (len(area) - 1, len(area) - 1):
+#                 result.append(path + [node])
+#             queue.append((node, path + [node]))
+#     all_paths_exceedances = []
+#     path_exceedance = 0
+#     for path in result:
+#         for cords in path:
+#             path_exceedance += int(area[cords[0]][cords[1]])
+#         all_paths_exceedances.append(path_exceedance)
+#         path_exceedance = 0
+#     return min(all_paths_exceedances)*2
+#
+# # CODEWARS: Path Finder #3: the Alpinist - better solution
+# import sys
+# from collections import deque
+#
+#
+# def path_finder(area, m=None, n=None):
+#     if m == None:
+#         area = area.split('\n')
+#         dimension = len(area) - 1
+#         m = n = dimension
+#         if area[0][0] == area[m][n]:
+#             if check_if_hogback(area):
+#                 return 0
+#     if n < 0 or m < 0:
+#         return sys.maxsize
+#     if m == 0 and n == 0:
+#         return int(area[m][n])
+#     else:
+#         current = int(area[m][n])
+#         return current + my_min(current, path_finder(area, m - 1, n), path_finder(area, m, n - 1))
+#
+#
+# def my_min(current, x, y):
+#     x_abs = abs(current - x)
+#     y_abs = abs(current - y)
+#     if x_abs > y_abs:
+#         return y_abs
+#     return x_abs
+#
+#
+# def check_if_hogback(area):
+#     root = area[0][0]
+#     graph = {}
+#     for idx_r, row in enumerate(area):
+#         for idx_e, element in enumerate(row):
+#             if element not in graph and element == root:
+#                 graph[(idx_r, idx_e)] = set([])
+#     for node in graph:
+#         for _node in graph:
+#             if (node[0] == _node[0] and _node[1] in (node[1] - 1, node[1] + 1)) or \
+#                     (node[1] == _node[1] and _node[0] in (node[0] - 1, node[0] + 1)):
+#                 graph[node].add(_node)
+#     seen, queue = set([]), deque([(0, 0)])
+#     while queue:
+#         current = queue.popleft()
+#         if current not in seen:
+#             seen.add(current)
+#             for node in graph[current]:
+#                 queue.append(node)
+#     return (len(area) - 1, len(area) - 1) in seen
+#
+# area = '\n'.join([
+#     '108',
+#     '932',
+#     '238'
+# ])
+# print(path_finder(area))
 
-# CODEWARS: Path Finder #3: the Alpinist - better solution
+# CODEWARS: Path Finder #3: the Alpinist - the best solution
 import sys
 
-def path_finder(area, m=None, n=None, factor=1):
-    if m == None:
-        area = area.split('\n')
-        dimension = len(area) - 1
-        m = n = dimension
-        if area[0][0] == area[m][n]:
-            if check_if_hogback(area):
-                return 0
-    if n < 0 or m < 0:
+
+def path_finder(area, m=None, n=None, total=0):
+    if m is None:
+        area = tuple(area.split('\n'))
+        m = n = len(area) - 1
+    if m < 0 or n < 0:
         return sys.maxsize
     if m == 0 and n == 0:
-        return int(area[m][n])
-    else:
-        return int(area[m][n]) * factor + min(path_finder(area, m - 1, n, 2), path_finder(area, m, n - 1, 2))
-
-
-def check_if_hogback(area):
-    root = area[0][0]
-    graph = {}
-    for idx_r, row in enumerate(area):
-        for idx_e, element in enumerate(row):
-            if element not in graph and element == root:
-                graph[(idx_r, idx_e)] = set([])
-    for node in graph:
-        for _node in graph:
-            if (node[0] == _node[0] and _node[1] in (node[1] - 1, node[1] + 1)) or \
-                    (node[1] == _node[1] and _node[0] in (node[0] - 1, node[0] + 1)):
-                graph[node].add(_node)
-    seen, queue = set([]), [(0, 0)]
-    while queue:
-        current = queue.pop(0)
-        if current not in seen:
-            seen.add(current)
-            for node in graph[current]:
-                queue.append(node)
-    return (len(area) - 1, len(area) - 1) in seen
-
+        return total
+    return min(
+        path_finder(area, m - 1, n, total + abs(int(area[m][n]) - int(area[m - 1][n]))),
+        path_finder(area, m, n - 1, total + abs(int(area[m][n]) - int(area[m][n - 1])))
+    )
 
 
 area = '\n'.join([
-    '70000077',
-    '77777777',
-    '00000077',
-    '07707077',
-    '07777077',
-    '07777077',
-    '07777077',
-    '07777077'
+    '100000000000',
+    '100000000000',
+    '100000000000',
+    '100000000000',
+    '100000000000',
+    '100000000000',
+    '100000000000',
+    '100000000000',
+    '100000000000',
+    '100000000000',
+    '100000000000',
+    '100000000000'
 ])
 print(path_finder(area))
