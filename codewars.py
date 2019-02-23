@@ -2219,35 +2219,46 @@ import operator
 # print(path_finder(area))
 
 # CODEWARS: Path Finder #3: the Alpinist - the best solution
-import sys
+# import sys
+#
+#
+# def path_finder(area, m=None, n=None, total=0):
+#     if m is None:
+#         area = tuple(area.split('\n'))
+#         m = n = len(area) - 1
+#     if m < 0 or n < 0:
+#         return sys.maxsize
+#     if m == 0 and n == 0:
+#         return total
+#     return min(
+#         path_finder(area, m - 1, n, total + abs(int(area[m][n]) - int(area[m - 1][n]))),
+#         path_finder(area, m, n - 1, total + abs(int(area[m][n]) - int(area[m][n - 1])))
+#     )
 
 
-def path_finder(area, m=None, n=None, total=0):
+def path_finder(graph, m=None, n=None):
     if m is None:
-        area = tuple(area.split('\n'))
-        m = n = len(area) - 1
-    if m < 0 or n < 0:
-        return sys.maxsize
-    if m == 0 and n == 0:
-        return total
-    return min(
-        path_finder(area, m - 1, n, total + abs(int(area[m][n]) - int(area[m - 1][n]))),
-        path_finder(area, m, n - 1, total + abs(int(area[m][n]) - int(area[m][n - 1])))
-    )
+        graph = tuple(graph.split('\n'))
+        m = n = len(graph)
+    tc = {}
+    tc[(0, 0)] = int(graph[0][0])
 
+    for i in range(1, m):
+        tc[(i, 0)] = abs(int(graph[i-1][0]) - int(graph[i][0]))
+        if i != 1:
+            tc[(i, 0)] += tc[(i-1), 0]
 
-area = '\n'.join([
-    '100000000000',
-    '100000000000',
-    '100000000000',
-    '100000000000',
-    '100000000000',
-    '100000000000',
-    '100000000000',
-    '100000000000',
-    '100000000000',
-    '100000000000',
-    '100000000000',
-    '100000000000'
-])
-print(path_finder(area))
+    for j in range(1, n):
+        tc[(0, j)] = abs(int(graph[0][j-1]) - int(graph[0][j]))
+        if j != 1:
+            tc[(0, j)] += tc[0, (j-1)]
+
+    for i in range(1, m):
+        for j in range(1, n):
+            tc[(i, j)] = min(
+                abs(int(graph[i][j]) - int(graph[i-1][j])) + tc[(i-1, j)],
+                abs(int(graph[i][j]) - int(graph[i][j-1])) + tc[(i, j-1)]
+            )
+            print((i, j), graph[i][j], tc[(i, j)])
+
+    return tc[(m-1, n-1)] if len(graph) > 1 else 0
