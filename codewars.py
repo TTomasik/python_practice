@@ -2236,29 +2236,85 @@ import operator
 #     )
 
 
-def path_finder(graph, m=None, n=None):
-    if m is None:
-        graph = tuple(graph.split('\n'))
-        m = n = len(graph)
-    tc = {}
-    tc[(0, 0)] = int(graph[0][0])
+# def path_finder(graph, m=None, n=None):
+#     if m is None:
+#         graph = tuple(graph.split('\n'))
+#         m = n = len(graph)
+#     tc = {}
+#     tc[(0, 0)] = int(graph[0][0])
+#
+#     for i in range(1, m):
+#         tc[(i, 0)] = abs(int(graph[i-1][0]) - int(graph[i][0]))
+#         if i != 1:
+#             tc[(i, 0)] += tc[(i-1), 0]
+#
+#     for j in range(1, n):
+#         tc[(0, j)] = abs(int(graph[0][j-1]) - int(graph[0][j]))
+#         if j != 1:
+#             tc[(0, j)] += tc[0, (j-1)]
+#
+#     for i in range(1, m):
+#         for j in range(1, n):
+#             tc[(i, j)] = min(
+#                 abs(int(graph[i][j]) - int(graph[i-1][j])) + tc[(i-1, j)],
+#                 abs(int(graph[i][j]) - int(graph[i][j-1])) + tc[(i, j-1)]
+#             )
+#             print((i, j), graph[i][j], tc[(i, j)])
+#
+#     return tc[(m-1, n-1)] if len(graph) > 1 else 0
 
-    for i in range(1, m):
-        tc[(i, 0)] = abs(int(graph[i-1][0]) - int(graph[i][0]))
-        if i != 1:
-            tc[(i, 0)] += tc[(i-1), 0]
+def path_finder(graph):
+    graph = graph.split('\n')
+    start = (0, 0)
+    end = (len(graph) - 1, len(graph) - 1)
+    G = {}
+    F = {}
+    G[start] = 0
+    F[start] = heuristic(start, end)
+    closedVertices = set()
+    openVertices = set([start])
+    while len(openVertices) > 0:
+        current = None
+        currentFscore = None
+        for pos in openVertices:
+            if current is None or F[pos] < currentFscore:
+                currentFscore = F[pos]
+                current = pos
 
-    for j in range(1, n):
-        tc[(0, j)] = abs(int(graph[0][j-1]) - int(graph[0][j]))
-        if j != 1:
-            tc[(0, j)] += tc[0, (j-1)]
+        if current == end:
+            return int(F[end]/100)
 
-    for i in range(1, m):
-        for j in range(1, n):
-            tc[(i, j)] = min(
-                abs(int(graph[i][j]) - int(graph[i-1][j])) + tc[(i-1, j)],
-                abs(int(graph[i][j]) - int(graph[i][j-1])) + tc[(i, j-1)]
-            )
-            print((i, j), graph[i][j], tc[(i, j)])
+        openVertices.remove(current)
+        closedVertices.add(current)
 
-    return tc[(m-1, n-1)] if len(graph) > 1 else 0
+        for neighbour in get_vertex_neighbours(current, len(graph) - 1):
+            if neighbour in closedVertices:
+                continue
+            candidateG = G[current] + abs(
+                int(graph[current[0]][current[1]]) - int(graph[neighbour[0]][neighbour[1]])
+            ) * 100
+            if neighbour not in openVertices:
+                openVertices.add(neighbour)
+            elif candidateG >= G[neighbour]:
+                continue
+
+            G[neighbour] = candidateG
+            H = heuristic(neighbour, end)
+            F[neighbour] = G[neighbour] + H
+
+    raise RuntimeError("Fail to find solution")
+
+
+def get_vertex_neighbours(pos, _max):
+    n = []
+    for dx, dy in [(1, 0), (-1, 0), (0, 1), (0, -1)]:
+        x2 = pos[0] + dx
+        y2 = pos[1] + dy
+        if x2 < 0 or x2 > _max or y2 < 0 or y2 > _max:
+            continue
+        n.append((x2, y2))
+    return n
+
+
+def heuristic(start, goal):
+    return abs(start[0] - goal[0]) + abs(start[1] - goal[1])
