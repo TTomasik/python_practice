@@ -108,3 +108,63 @@ graph = [
     '#  ###   ########',
     '## ##############',
 ]
+
+
+def path_finder(area):
+    splitted_area = area.splitlines()
+    end = height, width = len(splitted_area) - 1, len(splitted_area[0]) - 1
+    queue, seen, path = {(0, 0): 0}, set(), []
+    while queue:
+        x, y = min(queue, key=queue.get)
+        total_path_weight = queue.pop((x, y))
+        seen.add((x, y))
+        if (x, y) == end:
+            # path.append(end)
+            # return path_drawer(area, width, path)
+            return total_path_weight
+        for i, j in (-1, 0), (1, 0), (0, -1), (0, 1):
+            z, w = x + i, y + j
+            if (z, w) in seen or not (0 <= z <= height and 0 <= w <= width):
+                continue
+            single_path_weight = total_path_weight + abs(int(splitted_area[x][y]) - int(splitted_area[z][w]))
+            if single_path_weight < queue.get((z, w), float('inf')):
+                queue[z, w] = single_path_weight
+                # if (x, y) not in path: path.append((x, y))
+
+
+def path_drawer(area, width, path):
+    splitted_area = area.splitlines()
+    area_with_path = []
+    for idx_row, row in enumerate(splitted_area):
+        counter = 0
+        for idx_col, col in enumerate(row):
+            counter += 1
+            if (idx_row, idx_col) in path:
+                area_with_path.append('*')
+            else:
+                area_with_path.append(col)
+            if counter == width + 1:
+                area_with_path.append('\n')
+    return ''.join(area_with_path)
+
+
+area = '\n'.join([
+    '000000000000000000',
+    '111111111111111110',
+    '000000000000000000',
+    '011111111111111111',
+    '000000000000000000',
+    '111111111111111110',
+    '000000000000000000',
+    '111111111111111110',
+    '000000000000000000',
+    '011111111111111111',
+    '000000000000000000',
+    '111111111111111110',
+    '000000000000000000',
+    '111111111111111110',
+    '000000000000000000',
+    '011111111111111111',
+    '000000000000000000',
+    '111111111111111110',
+])
