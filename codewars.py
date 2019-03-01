@@ -2263,58 +2263,85 @@ import operator
 #
 #     return tc[(m-1, n-1)] if len(graph) > 1 else 0
 
-def path_finder(graph):
-    graph = graph.split('\n')
-    start = (0, 0)
-    end = (len(graph) - 1, len(graph) - 1)
-    G = {}
-    F = {}
-    G[start] = 0
-    F[start] = heuristic(start, end)
-    closedVertices = set()
-    openVertices = set([start])
-    while len(openVertices) > 0:
-        current = None
-        currentFscore = None
-        for pos in openVertices:
-            if current is None or F[pos] < currentFscore:
-                currentFscore = F[pos]
-                current = pos
+# def path_finder(graph):
+#     graph = graph.split('\n')
+#     start = (0, 0)
+#     end = (len(graph) - 1, len(graph) - 1)
+#     G = {}
+#     F = {}
+#     G[start] = 0
+#     F[start] = heuristic(start, end)
+#     closedVertices = set()
+#     openVertices = set([start])
+#     while len(openVertices) > 0:
+#         current = None
+#         currentFscore = None
+#         for pos in openVertices:
+#             if current is None or F[pos] < currentFscore:
+#                 currentFscore = F[pos]
+#                 current = pos
+#
+#         if current == end:
+#             return int(F[end]/100)
+#
+#         openVertices.remove(current)
+#         closedVertices.add(current)
+#
+#         for neighbour in get_vertex_neighbours(current, len(graph) - 1):
+#             if neighbour in closedVertices:
+#                 continue
+#             candidateG = G[current] + abs(
+#                 int(graph[current[0]][current[1]]) - int(graph[neighbour[0]][neighbour[1]])
+#             ) * 100
+#             if neighbour not in openVertices:
+#                 openVertices.add(neighbour)
+#             elif candidateG >= G[neighbour]:
+#                 continue
+#
+#             G[neighbour] = candidateG
+#             H = heuristic(neighbour, end)
+#             F[neighbour] = G[neighbour] + H
+#
+#     raise RuntimeError("Fail to find solution")
+#
+#
+# def get_vertex_neighbours(pos, _max):
+#     n = []
+#     for dx, dy in [(1, 0), (-1, 0), (0, 1), (0, -1)]:
+#         x2 = pos[0] + dx
+#         y2 = pos[1] + dy
+#         if x2 < 0 or x2 > _max or y2 < 0 or y2 > _max:
+#             continue
+#         n.append((x2, y2))
+#     return n
+#
+#
+# def heuristic(start, goal):
+#     return abs(start[0] - goal[0]) + abs(start[1] - goal[1])
 
-        if current == end:
-            return int(F[end]/100)
-
-        openVertices.remove(current)
-        closedVertices.add(current)
-
-        for neighbour in get_vertex_neighbours(current, len(graph) - 1):
-            if neighbour in closedVertices:
-                continue
-            candidateG = G[current] + abs(
-                int(graph[current[0]][current[1]]) - int(graph[neighbour[0]][neighbour[1]])
-            ) * 100
-            if neighbour not in openVertices:
-                openVertices.add(neighbour)
-            elif candidateG >= G[neighbour]:
-                continue
-
-            G[neighbour] = candidateG
-            H = heuristic(neighbour, end)
-            F[neighbour] = G[neighbour] + H
-
-    raise RuntimeError("Fail to find solution")
+# CODEWARS: The position of a digital string in an infinite digital string
+# (works but too slow - timeouts when big numbers)
+def find_position(number):
+    my_range = lambda lower, upper: ''.join([str(i) for i in range(lower, upper + 1)])
+    result, memory, lower, upper = None, 0, 1, 100
+    while result is None:
+        _range = my_range(lower, upper)
+        for idx, i in enumerate(_range):
+            result = section_finder(number, idx, _range[idx:idx+len(number)])
+            if result:
+                break
+        if not result:
+            lower += 100
+            upper += 100
+            memory += len(_range) - 1
+    return result + memory
 
 
-def get_vertex_neighbours(pos, _max):
-    n = []
-    for dx, dy in [(1, 0), (-1, 0), (0, 1), (0, -1)]:
-        x2 = pos[0] + dx
-        y2 = pos[1] + dy
-        if x2 < 0 or x2 > _max or y2 < 0 or y2 > _max:
+def section_finder(number, idx, section):
+    for idx_i, i in enumerate(section):
+        if i == number[idx_i]:
             continue
-        n.append((x2, y2))
-    return n
-
-
-def heuristic(start, goal):
-    return abs(start[0] - goal[0]) + abs(start[1] - goal[1])
+        else:
+            idx = None
+            break
+    return idx
