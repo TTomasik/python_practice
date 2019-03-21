@@ -2,7 +2,7 @@
 
 ***BFS (breadth first search)**
 
-`1. Finding the nearest exit from maze.`
+`1. Finding the nearest exit in maze.`
 
 ![](https://github.com/TTomasik/python_practice/blob/master/images/maze.png)
 
